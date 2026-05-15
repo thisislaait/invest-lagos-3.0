@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Simulation - LSIF 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#0B1F45;--navy-deep:#071530;--gold:#F4B41A;--gold-soft:#FDF3D9;
+      --gold-mid:#c8920e;--red:#D7263D;--teal:#0A8E7F;--teal-soft:#E0F5F3;
+      --cream:#F6F5F1;--border:#DDD9CF;--muted:#64748B;--ink:#1E293B;
+      --white:#FFFFFF;--blue:#3B82F6;--purple:#7C3AED;
+      --font:'Poppins',sans-serif;--mono:'JetBrains Mono',monospace;
+      --screen-col:#3B82F6;--audio-col:#7C3AED;--staff-col:#0A8E7F;
+      --av-col:#F97316;--proto-col:#D7263D;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:15px;scroll-behavior:smooth}
+    body{font-family:var(--font);color:var(--ink);background:#ECEAE4;-webkit-font-smoothing:antialiased}
+
+    .layout{display:flex;min-height:100vh}
+
+    /* ── Sidebar ── */
+    .sidebar{width:260px;min-width:260px;background:var(--navy);position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+    .sb-header{padding:1.25rem 1rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+    .sb-logo{font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);display:block;margin-bottom:.3rem}
+    .sb-title{font-weight:800;font-size:.95rem;color:var(--white);line-height:1.2}
+    .sb-title span{color:var(--gold)}
+    .sb-sub{font-family:var(--mono);font-size:.5rem;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem}
+    .sb-day{padding:.5rem 1rem .25rem;font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:.5rem}
+    .sb-link{display:flex;align-items:flex-start;gap:.5rem;padding:.45rem 1rem;cursor:pointer;border-left:2px solid transparent;text-decoration:none;transition:all .12s}
+    .sb-link:hover{background:rgba(255,255,255,.05);border-left-color:rgba(255,255,255,.2)}
+    .sb-link.active{background:rgba(244,180,26,.08);border-left-color:var(--gold)}
+    .sb-link-time{font-family:var(--mono);font-size:.5rem;color:rgba(255,255,255,.3);min-width:2.4rem;padding-top:.15rem;flex-shrink:0}
+    .sb-link-text{font-size:.7rem;color:rgba(255,255,255,.65);line-height:1.35}
+    .sb-link.active .sb-link-text{color:var(--white)}
+
+    /* ── Main ── */
+    .main{flex:1;min-width:0}
+    .stripe{height:5px;background:linear-gradient(to right,#F4B41A 0% 12.5%,#F97316 12.5% 25%,#D7263D 25% 37.5%,#C026D3 37.5% 50%,#F472B6 50% 62.5%,#3B82F6 62.5% 75%,#0A8E7F 75% 87.5%,#22C55E 87.5% 100%)}
+    .top-header{background:var(--navy);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .th-title{font-weight:700;font-size:.95rem;color:var(--white)}
+    .th-tag{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:rgba(244,180,26,.1);padding:.25rem .6rem}
+    .content{padding:2rem;max-width:760px}
+
+    /* ── Legend ── */
+    .legend{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;padding:.875rem 1rem;background:var(--white);border:1px solid var(--border)}
+    .legend-item{display:flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase}
+    .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+    /* ── Day banner ── */
+    .day-banner{background:var(--navy);padding:1.25rem 1.5rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+    .day-banner::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(244,180,26,.1)}
+    .day-label{font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+    .day-title{font-weight:800;font-size:1.4rem;color:var(--white);letter-spacing:-.02em}
+    .day-sub{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:.2rem}
+
+    /* ── Scene card ── */
+    .scene{background:var(--white);border:1px solid var(--border);margin-bottom:1.25rem;scroll-margin-top:1rem}
+    .scene-header{padding:.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:1rem}
+    .scene-num{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--cream);padding:.2rem .5rem;flex-shrink:0;margin-top:.1rem}
+    .scene-header-info{flex:1}
+    .scene-time{font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:.2rem}
+    .scene-title{font-weight:700;font-size:1rem;color:var(--navy);letter-spacing:-.01em;line-height:1.2}
+    .scene-location{font-size:.72rem;color:var(--muted);font-style:italic;margin-top:.15rem}
+    .scene-body{padding:1.25rem}
+
+    /* ── Scene images ── */
+    .scene-imgs{display:grid;gap:.625rem;margin-bottom:1.25rem}
+    .scene-imgs.one{grid-template-columns:1fr}
+    .scene-imgs.two{grid-template-columns:1fr 1fr}
+    .scene-img-wrap{overflow:hidden}
+    .scene-img-wrap img{width:100%;height:210px;object-fit:cover;display:block}
+    .img-cap{font-family:var(--mono);font-size:.44rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);background:var(--cream);padding:.25rem .4rem;display:block;border-top:2px solid var(--border)}
+
+    /* ── Narrative ── */
+    .narrative{font-size:.875rem;line-height:1.75;color:var(--ink);margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px dashed var(--border)}
+
+    /* ── Cues ── */
+    .cues{display:flex;flex-direction:column;gap:.5rem}
+    .cue{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem .875rem;font-size:.8rem;line-height:1.55}
+    .cue-label{font-family:var(--mono);font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;padding:.15rem .4rem;flex-shrink:0;margin-top:.05rem;align-self:flex-start}
+    .cue-text{color:var(--ink)}
+    .cue-text strong{font-weight:600}
+    .cue-text em{font-style:italic;color:var(--muted)}
+    .cue.screens{background:#EFF6FF}
+    .cue.screens .cue-label{background:var(--screen-col);color:white}
+    .cue.audio{background:#F5F3FF}
+    .cue.audio .cue-label{background:var(--audio-col);color:white}
+    .cue.staff{background:var(--teal-soft)}
+    .cue.staff .cue-label{background:var(--staff-col);color:white}
+    .cue.av{background:#FFF7ED}
+    .cue.av .cue-label{background:var(--av-col);color:white}
+    .cue.delegate{background:var(--cream)}
+    .cue.delegate .cue-label{background:var(--navy);color:white}
+    .cue.protocol{background:#FEF2F2}
+    .cue.protocol .cue-label{background:var(--red);color:white}
+
+    .transition{text-align:center;padding:.75rem 0;font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .transition::before{content:'↓  '}
+    .tbc{display:inline-block;font-family:var(--mono);font-size:.44rem;letter-spacing:.1em;text-transform:uppercase;background:var(--gold-soft);color:var(--gold-mid);padding:.1rem .35rem;vertical-align:middle;margin-left:.3rem}
+
+    @media print{
+      .sidebar{display:none}
+      body{background:white}
+      .content{padding:1rem;max-width:100%}
+      .scene{break-inside:avoid}
+      .scene-imgs.two{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="sidebar">
+    <div class="sb-header">
+      <span class="sb-logo">Lagos State Investment Forum</span>
+      <div class="sb-title">LSIF <span>2026</span></div>
+      <div class="sb-sub">Full Event Simulation</div>
+    </div>
+    <div class="sb-day">Day 1 - 8 June</div>
+    <a class="sb-link" href="#s1"><span class="sb-link-time">07:00</span><span class="sb-link-text">Hotel Exterior & Approach</span></a>
+    <a class="sb-link" href="#s2"><span class="sb-link-time">07:30</span><span class="sb-link-text">Registration & Check-in</span></a>
+    <a class="sb-link" href="#s3"><span class="sb-link-time">08:30</span><span class="sb-link-text">Pre-Plenary Networking</span></a>
+    <a class="sb-link" href="#s4"><span class="sb-link-time">09:20</span><span class="sb-link-text">Call to Order</span></a>
+    <a class="sb-link" href="#s5"><span class="sb-link-time">09:30</span><span class="sb-link-text">Cultural Performance</span></a>
+    <a class="sb-link" href="#s6"><span class="sb-link-time">09:40</span><span class="sb-link-text">Official Opening Ceremony</span></a>
+    <a class="sb-link" href="#s7"><span class="sb-link-time">10:30</span><span class="sb-link-text">Presidential Keynote</span></a>
+    <a class="sb-link" href="#s8"><span class="sb-link-time">11:30</span><span class="sb-link-text">Pavilion Opening</span></a>
+    <a class="sb-link" href="#s9"><span class="sb-link-time">12:30</span><span class="sb-link-text">Governors' Panel</span></a>
+    <a class="sb-link" href="#s10"><span class="sb-link-time">13:30</span><span class="sb-link-text">Plenary 1</span></a>
+    <a class="sb-link" href="#s11"><span class="sb-link-time">14:30</span><span class="sb-link-text">Networking Lunch</span></a>
+    <a class="sb-link" href="#s12"><span class="sb-link-time">15:30</span><span class="sb-link-text">Breakout Sessions</span></a>
+    <a class="sb-link" href="#s13"><span class="sb-link-time">17:30</span><span class="sb-link-text">End of Day 1 / Break</span></a>
+    <div class="sb-day">Gala Dinner - 8 June</div>
+    <a class="sb-link" href="#g1"><span class="sb-link-time">19:00</span><span class="sb-link-text">Cocktail Reception</span></a>
+    <a class="sb-link" href="#g2"><span class="sb-link-time">19:30</span><span class="sb-link-text">Guests Seated</span></a>
+    <a class="sb-link" href="#g3"><span class="sb-link-time">19:35</span><span class="sb-link-text">Anthem & MC Toast</span></a>
+    <a class="sb-link" href="#g4"><span class="sb-link-time">19:45</span><span class="sb-link-text">Spoken Word</span></a>
+    <a class="sb-link" href="#g5"><span class="sb-link-time">19:55</span><span class="sb-link-text">Berklee Performance</span></a>
+    <a class="sb-link" href="#g6"><span class="sb-link-time">20:25</span><span class="sb-link-text">Acapella Group</span></a>
+    <a class="sb-link" href="#g7"><span class="sb-link-time">20:37</span><span class="sb-link-text">Equilibrist Act</span></a>
+    <a class="sb-link" href="#g8"><span class="sb-link-time">20:47</span><span class="sb-link-text">Solo Instrumentalist</span></a>
+    <a class="sb-link" href="#g9"><span class="sb-link-time">21:00</span><span class="sb-link-text">Dessert & Close</span></a>
+    <div class="sb-day">Day 2 - 9 June</div>
+    <a class="sb-link" href="#d1"><span class="sb-link-time">08:30</span><span class="sb-link-text">Arrival & Re-registration</span></a>
+    <a class="sb-link" href="#d2"><span class="sb-link-time">09:30</span><span class="sb-link-text">Day 2 Opening Recap</span></a>
+    <a class="sb-link" href="#d3"><span class="sb-link-time">10:30</span><span class="sb-link-text">Plenary 4 - Cities</span></a>
+    <a class="sb-link" href="#d4"><span class="sb-link-time">11:30</span><span class="sb-link-text">Networking Break</span></a>
+    <a class="sb-link" href="#d5"><span class="sb-link-time">12:00</span><span class="sb-link-text">Plenary 5 - Partnerships</span></a>
+    <a class="sb-link" href="#d6"><span class="sb-link-time">13:00</span><span class="sb-link-text">Plenary 6 - Culture</span></a>
+    <a class="sb-link" href="#d7"><span class="sb-link-time">14:00</span><span class="sb-link-text">Closing Session</span></a>
+    <a class="sb-link" href="#d8"><span class="sb-link-time">14:30</span><span class="sb-link-text">Closing Lunch & Departure</span></a>
+  </nav>
+
+  <div class="main">
+    <div class="stripe"></div>
+    <div class="top-header">
+      <span class="th-title">Full Event Simulation</span>
+      <span class="th-tag">Production Document - Confidential</span>
+    </div>
+
+    <div class="content">
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--screen-col)"></div>Screens</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--audio-col)"></div>Audio</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--staff-col)"></div>Staff / Ops</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--av-col)"></div>AV / Tech Cues</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div>Delegate Experience</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Protocol / Security</div>
+      </div>
+
+      <!-- ══════════ DAY 1 ══════════ -->
+      <div class="day-banner">
+        <div class="day-label">Day One - Tuesday, 8 June 2026</div>
+        <div class="day-title">Conference Programme</div>
+        <div class="day-sub">Main Plenary Hall + Breakout A & B - Eko Hotel & Suites, Victoria Island, Lagos</div>
+      </div>
+
+      <!-- S1 -->
+      <div class="scene" id="s1">
+        <div class="scene-header">
+          <span class="scene-num">Scene 01</span>
+          <div class="scene-header-info">
+            <div class="scene-time">07:00 &ndash; 07:30</div>
+            <div class="scene-title">Hotel Exterior & Approach</div>
+            <div class="scene-location">Eko Hotel Entrance, Adetokunbo Ademola Street, Victoria Island</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/_%20(11).jpeg" alt="Exterior branded registration area" />
+              <!-- <span class="img-cap">Reference - Exterior branded entry zone with multiple check-in positions</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Delegates arriving by car or bus see the Forum's first visual signals before they step out - branding at all key eye-level positions on the hotel façade, directional signage from the drop-off zone, security presence established and visible. The perimeter is set. The message lands before anyone walks through a door: this is a major event and it is organised. First impression starts at the gate, not the lobby.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Large format outdoor screens or LED displays at the hotel entrance running the LSIF brand film on loop - Lagos aerial footage, infrastructure, the Forum logo. No text-heavy slides. <strong>Atmosphere, not information.</strong> Outdoor banners and vinyl: LSIF 2026 / Lagos State Government / CWEIC co-branding at eye level on the façade.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Outdoor PA at low volume: smooth instrumental African jazz (Ebo Taylor, Hugh Masekela influenced). Audible enough to signal an event is happening, low enough that arriving delegates can speak without competing with it.</span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">DSS and hotel security perimeter is established by 06:30. Dedicated VVIP drop-off lane separate from general hotel traffic. Obehi coordinates with protocol officers at the entrance to receive and direct principals. Presidential advance sweep completed before delegates begin arriving.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Gbemi coordinates with ushers in position at the entrance in navy and gold - welcoming, directing, no standing with arms folded. Signage posts run from drop-off → entrance → registration hall. Nobody should be unsure where to go.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Delegates enter the building</div>
+
+      <!-- S2 -->
+      <div class="scene" id="s2">
+        <div class="scene-header">
+          <span class="scene-num">Scene 02</span>
+          <div class="scene-header-info">
+            <div class="scene-time">07:30 &ndash; 09:00</div>
+            <div class="scene-title">Registration & Check-in</div>
+            <div class="scene-location">Eko Hotel Conference Foyer / Pre-Function Area</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/registration.jpeg" alt="Registration check-in desk with categories" />
+              <!-- <span class="img-cap">Reference - Categorised check-in lanes: General / International / VVIP - clean flow, clear signage overhead</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Delegates walk in and are absorbed into the Forum's world immediately. Registration is categorised, fast, and staffed - a delegate should have their badge in under 90 seconds and be free to move. This desk is the first human interaction with the event; the team here sets the tone. Warm, efficient, no fumbling.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Foyer screens loop a <strong>welcome reel</strong>: LSIF 2026 animated logo → Lagos investment statistics → key speaker portraits with name and title → agenda highlights → sponsor logos → countdown clock to 09:30 in the corner of every screen. Content is informative but the mood is confident, not busy.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Ambient African jazz playlist continues. Volume is calibrated for conversation - delegates can speak to each other at normal volume. This is not performance sound, it is atmosphere. Subtle energy increase from 08:30 onwards as the countdown tightens.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text"><strong>Four desk categories:</strong><br>- Desk A: VVIP - Heads of Government, Governor, Ministers - pre-registered, badge collected by Obehi's assigned protocol officer, no queue<br>- Desk B: International Delegates - Commonwealth members, foreign investors, diplomats<br>- Desk C: Nigerian Delegates - private sector, government officials<br>- Desk D: Media & Press - press passes, media wristbands, separate area<br><br>Each delegate receives: name badge, welcome pack, Forum programme booklet, Wi-Fi card, day agenda card. Gbemi coordinates with floating ushers, offering water or juice on arrival.</span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">Obehi coordinates with the Presidential advance team arriving ~07:30 for venue sweeps. Dedicated holding room for the President's team near the plenary hall - swept and staffed. Governor's team arrives ~08:30 to confirm VIP seating and stage access.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Registration winds down - delegates move into networking</div>
+
+      <!-- S3 -->
+      <div class="scene" id="s3">
+        <div class="scene-header">
+          <span class="scene-num">Scene 03</span>
+          <div class="scene-header-info">
+            <div class="scene-time">08:30 &ndash; 09:20</div>
+            <div class="scene-title">Pre-Plenary Networking</div>
+            <div class="scene-location">Conference Foyer / Pre-Function Networking Area</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/networking.jpg" alt="Large-scale branded event space with delegates networking" />
+              <!-- <span class="img-cap">Reference - Branded networking floor at scale: event identity present throughout the space, not just at the stage</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            The foyer is at capacity by 09:00. Connections from across the Commonwealth are picking up where they left off. Cards are exchanged, introductions are made, conversations that will become deals are beginning. Gbemi coordinates with ushers on flow from here - the room is working, let it.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">At 09:00: reel transitions to a <strong>building anticipation sequence</strong> - slow aerial Lagos footage, Forum logo building frame by frame, countdown becoming more prominent. At 09:15: message on screen - <em>"The Forum opens in 15 minutes. Please make your way to the Plenary Hall."</em> Delegates read it; ushers reinforce it.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Music builds perceptibly from 09:00 - more rhythmic, more structured. Not a sudden gear change, a gradual lift that signals momentum. At 09:15, volume steps down as ushers begin directing - the music says "time to move" without anyone having to shout it.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">At 09:15: Gbemi coordinates with ushers for the directional sweep - <em>"Good morning, the Forum will begin shortly, please make your way into the Plenary Hall."</em> Polite, not urgent. Delegates at this level do not respond to being herded. Firm and warm. Obehi coordinates with protocol officers inside the hall to confirm gold reserved cards are correct for VIP rows.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">At 09:10: plenary hall lights come to full. Stage lit. LED screens inside the hall activate - LSIF 2026 holding slide, navy background, gold animated border. MC does final mic and in-ear check backstage. Alhassan and Damilare confirm all camera feeds live. Ugo confirms all Day 1 morning speakers are in the building.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Delegates take their seats in the Plenary Hall</div>
+
+      <!-- S4 -->
+      <div class="scene" id="s4">
+        <div class="scene-header">
+          <span class="scene-num">Scene 04</span>
+          <div class="scene-header-info">
+            <div class="scene-time">09:20 &ndash; 09:30</div>
+            <div class="scene-title">Call to Order</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/_%20(12).jpeg" alt="Empty plenary hall with branded screen lit" />
+              <!-- <span class="img-cap">Reference - The hall before it fills: screens live, stage lit, seats arranged - this is what Alhassan and the production team see at 09:10 when the room is ready</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            The hall is filling. Music is lower. The screen is crisp. Delegates sense the transition from the foyer buzz to something more focused - nobody has said anything yet but the room knows it is about to begin. At 09:25 a 60-second opening film runs. By 09:28 the hall is quiet. MC is in position backstage. This is the last moment before the programme is live.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Holding slide → at 09:25 transitions to the <strong>60-second opening film</strong>: Lagos from the air at sunrise, the port, construction, markets, innovation hubs - a visual case for Lagos as Africa's investment capital. No narration. Music only. Ends on the Forum logo. Then silence.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">At 09:20: music fades to silence over 30 seconds. The silence itself signals gravity. Opening film has its own curated soundtrack - orchestral with Afrobeats undertones, building to a swell on the final logo reveal. Then silence again. Do not fill it.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">At 09:28: lights dim slightly - not dark, but a perceptible shift that focuses the room on the stage. MC takes position backstage. Lectern mic active. Ugo gives the 2-minute warning to all morning principals via earpiece. Camera operators confirm positions: stage wide, podium close-up, VIP row.</span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">At 09:25: Presidential motorcade in motion. DSS in the hall on comms. All doors sealed - no further delegate entry once the President's party enters. Cultural performance troupe in position backstage.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC steps on stage</div>
+
+      <!-- S5 -->
+      <div class="scene" id="s5">
+        <div class="scene-header">
+          <span class="scene-num">Scene 05</span>
+          <div class="scene-header-info">
+            <div class="scene-time">09:30</div>
+            <div class="scene-title">Cultural Performance</div>
+            <div class="scene-location">Main Plenary Hall - Main Stage</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            MC takes the stage with two sentences - the Forum is declared open in spirit and the performance begins immediately. This is the moment that tells international delegates they are not at a generic investment conference. It is rooted, proud, and precise. Maximum 8 minutes. No overrun - the Presidential motorcade is timing is locked.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">All screens carry the <strong>live performance feed</strong> - no lower thirds or text overlays. Let the performance breathe. The screens make sure delegates at the back of a large hall experience it as clearly as those in the front rows. After the performance: LSIF logo returns as the applause settles.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">House PA carries full performance audio. Damilare riding levels throughout - performers should fill the room without distortion. After performance ends: natural room ambience for applause. No music under the applause - let the reaction be genuine.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">Immediately after performance exits stage: MC returns to podium. <span class="tbc">TBC</span> Performance type to be confirmed - Nkem, David and Michael (Cultural Performance team) coordinate staging, sound check, and clearance timing with the act. All logistics confirmed at production recce.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">Phones come out. International delegates lean forward - this is the first photograph moment of the day. By the time it ends the room temperature is warm and alive. The opening ceremony that follows inherits this energy.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC introduces the official opening sequence</div>
+
+      <!-- S6 -->
+      <div class="scene" id="s6">
+        <div class="scene-header">
+          <span class="scene-num">Scene 06</span>
+          <div class="scene-header-info">
+            <div class="scene-time">09:40 &ndash; 10:30</div>
+            <div class="scene-title">Official Opening Ceremony</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs two">
+            <div class="scene-img-wrap">
+              <img src="images/_%20(5).jpeg" alt="MC on stage with speaker headshots and lower thirds on screen behind" />
+              <span class="img-cap">Lower third example - Speaker name, title and org shown on screen while MC introduces. This is the format for every speaker in the ceremony.</span>
+            </div>
+            <div class="scene-img-wrap">
+              <img src="images/keynote1.jpeg" alt="Speaker at podium with large branded screen" />
+              <!-- <span class="img-cap">Podium setup reference - Full branded screen behind speaker, lectern branded, side screens for slides where applicable</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            The opening ceremony is a tightly sequenced run of addresses - each one introduced cleanly and transitioned smoothly. The MC is the invisible architecture holding it together: warm but invisible, correct on every title, never ad-libbing on names or protocol. The image above left shows exactly what a lower third looks like - the speaker's name, title and organisation appear on screen a few seconds after they reach the podium, so the audience knows who they are looking at without the MC having to say it twice.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">For each speaker: <strong>lower third graphic</strong> fires 5 seconds after they reach the podium - name in white, title in gold, organisation in grey. Each one pre-loaded and labelled in the graphics queue. Between speakers: LSIF holding graphic with gold pulse animation. If a speaker uses slides: side screens switch to slides, centre screen stays on the speaker live feed.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">
+              <strong>09:40</strong> - Commissioner Ambrose: podium mic live, lower third cued<br>
+              <strong>09:45</strong> - Lord Marland: same sequence<br>
+              <strong>09:50</strong> - Governor Sanwo-Olu: dedicated podium mic channel (higher quality). Nigerian flag + Lagos State flag flanking the podium.<br>
+              <strong>10:00</strong> - Commonwealth SG Botchwey: lower third ready<br>
+              <strong>10:08</strong> - Visiting Heads of Government: <span class="tbc">TBC</span> lower thirds for each; order and names cleared by protocol in advance<br>
+              <strong>10:20</strong> - Forum Co-Chairs (BUA + Dangote): <span class="tbc">TBC</span> BUA Chair name needed<br>
+              <strong>10:30</strong> - President of Nigeria: full protocol sequence (Scene 07)
+            </span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">MC introductions use exact approved titles only - no improvisation. Heads of Government addresses in confirmed protocol order. DSS active throughout - no movement in VIP rows during the Presidential period. Personal photography by delegates in the VIP section is restricted; official press pool handles all photography.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Ugo or Emeke stands in the wing with the running order and a countdown board visible only to the MC. 1-minute warning signal, then 30-second warning. MC is prepared to politely but firmly close any speaker who overruns - every minute here has a downstream cost.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC announces the Presidential Keynote</div>
+
+      <!-- S7 -->
+      <div class="scene" id="s7">
+        <div class="scene-header">
+          <span class="scene-num">Scene 07</span>
+          <div class="scene-header-info">
+            <div class="scene-time">10:30 &ndash; 11:30</div>
+            <div class="scene-title">Presidential Keynote</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/_%20(9).jpeg" alt="Head of State at podium, large screen backdrop, full conference setup" />
+              <!-- <span class="img-cap">Reference - Presidential keynote format: full branded backdrop, branded podium, dedicated lighting, press positions established</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            All eyes forward. The room is at its most formal. Every camera, every microphone, every delegate is focused on one point. The MC introduces the President in two sentences and steps aside - this is not their moment. When the address ends and the room responds, the Forum is officially alive. Everything that follows builds on this.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text"><strong>Presidential lower third</strong>: <em>His Excellency [President's Full Name] / President, Federal Republic of Nigeria.</em> Nigerian coat of arms used as a subtle screen watermark during the address. All screens - centre and sides - on the President at the podium. No sponsor logos on screens during the Presidential address.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Presidential mic on a dedicated high-quality isolated channel. Damilare rides this channel only. Feed also goes to: live stream (if applicable), press recording pool, and any overflow rooms. Absolute clarity - no compromise.</span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">All delegates standing when the President enters. No one walks, enters, or exits during the address. DSS confirmed - no personal photography in VIP section during the address. Official press pool in designated positions only. MC introduction: two sentences maximum, then step aside.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">The room has the quiet authority of a moment that matters. Phones are down. Notepads are open. When the address ends, the applause is genuine and sustained. Delegates turn to each other and start talking. The Forum is alive and the rest of the day has momentum behind it.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Delegates move to the Exhibition area</div>
+
+      <!-- S8 -->
+      <div class="scene" id="s8">
+        <div class="scene-header">
+          <span class="scene-num">Scene 08</span>
+          <div class="scene-header-info">
+            <div class="scene-time">11:30 &ndash; 12:30</div>
+            <div class="scene-title">Official Opening of Pavilions & Exhibition</div>
+            <div class="scene-location">Exhibition Hall / Pavilion Area</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/exhibition.jpeg" alt="Immersive LED exhibition entry corridor" />
+              <!-- <span class="img-cap">Reference - Exhibition entry experience: delegates walk into the pavilion space through a branded, immersive corridor - the visual impact starts before they reach any stand</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            The Forum shifts from ceremony to action. The pavilion opening is the transition point - after the ribbon cut, delegates spread across the exhibition floor, Ministers walk alongside investors, conversations that started in the plenary continue at stands. This is where deal-making begins in earnest. Gbemi coordinates with ushers on flow and timing here - delegates need to be back in the hall by 12:30.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Exhibition screens loop: <strong>Lagos investment opportunity content</strong> - sector by sector (infrastructure, tech, energy, agri, real estate). Each pavilion has its own screen running its own content. Overhead screens in the exhibition hall display the day's remaining programme so delegates know when to return.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Exhibition PA: ambient Afro jazz playlist returns. Social volume - audible enough to fill the space, low enough for meaningful conversations at stands without raising voices.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Each pavilion staffed with knowledgeable representatives. Gbemi coordinates with ushers on flow. At 12:15: soft reminder sweep - <em>"The Governors' Investment Showcase begins in 15 minutes in the Plenary Hall."</em> Repeat at 12:25.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Delegates return to the Plenary Hall</div>
+
+      <!-- S9 -->
+      <div class="scene" id="s9">
+        <div class="scene-header">
+          <span class="scene-num">Scene 09</span>
+          <div class="scene-header-info">
+            <div class="scene-time">12:30 &ndash; 13:30</div>
+            <div class="scene-title">Governors' Investment Showcase Panel</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs two">
+            <div class="scene-img-wrap">
+              <img src="images/plenary3.jpeg" alt="Large multi-person panel on main stage" />
+              <!-- <span class="img-cap">Reference - Large panel format: multiple principals on stage simultaneously, each with their own mic position, moderator managing flow</span> -->
+            </div>
+            <div class="scene-img-wrap">
+              <img src="images/Blatant%20Gender%20Bias%20at%20a%20Davos%20Economic%20Summit%20Panel%20Discussion.jpeg" alt="Davos WEF formal panel with name cards" />
+              <!-- <span class="img-cap">Reference - Formal high-protocol panel layout: individual name cards at each seat, podium branding, full backdrop - this is the calibre of staging required</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Eight state governors on one stage moderated by Minister Jumoke Oduwole. This session is competitive and commercial - each governor gets a few minutes to pitch their state to a room of investors. The energy shifts from the morning's ceremony into something sharper. Delegates who were leaning back are now leaning forward. This is where the Forum earns its investment mandate.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Lower thirds pre-loaded for all 8 governors - fire on cue as each speaks. State graphic (map + headline investment stat) on side screens while each governor is talking. Centre screen on live wide panel shot or speaker close-up as directed. Running order on director's monitor in gallery.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">8 panellists simultaneously - mic assignment confirmed per seat in advance. All lapel or gooseneck - no hand-helds for seated panellists. Moderator (Minister Oduwole) on handheld for mobility. Vision mixer: cut to speaker when they begin. Ugo tracks time - 6–7 minutes per governor, no exceptions.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">An investor who has been distracted is now taking notes. The format - fast, competitive, substantive - converts attention into intent. By the end of the session, delegates know which states they want to speak to at lunch. The session is doing its commercial job.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC closes the panel, introduces Plenary 1</div>
+
+      <!-- S10 -->
+      <div class="scene" id="s10">
+        <div class="scene-header">
+          <span class="scene-num">Scene 10</span>
+          <div class="scene-header-info">
+            <div class="scene-time">13:30 &ndash; 14:30</div>
+            <div class="scene-title">Plenary 1 - Lagos: Africa's Global Gateway</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs two">
+            <div class="scene-img-wrap">
+              <img src="images/plenary1.jpeg" alt="Panel session with speaker headshots on screen" />
+              <!-- <span class="img-cap">Reference - Panel with speaker headshots displayed on screen: moderator plus panellists identified visually for the audience throughout the session</span> -->
+            </div>
+            <div class="scene-img-wrap">
+              <img src="images/plenary2.jpeg" alt="Tech conference panel with large screen backdrop" />
+              <!-- <span class="img-cap">Reference - Full stage panel setup: session title on left screen, speaker headshots on main screen, live stage visible - this is the format for all major plenaries</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            The flagship plenary of Day 1. Commissioner Ambrose moderates. This session makes the definitive case for Lagos - substantive, quotable, designed to generate moments that delegates take home and repeat. It runs one hour. It is the last session before lunch, so energy management and time discipline from the moderator are critical. No overrun.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Session title graphic on opening. Speaker lower thirds on cue throughout. Any data or slides from panellists go to side screens; centre screen stays on the live feed. Moderator has a confidence monitor at stage base showing running time and speaker cue order.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">At 14:15: Gbemi coordinates with ushers on quiet lunch setup in the dining hall without disrupting the plenary. At 14:25: Emeke gives the MC the wrap signal. MC closes at exactly 14:30 - delegates are hungry and the afternoon sessions are tightly timed.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC announces networking lunch</div>
+
+      <!-- S11 -->
+      <div class="scene" id="s11">
+        <div class="scene-header">
+          <span class="scene-num">Scene 11</span>
+          <div class="scene-header-info">
+            <div class="scene-time">14:30 &ndash; 15:30</div>
+            <div class="scene-title">Networking Lunch</div>
+            <div class="scene-location">Dining Hall / Banquet Area, Eko Hotel</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Lunch is not a break - it is structured relationship time. Table design encourages cross-pollination: Nigerian and international delegates seated together, sector-based table themes on table cards. The conversations happening over food are as valuable as anything on stage. Jacqui and Ime coordinate with the hospitality team to manage the room quietly - no disruptions, no announcements until 15:15.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Dining hall screens: <strong>Day 1 highlights reel</strong> on loop - key morning quotes, Forum stats, Lagos photography. Sponsor logos rotating. Bottom of screen: <em>"Afternoon Sessions begin 15:30 - Plenary Hall (Tech & Innovation) and Breakout B (Unlocking Investment)."</em></span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Background Afrobeats instrumental - the kind you'd hear in a high-end Lagos restaurant. Social volume. Cuts completely at 15:15 for the PA announcement.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">At 15:15: PA - <em>"Afternoon sessions begin in 15 minutes. Plenary 2 (Technology & Innovation) is in the Main Plenary Hall. Plenary 3 (Unlocking Investment) is in Breakout Room B."</em> Directional signage to both rooms clearly posted at all exits from the dining area.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Delegates split to Breakout A and Breakout B</div>
+
+      <!-- S12 -->
+      <div class="scene" id="s12">
+        <div class="scene-header">
+          <span class="scene-num">Scene 12</span>
+          <div class="scene-header-info">
+            <div class="scene-time">15:30 &ndash; 17:30</div>
+            <div class="scene-title">Parallel Breakout Sessions</div>
+            <div class="scene-location">Breakout Room A (Tech & Innovation) + Breakout Room B (Unlocking Investment)</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs two">
+            <div class="scene-img-wrap">
+              <img src="images/plenary5.jpeg" alt="Large conference tech panel with full audience" />
+              <!-- <span class="img-cap">Breakout A reference - Tech & Innovation format: large-format panel, full audience, speaker headshots on screen with lower thirds</span> -->
+            </div>
+            <div class="scene-img-wrap">
+              <img src="images/deal_rm1.jpeg" alt="Sleek premium boardroom" />
+              <!-- <span class="img-cap">Deal Room / Breakout B reference - Smaller, more intimate format for focused investment discussions running parallel to the main breakout</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Two rooms, running simultaneously. Each has its own MC, its own moderator, its own AV desk, its own director. Delegates self-select based on interest. The smaller format means sharper conversations - this is where the Forum gets specific. A technical failure in one room must not affect the other; they are fully independent setups.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text"><strong>Breakout A</strong>: Plenary 2 - Technology & Innovation. <span class="tbc">TBC</span> Elon Musk format: live video call or pre-recorded. If live: dedicated high-bandwidth line with a backup connection on standby, tested 24 hours prior. If pre-recorded: file confirmed and quality-checked the day before. Lower thirds for all panellists.<br><br><strong>Breakout B</strong>: Plenary 3 - Unlocking Investment. Standard panel. Own screen, own AV desk, own director. Completely independent of Breakout A.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">Each breakout has a dedicated technician (Damilare's team) and stage manager (Ugo or Emeke) - not shared with the main plenary. Communication between rooms and production office via radio. Alhassan monitors both rooms from the central production position. Independent power feeds preferred.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">A fintech founder in Breakout A chose this room for the Musk session. When he appears - live or recorded - phones come out. This is the clip that travels. The session continues with a sharp panel. Meanwhile, in Breakout B, an infrastructure investor is getting exactly the detail on Nigerian investment structures she flew in to hear.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Sessions close - delegates break before the Gala</div>
+
+      <!-- S13 -->
+      <div class="scene" id="s13">
+        <div class="scene-header">
+          <span class="scene-num">Scene 13</span>
+          <div class="scene-header-info">
+            <div class="scene-time">17:30 &ndash; 19:00</div>
+            <div class="scene-title">End of Day 1 Conference / Pre-Gala Break</div>
+            <div class="scene-location">Hotel Corridors, Guest Rooms, Lobby</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Conference day wraps. Delegates have been on their feet since 07:30. They have 90 minutes to decompress, change, and shift mentally from conference mode to gala mode. The hotel handles this transition intentionally - the lobby screens have changed, the lighting has shifted, the building is getting dressed for the evening. Ugo and Emeke hand the programme baton to the full gala team. All performer sound checks must be completed before 18:30.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Hotel lobby and corridor screens switch to <strong>Gala Dinner holding content</strong>: warm Lagos night photography, subtle Forum branding, slower pace than the day content. Text: <em>"Gala Dinner - 19:00, Grand Ballroom & Pre-Function Area. Dress Code: [TBC]."</em> Countdown begins to 19:00.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Lobby music shifts register: slower, more refined, jazz-inflected. The sonic equivalent of changing into black tie - the building is transitioning alongside its guests.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Ugo and Emeke: quick plenary reset for Day 2. Full gala team: ballroom takeover - table settings, lighting rig, stage dressing. Nkem, David and Michael confirm sound check slots for all performers. <strong>All sound checks done by 18:30 - hard deadline.</strong></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ GALA DINNER ══════════ -->
+      <div class="day-banner" style="background:linear-gradient(135deg,#071530 0%,#0B1F45 60%,#1a3060 100%)">
+        <div class="day-label">Gala Dinner - Tuesday, 8 June 2026</div>
+        <div class="day-title">Evening Entertainment Programme</div>
+        <div class="day-sub">Grand Ballroom, Eko Hotel &amp; Suites - 19:00 to 21:30</div>
+      </div>
+
+      <!-- G1 -->
+      <div class="scene" id="g1">
+        <div class="scene-header">
+          <span class="scene-num">Gala 01</span>
+          <div class="scene-header-info">
+            <div class="scene-time">19:00 &ndash; 19:30</div>
+            <div class="scene-title">Arrival & Cocktail Reception</div>
+            <div class="scene-location">Lobby & Pre-Function Area, Eko Hotel</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/gala1.jpg" alt="Gala cocktail reception area dressed and ready" />
+              <!-- <span class="img-cap">Reference - Gala cocktail reception: pre-function area transformed for the evening, guests arriving in formal dress</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Delegates emerge transformed - the suits of the day have given way to black tie and national dress. The pre-function area feels different: warmer lighting, flowers, the sound of glasses. The Gala has already begun before anyone sits down. This 30-minute window is not a waiting room - it is the first act of the evening, and it should feel like one.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Pre-function screens: elegant LSIF Gala branding - gold on navy, slow animations. Loop: <em>Gala Dinner / Lagos State Investment Forum 2026.</em> No programme slides, no statistics. The screens are décor, not signage. They should feel like part of the room design.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Live or high-quality recorded cocktail jazz: piano-led, warm. Guests can speak at normal volume directly next to a speaker. This is conversation music, not performance music - that distinction matters.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Jacqui and Ime coordinate with the hospitality team on welcome drinks and canapés. Gbemi coordinates with ushers at the ballroom entrance - sharper presentation than daytime, not yet admitting guests. Obehi coordinates with the VIP escort team on standby for Governor's arrival (~19:20).</span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">Governor Sanwo-Olu arrives at 19:20 via a separate entrance. Obehi coordinates with the Governor's escort, ensuring he reaches the VIP pre-function area briefly, then his table in the ballroom ahead of the general seating call. He is in the room before his guests - that is intentional.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Ballroom doors open</div>
+
+      <!-- G2 -->
+      <div class="scene" id="g2">
+        <div class="scene-header">
+          <span class="scene-num">Gala 02</span>
+          <div class="scene-header-info">
+            <div class="scene-time">19:30</div>
+            <div class="scene-title">Guests Proceed to the Ballroom & Seated</div>
+            <div class="scene-location">Grand Ballroom, Eko Hotel</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Ballroom doors open and guests enter a space that has been fully transformed since the afternoon. Warm lighting, flowers, round tables, crisp linen, the stage dressed and lit. Guests slow down instinctively - that is exactly the reaction the room needs. This room needs to earn its own reputation before a single performance begins.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Ballroom screens: slow, elegant LSIF Gala holding graphic - navy to dark blue gradient, gold Forum wordmark, subtle animated light effect. Table numbers displayed briefly on entry to help guests locate their seats, then graphic returns. No content clutter.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Music lifts slightly as guests enter - warmer, fuller than the cocktail sound. Still soft, still background, filling every corner of the ballroom. At 19:33: MC takes backstage position. At 19:35: music fades to silence as MC approaches the podium. The silence commands attention before a word is spoken.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">At 19:33: MC cued and in position. Ugo confirms all VIP principals are seated. At 19:35: MC walks on. Music out. Camera operators in position: stage wide + podium close.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC steps on stage</div>
+
+      <!-- G3 -->
+      <div class="scene" id="g3">
+        <div class="scene-header">
+          <span class="scene-num">Gala 03</span>
+          <div class="scene-header-info">
+            <div class="scene-time">19:35 &ndash; 19:38</div>
+            <div class="scene-title">Nigerian National Anthem & MC Welcome Toast</div>
+            <div class="scene-location">Grand Ballroom</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            The MC opens the evening in three minutes. Anthem. All standing. Then one minute - two sentences - a raised glass on behalf of the Governor. No speech, no agenda, no formality beyond what the moment requires. Dinner begins immediately after. The evening is clean and it is moving.
+          </div>
+          <div class="cues">
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Nigerian National Anthem performed live or through PA at full, dignified volume. All guests standing. After the anthem: 3 seconds of natural silence before the MC speaks - do not fill it. The MC delivers the welcome and toast, raises a glass. Room drinks. Dinner service cued.</span></div>
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">During anthem: Nigerian coat of arms or clean navy/gold graphic - nothing distracting. During MC toast: Gala holding graphic returns. No lower third for the MC - they are the host, not a panellist.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">MC: <em>"On behalf of His Excellency Governor Babajide Sanwo-Olu and the Lagos State Government - welcome to the Lagos State Investment Forum Gala Dinner 2026. To Lagos, and to all of you who have chosen to be part of her story."</em> The room drinks. Something shifts. The evening has properly begun.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Starter served - spoken word takes the stage</div>
+
+      <!-- G4 -->
+      <div class="scene" id="g4">
+        <div class="scene-header">
+          <span class="scene-num">Gala 04</span>
+          <div class="scene-header-info">
+            <div class="scene-time">19:45 &ndash; 19:55</div>
+            <div class="scene-title">Spoken Word Performance</div>
+            <div class="scene-location">Grand Ballroom - Main Stage</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Starters are on the tables. The spoken word artist takes the stage - the room does not fully stop, and that is intentional. The piece works as both foreground and background. By the third stanza, forks are going down. By the final lines, the room is still. 10 minutes of genuine literary performance - commissioned for this night, about this city, for this room. The fact that it is bespoke is what makes it land.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Slow visual accompaniment: abstract Lagos imagery - the ocean, the city at night, hands exchanging documents. No text. No lower thirds during the performance. Artist name and title shown briefly at the start only: <em>[Name] / Spoken Word Artist.</em></span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Single handheld or podium mic. Subtle low musical bed if the artist uses one - confirm in advance. PA calibrated so the voice carries to every corner without strain. Words must be clear - no heavy reverb settings.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text"><span class="tbc">TBC</span> Artist and piece to be confirmed. Brief required: piece themed around Lagos, global investment, Africa's future. Max 10 minutes, strict - next acts are timed.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Applause - Berklee takes the stage</div>
+
+      <!-- G5 -->
+      <div class="scene" id="g5">
+        <div class="scene-header">
+          <span class="scene-num">Gala 05</span>
+          <div class="scene-header-info">
+            <div class="scene-time">19:55 &ndash; 20:10</div>
+            <div class="scene-title">Berklee College of Music - Live Performance</div>
+            <div class="scene-location">Grand Ballroom - Main Stage</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Berklee takes the stage and the register shifts - from intimate poetry to something warmer and fuller. Jazz with Afrobeat undercurrents. Starters are being eaten, conversations resume at tables, but the music is doing its work underneath it all. International delegates recognise the name. It lands with authority without demanding full attention.
+          </div>
+          <div class="cues">
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Set list confirmed at sound check (18:30 hard deadline). Engineer rides the mix throughout - this is dinner music, not a concert. Piano and brass lead; rhythm section supports without overwhelming. If the room energy lifts mid-set, engineer may nudge volume slightly - follow the room, don't fight it.</span></div>
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Live camera feed of the ensemble - warm close-ups of instruments and musicians. No titles or lower thirds after the initial introduction. Visuals are musical, not informational.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">At 20:08: Ugo gives the 2-minute signal. Set ends cleanly at 20:10. Main course service is ready and the kitchen has been holding - any overrun here cascades through the rest of the evening.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Main course served - open networking at tables</div>
+
+      <!-- G6 -->
+      <div class="scene" id="g6">
+        <div class="scene-header">
+          <span class="scene-num">Gala 06</span>
+          <div class="scene-header-info">
+            <div class="scene-time">20:25 &ndash; 20:37</div>
+            <div class="scene-title">Acapella Group Performance</div>
+            <div class="scene-location">Grand Ballroom - Main Stage</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Main course is underway, table conversations are flowing. The acapella group enters without fanfare - and when they begin, pure human voices cut through the room in a way an instrument cannot. No backing track. No equipment beyond microphones. Cutlery pauses. This is the texture of the evening: each act completely different from the last, each one a small surprise.
+          </div>
+          <div class="cues">
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Individual handheld or clip mics per vocalist. Engineer supports the group's natural vocal balance - does not fight it. Set: contemporary arrangements of Nigerian music, Afrobeats standards reimagined as harmonies. Recognisable but transformed. Strictly 12 minutes.</span></div>
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Live feed: close-ups on faces and mouths - the physical effort of unaccompanied singing. Warm, intimate framing. Visuals reinforce what the room is hearing: this is human, unaugmented, and genuinely extraordinary.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text"><span class="tbc">TBC</span> Nigerian acapella group to be confirmed. Sound check completed before 18:30. No additional equipment beyond microphones and monitoring.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Applause - brief stage reset - lighting shift</div>
+
+      <!-- G7 -->
+      <div class="scene" id="g7">
+        <div class="scene-header">
+          <span class="scene-num">Gala 07</span>
+          <div class="scene-header-info">
+            <div class="scene-time">20:37 &ndash; 20:47</div>
+            <div class="scene-title">Equilibrist Act - Chair Balance & Stacking</div>
+            <div class="scene-location">Grand Ballroom - Main Stage / Performance Floor</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            The MC says nothing. Lights dim. A single spotlight hits the stage. A performer walks out carrying a chair. By the time the act ends, they are balanced on a tower of stacked chairs several metres high, in complete stillness. The room is completely silent. Some guests will have risen slightly from their seats without realising. This is the moment that gets described at breakfast tomorrow. It requires precision from Alhassan and Damilare's technical team - the staging of this act is as important as the act itself.
+          </div>
+          <div class="cues">
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text"><strong>Critical lighting sequence:</strong> house lights drop to 20% as the performer enters. Single tight spotlight follows throughout. <strong>Ceiling clearance at Eko Hotel ballroom must be measured and confirmed at the production recce</strong> - the full stacked height of the act must clear the ceiling with margin. Screen cameras track the performance live so delegates at the back see the scale. <strong>Complete silence from house PA</strong> during the act.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Zero PA during the performance. The only sound is the performer's movement and the audience's collective held breath. After the final balance is held: 3 full seconds of silence before the performer descends - do not rush to the music cue. When they descend safely: 10-second dramatic music swell from PA, then cut to natural applause.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">All floor waiting staff hold from 20:35 - zero movement during the act. Jacqui coordinates with the hospitality team, Lola coordinates with F&B service. Ugo briefs all floor staff before this slot. No exceptions. Service resumes only when applause begins.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">Phones come out horizontally. The Governor watches with a slight smile. This is the kind of moment that cannot be manufactured - it either happens or it does not. The room will be talking about it tomorrow at the site visits.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">House lights return - final performance act</div>
+
+      <!-- G8 -->
+      <div class="scene" id="g8">
+        <div class="scene-header">
+          <span class="scene-num">Gala 08</span>
+          <div class="scene-header-info">
+            <div class="scene-time">20:47 &ndash; 20:59</div>
+            <div class="scene-title">Solo Instrumentalist - Closing Performance</div>
+            <div class="scene-location">Grand Ballroom - Main Stage</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            After the electricity of the equilibrist, the solo instrumentalist brings the room back to earth - gently, beautifully. A kora virtuoso or a jazz saxophonist, 12 minutes, intimate and refined. Dessert arrives. Conversations resume. The music is not asking for the room's full attention - it has already earned it. Now it simply holds it and carries the evening to a natural close.
+          </div>
+          <div class="cues">
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Single instrument, carefully miked. The goal is presence, not amplification - the instrument should feel live and natural, not broadcast. Kora: careful miking of the bridge to capture full harmonic range. Saxophone: warm, close-mic setup. Set moves from reflective to warm to gently celebratory across 12 minutes.</span></div>
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Close-up live footage of the instrument and performer's hands. Warm, slow camera moves. If kora: strings, gourd, hands. If saxophone: keys, breath, body. The screens bring the audience closer to the instrument than the room's size would otherwise allow.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text"><span class="tbc">TBC</span> Artist to be confirmed by client - kora or jazz saxophone recommended. Not a concert act. Sound check before 18:30.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Dessert served - open networking</div>
+
+      <!-- G9 -->
+      <div class="scene" id="g9">
+        <div class="scene-header">
+          <span class="scene-num">Gala 09</span>
+          <div class="scene-header-info">
+            <div class="scene-time">21:00 &ndash; 21:30</div>
+            <div class="scene-title">Dessert, Networking & Formal Close</div>
+            <div class="scene-location">Grand Ballroom</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Dessert is on the tables. The formal programme is done. Delegates move freely - some stay at their tables, some cross the room for conversations they have been putting off all day. At 21:20 the MC returns for two minutes: warm, brief, and closing. Governor's farewell. Room responds with genuine warmth. By 21:30, the formal evening is complete - bar is open, the night is not.
+          </div>
+          <div class="cues">
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">From 21:00: cocktail-register jazz returns - easy, warm, unobtrusive. Carries the room through the MC close and into the informal networking period. Continues until the room clears naturally.</span></div>
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">After MC close: <strong>thank you graphic</strong> - <em>Thank you for being part of LSIF 2026 / Day Two begins at 09:30.</em> A quiet but intentional reminder. Then Gala branding holds until the room clears.</span></div>
+            <div class="cue protocol"><span class="cue-label">Protocol</span><span class="cue-text">Governor departs at 20:58 - before the MC close. Obehi coordinates with DSS on the Governor's exit - quietly and without disrupting the room. Governor's departure cues other VIP principals that the evening's formal obligations are complete. MC close follows at 21:20.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════ DAY 2 ══════════ -->
+      <div class="day-banner">
+        <div class="day-label">Day Two - Wednesday, 9 June 2026</div>
+        <div class="day-title">Conference Programme</div>
+        <div class="day-sub">Main Plenary Hall - Eko Hotel & Suites - 09:30 to 14:30</div>
+      </div>
+
+      <!-- D1 -->
+      <div class="scene" id="d1">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 01</span>
+          <div class="scene-header-info">
+            <div class="scene-time">08:30 &ndash; 09:25</div>
+            <div class="scene-title">Arrival & Light Re-registration</div>
+            <div class="scene-location">Conference Foyer, Eko Hotel</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            Day 2 feels different from Day 1. Delegates who were strangers at yesterday's registration are greeting each other by name. Re-registration is light - badge check only, no new packs. Coffee is out. The Forum has found its rhythm and the room knows it. Alhassan and Philipe's production team's energy needs to match: this day should feel like a continuation, not a reset.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Foyer screens: <strong>Day 1 highlights reel</strong> - best moments, key quotes, photography from the exhibition and sessions. Transitions to Day 2 agenda as 09:15 approaches. Countdown to 09:30 in the corner.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Same ambient playlist - slightly more upbeat selection this morning. At 09:15: pre-session mode, building. At 09:20: Gbemi coordinates with ushers for the call-to-order sweep, same sequence as Day 1.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Re-registration: badge check only - one desk, two staff. Olumide, Arinola, Tonye and Nathan redeployed to floor operations. Gbemi coordinates with ushers to call delegates to the hall at 09:15.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Delegates seated - Day 2 opens</div>
+
+      <!-- D2 -->
+      <div class="scene" id="d2">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 02</span>
+          <div class="scene-header-info">
+            <div class="scene-time">09:30 &ndash; 10:30</div>
+            <div class="scene-title">Day 2 Opening Recap & Programme Gap</div>
+            <div class="scene-location">Main Plenary Hall + Deal Room (TBC)</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/deal_rm2.jpeg" alt="Premium boardroom with city view for deal meetings" />
+              <!-- <span class="img-cap">Deal Room reference - This is the calibre of space the 10:00–10:30 gap could activate: a dedicated deal-making room running parallel to the main hall for scheduled 1-to-1 investment meetings</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Forum Chairs open Day 2 with a short recap - key themes and commitments from Day 1, what the day ahead holds. Brisk, purposeful. The 30-minute gap from 10:00–10:30 is currently unallocated and needs a client decision before production lock. Three options are on the table (see AV cue below).
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Opening: 60-second Day 1 highlights reel plays before Forum Chairs take the podium - sets the energy without a long verbal recap. Lower thirds for Forum Chairs <span class="tbc">TBC</span> - names not yet confirmed.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text"><span class="tbc">OPEN ITEM - CLIENT DECISION REQUIRED</span><br><strong>10:00–10:30 gap:</strong><br>Option 1: Structured Deal Room / 1-to-1 investment meetings (pre-scheduled pairings, private breakout rooms) - highest value, most complex to set up<br>Option 2: Additional panel or fireside not yet on the programme - standard AV setup<br>Option 3: Extended networking break with exhibition access - lowest complexity<br><br>Each requires a different setup. Confirm before production lock.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Plenary 4 begins</div>
+
+      <!-- D3 -->
+      <div class="scene" id="d3">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 03</span>
+          <div class="scene-header-info">
+            <div class="scene-time">10:30 &ndash; 11:30</div>
+            <div class="scene-title">Plenary 4 - Building the Cities of the Future</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs two">
+            <div class="scene-img-wrap">
+              <img src="images/plenary5.jpeg" alt="Large conference hall with full audience and panel" />
+              <span class="img-cap">Reference - Full-room plenary format with complete delegate presence, speaker screens active, large-scale session delivery</span>
+            </div>
+            <div class="scene-img-wrap">
+              <img src="images/plenary7.jpeg" alt="Formal investment forum panel" />
+              <!-- <span class="img-cap">Reference - Investment forum panel format: formal backdrop, individual seating, name cards, structured moderator-led discussion</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Deputy Governor Hamzat chairs a session anchored by the AfDB President's keynote. Infrastructure and urban development - every government delegation in the room has skin in this game. The AfDB keynote carries weight: when the continent's development bank speaks on cities, capital moves. Confirm AfDB President attendance format before the day.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Session title graphic on opening. AfDB lower third: <em>[AfDB President Name] / President, African Development Bank.</em> <span class="tbc">TBC</span> In-person or video - if video: dedicated screen for remote feed, technical setup confirmed 48 hours in advance, backup connection on standby.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">If AfDB President is remote: dedicated laptop on a clean connection, operator monitoring the call throughout the session. Vision mixer has a dedicated input for the remote feed. Test call conducted 30 minutes before the session starts.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Networking break</div>
+
+      <!-- D4 -->
+      <div class="scene" id="d4">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 04</span>
+          <div class="scene-header-info">
+            <div class="scene-time">11:30 &ndash; 12:00</div>
+            <div class="scene-title">Networking Break</div>
+            <div class="scene-location">Conference Foyer</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            30 minutes. Coffee, tea, light refreshments. Exhibition accessible. By Day 2, delegates know exactly who they need to speak to - they use every available minute. Let the room work. Gbemi coordinates with ushers for the 11:55 call-to-order and nothing else.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Exhibition and deal room promotions. <em>"Plenary 5 begins at 12:00 - Global Partnerships for Growth."</em> At 11:50: Gbemi coordinates with ushers for the soft call-to-order.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Ambient playlist. At 11:55: PA - <em>"Plenary 5 begins in 5 minutes. Please make your way to the Plenary Hall."</em></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Plenary 5 begins</div>
+
+      <!-- D5 -->
+      <div class="scene" id="d5">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 05</span>
+          <div class="scene-header-info">
+            <div class="scene-time">12:00 &ndash; 13:00</div>
+            <div class="scene-title">Plenary 5 - Global Partnerships for Growth</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/plenary4.jpeg" alt="Two-person fireside chat format on stage" />
+              <!-- <span class="img-cap">Reference - Fireside format: two chairs, no podium, conversational staging - the informality of the format signals dialogue, not address</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Samantha Cohen chairs. Wamkele Mene (AfCFTA) delivers a fireside conversation on continental trade. This is the most globally oriented session of the Forum - it speaks directly to international delegates who need to understand Africa's regulatory and investment environment before committing capital. The fireside format is deliberate: less formal, more substantive.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Fireside format: two chairs on stage, no podium. Camera setup for two-shot and individual close-ups - vision mixer between wide, Mene close-up, Cohen close-up based on who is speaking. AfCFTA trade corridor graphic on side screens where contextually relevant.</span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">Two lapel mics - no table mics. Stage dressed with two chairs, side table, water. No lectern. The chairs and their positioning must communicate equals in conversation, not interviewer and subject.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Plenary 6 begins</div>
+
+      <!-- D6 -->
+      <div class="scene" id="d6">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 06</span>
+          <div class="scene-header-info">
+            <div class="scene-time">13:00 &ndash; 14:00</div>
+            <div class="scene-title">Plenary 6 - Talent, Creativity and Culture</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs two">
+            <div class="scene-img-wrap">
+              <img src="images/plenary6.jpeg" alt="Culture and the City panel session" />
+              <!-- <span class="img-cap">Reference - Culture panel format: session title prominent on left screen, speakers and moderator in relaxed conversational arrangement - this image is very close to the actual session theme</span> -->
+            </div>
+            <div class="scene-img-wrap">
+              <img src="images/_%20(13).jpeg" alt="Artistic installation in exhibition context" />
+              <!-- <span class="img-cap">Reference - The cultural and creative dimension of the Forum: artistic installations and creative economy displays make the case for Lagos beyond investment data</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            Eva Omaghomi chairs the final substantive session before the closing. The keynote speaker - Soyinka, Bolanle Austin-Peters, or Kunle Afolayan, TBC - sets a completely different tone from everything that preceded it. After two days of investment data and infrastructure policy, this session makes the argument that culture and creative economy are Lagos's sharpest competitive edge. It energises the room before the closing.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Keynote lower third confirmed once speaker is confirmed <span class="tbc">TBC</span>. Side screens can carry creative and cultural visual content relevant to the speaker's area - Nollywood, fashion, music, art. This session is more visually dynamic than the policy panels. Coordinate content with the moderator in advance.</span></div>
+            <!-- <div class="cue delegate"><span class="cue-label">Experience</span><span class="cue-text">After two days of investment pitches, this session lands differently. A UK-Nigerian delegate who has sat politely through most of the Forum leans forward and speaks from the floor during Q&A for the first time. The room applauds her point. That is what this session is designed to create - space for a different kind of voice.</span></div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">MC introduces the Closing Session</div>
+
+      <!-- D7 -->
+      <div class="scene" id="d7">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 07</span>
+          <div class="scene-header-info">
+            <div class="scene-time">14:00 &ndash; 14:30</div>
+            <div class="scene-title">Closing Session - Communiqué, MoU Signing & Governor's Close</div>
+            <div class="scene-location">Main Plenary Hall</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="scene-imgs one">
+            <div class="scene-img-wrap">
+              <img src="images/Bidwells%20Immersive%20Employee%20Conference_%20Bringing%202030%20Strategy%20%26%20Values%20to%20Life%20-%20MGN%20Events.jpeg" alt="Large closing panel session with full stage" />
+              <!-- <span class="img-cap">Reference - Closing session format: full panel on stage, large audience, high-energy close - the room should feel like a conclusion worth arriving at</span> -->
+            </div>
+          </div>
+          <div class="narrative">
+            The Forum closes formally. The communiqué is read and presented - a document representing two days of collective work and commitment. The MoU signing ceremony follows: signatories to the stage in order, sign at the designated table, each signing acknowledged by the room. Governor Sanwo-Olu closes with brief, warm remarks. Two days crystallised into a final public moment. The room's energy is quiet but proud.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text"><strong>MoU Signing</strong>: dedicated graphic as each signatory approaches - names of signing parties, sector of agreement. Camera captures handshake and signature - press pool in position. <span class="tbc">TBC</span> Number of signatories and order to be confirmed; plan 2 minutes per signing.<br><br><strong>Governor's Close</strong>: full-screen live podium feed, lower third. After: screens show closing graphic - <em>Lagos State Investment Forum 2026 / Thank you for investing in Lagos.</em></span></div>
+            <div class="cue av"><span class="cue-label">AV Cue</span><span class="cue-text">MoU signing table pre-positioned stage left: pens, folders with documents, Lagos State crest, two chairs. Signing area lit separately. Dedicated camera operator on the signing table throughout. <span class="tbc">TBC</span> Vote of Thanks speaker - 2 minutes before Governor's close.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">After Governor's closing remarks: 15-second music swell - uplifting, Afrobeats-inflected - as the applause rises. Then music holds softly under the natural applause and transitions to the outgoing networking playlist. Triumphant but not overblown.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="transition">Formal programme ends - closing lunch begins</div>
+
+      <!-- D8 -->
+      <div class="scene" id="d8">
+        <div class="scene-header">
+          <span class="scene-num">Day 2 - 08</span>
+          <div class="scene-header-info">
+            <div class="scene-time">14:30 &ndash; 16:00</div>
+            <div class="scene-title">Closing Networking Lunch & Delegate Departure</div>
+            <div class="scene-location">Dining Hall / Hotel Lobby</div>
+          </div>
+        </div>
+        <div class="scene-body">
+          <div class="narrative">
+            The final act. The formal structure has dissolved - what remains are the relationships it created. Delegates are animated: cards, follow-up plans, photographs. The room is doing the Forum's last piece of work on its own. By 16:00 it is emptying. Day 3 site visit delegates depart at 08:00 tomorrow - they receive their logistics briefing card at this lunch.
+          </div>
+          <div class="cues">
+            <div class="cue screens"><span class="cue-label">Screens</span><span class="cue-text">Dining hall screens: <strong>closing montage</strong> - two days of faces, handshakes, signing moments, performance highlights, aerial Lagos. No text. Pure atmosphere. The last image a delegate sees before they leave should be Lagos at its best.</span></div>
+            <div class="cue audio"><span class="cue-label">Audio</span><span class="cue-text">Closing lunch playlist: celebratory, easy. Afrobeats at social volume. Transitions naturally to silence as the room empties - no hard cut, no formal end. Let it dissolve.</span></div>
+            <div class="cue staff"><span class="cue-label">Staff</span><span class="cue-text">Ernest, Charles and Jumoke confirm Day 3 transport: buses from Eko Hotel at 08:00 for Dangote Refinery and Lekki Free Zone. <strong>Security clearance for Dangote Refinery must be received before the day.</strong> Site visit delegates receive briefing card with tomorrow's logistics at this lunch.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const links = document.querySelectorAll('.sb-link');
+  const scenes = document.querySelectorAll('.scene');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector('.sb-link[href="#' + entry.target.id + '"]');
+        if (match) match.classList.add('active');
+      }
+    });
+  }, { threshold: 0.25 });
+  scenes.forEach(s => { if (s.id) observer.observe(s); });
+</script>
+</body>
+</html>

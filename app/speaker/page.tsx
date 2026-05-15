@@ -3,16 +3,19 @@ import { useEffect, useRef } from 'react'
 import RoleHeader from '@/components/RoleHeader'
 import FlashBanner from '@/components/FlashBanner'
 import { useEventState } from '@/hooks/useEventState'
-import { useTimer, formatTimer, getTimerColor } from '@/hooks/useTimer'
+import { useRole } from '@/hooks/useRole'
+import { useTimer, formatDisplay, getTimerColor } from '@/hooks/useTimer'
 import { useClock } from '@/hooks/useClock'
 import { useChime } from '@/hooks/useChime'
 
 export default function SpeakerPage() {
-  const { currentSession, nextSession, currentSessionId, timer, message, connected, serverTimeOffset } = useEventState()
+  useRole('speaker')
+  const { currentSession, nextSession, currentSessionId, timer, timerMode, message, connected, serverTimeOffset } = useEventState()
   const seconds = useTimer(timer, serverTimeOffset)
   const clock = useClock()
   const playChime = useChime()
   const color = getTimerColor(seconds, currentSession?.duration)
+  const display = formatDisplay(seconds, timerMode, currentSession?.duration)
 
   const lastChimeId = useRef<string | null>(null)
   const warnedRef = useRef(false)
@@ -47,7 +50,7 @@ export default function SpeakerPage() {
 
       <div className="flex-1 flex flex-col items-center justify-center px-8 text-center">
         <div className={`font-mono font-black leading-none tabular-nums ${timerColorClass}`} style={{ fontSize: 'clamp(5rem, 22vw, 22rem)' }}>
-          {formatTimer(seconds)}
+          {display}
         </div>
         <div className={`font-mono font-semibold mt-6 tracking-wide ${timerColorClass}`} style={{ fontSize: 'clamp(1.25rem, 4vw, 3.5rem)' }}>
           {timingLabel()}

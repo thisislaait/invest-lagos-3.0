@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useEventState } from '@/hooks/useEventState'
-import { useTimer, formatTimer, getTimerColor } from '@/hooks/useTimer'
+import { useTimer, formatDisplay, getTimerColor } from '@/hooks/useTimer'
 import { useClock } from '@/hooks/useClock'
 import { useChime } from '@/hooks/useChime'
 import { useBriefingData } from '@/hooks/useBriefingData'
@@ -25,6 +25,14 @@ function startsIn(startTime: string | undefined, clock: string): string | null {
   const diff = clockToMins(startTime) - clockToMins(clock)
   if (diff <= 0) return null
   return diff < 60 ? `${diff}m` : `${Math.floor(diff / 60)}h ${diff % 60}m`
+}
+
+function adjustTime(startTime: string | undefined, delayMins: number): string | undefined {
+  if (!startTime || delayMins === 0) return startTime
+  const [h, m] = startTime.split(':').map(Number)
+  const total = h * 60 + m + delayMins
+  const dayMins = ((total % 1440) + 1440) % 1440
+  return `${Math.floor(dayMins / 60).toString().padStart(2, '0')}:${(dayMins % 60).toString().padStart(2, '0')}`
 }
 
 // ── Drawer ────────────────────────────────────────────────────────────────────
@@ -239,7 +247,7 @@ function SessionDrawer({
 export default function DashboardPage() {
   const {
     currentSession, nextSession, currentSessionId, ordered,
-    timer, message, connected, serverTimeOffset,
+    timer, timerMode, delayMins, message, connected, serverTimeOffset,
   } = useEventState()
   const { sessions: briefingSessions } = useBriefingData()
 
@@ -247,6 +255,7 @@ export default function DashboardPage() {
   const clock = useClock()
   const playChime = useChime()
   const color = getTimerColor(seconds, currentSession?.duration)
+  const display = formatDisplay(seconds, timerMode, currentSession?.duration)
 
   const [selectedDay, setSelectedDay] = useState(1)
   const [drawerSession, setDrawerSession] = useState<(Session & { id?: string }) | null>(null)
@@ -345,7 +354,7 @@ export default function DashboardPage() {
               {/* Timer — always visible, right-aligned */}
               <div className="text-right shrink-0">
                 <div className={`text-5xl font-mono font-black tabular-nums leading-none ${timerColor}`}>
-                  {formatTimer(seconds)}
+                  {display}
                 </div>
                 <div className={`text-[10px] font-mono mt-1.5 ${timerColor} opacity-70`}>
                   {timerLabel}{currentSession.duration ? ` · ${currentSession.duration}m` : ''}
@@ -364,7 +373,7 @@ export default function DashboardPage() {
                 )}
               </div>
               <div className={`text-4xl font-mono font-black tabular-nums ${timerColor}`}>
-                {formatTimer(seconds)}
+                {display}
               </div>
             </div>
           )}
@@ -395,6 +404,16 @@ export default function DashboardPage() {
           </div>
         )}
       </div>
+
+      {/* ── Delay banner ── */}
+      {delayMins !== 0 && (
+        <div className={`px-5 py-2 flex items-center gap-2 text-xs font-mono border-b ${
+          delayMins > 0 ? 'bg-red-950/30 border-red-900/30 text-red-400' : 'bg-blue-950/30 border-blue-900/30 text-blue-400'
+        }`}>
+          <span>{delayMins > 0 ? '▲' : '▼'}</span>
+          <span>Schedule running <strong>{delayMins > 0 ? `+${delayMins}m behind` : `${Math.abs(delayMins)}m ahead`}</strong> — times below are adjusted</span>
+        </div>
+      )}
 
       {/* ── Timeline ── */}
       <div className="flex-1 px-5">
@@ -434,7 +453,10 @@ export default function DashboardPage() {
                   {/* Time row */}
                   <div className="flex items-center gap-2.5 mb-1">
                     {s.startTime && (
-                      <span className="font-mono text-zinc-600 text-xs tabular-nums">{s.startTime}</span>
+                      <span className="font-mono text-zinc-600 text-xs tabular-nums">
+                        {adjustTime(s.startTime, delayMins)}
+                        {delayMins !== 0 && <span className="text-zinc-800 ml-0.5 line-through">{s.startTime}</span>}
+                      </span>
                     )}
                     {s.duration && (
                       <span className="font-mono text-zinc-800 text-xs">{s.duration}m</span>

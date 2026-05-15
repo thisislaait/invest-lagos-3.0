@@ -1,32 +1,28 @@
 {
   "rules": {
     ".read": true,
-    "sessions": {
-      ".write": true,
-      "$sessionId": {
-        ".validate": "newData.hasChildren(['title', 'order', 'status', 'day', 'type'])"
+    "events": {
+      "$eventId": {
+        "sessions": {
+          ".write": true,
+          "$sessionId": {
+            ".validate": "newData.hasChildren(['title', 'order', 'status', 'day', 'type'])"
+          }
+        },
+        "currentSessionId": { ".write": true },
+        "timer": {
+          ".write": true,
+          ".validate": "newData.hasChildren(['running', 'baseSeconds'])"
+        },
+        "message": {
+          ".write": true,
+          ".validate": "newData.hasChildren(['active', 'text'])"
+        },
+        "timerMode":  { ".write": true },
+        "delayMins":  { ".write": true }
       }
     },
-    "currentSessionId": {
-      ".write": true
-    },
-    "timer": {
-      ".write": true,
-      ".validate": "newData.hasChildren(['running', 'baseSeconds'])"
-    },
-    "message": {
-      ".write": true,
-      ".validate": "newData.hasChildren(['active', 'text'])"
-    },
-    "briefing": {
-      ".write": true
-    },
-    "checklist": {
-      ".write": true
-    },
-    "$other": {
-      ".read": false,
-      ".write": false
-    }
+    "briefing":        { ".write": true },
+    "checklist":       { ".write": true }
   }
 }

@@ -151,27 +151,27 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:7,day:1,order:7,startTime:'10:20',duration:10,title:'Messages of Goodwill — Forum Co-Chairs',type:'speech',
-   speakers:['Chairman, BUA Group (Name TBC)','Alhaji Aliko Dangote — Chairman, Dangote Group'],moderator:'',
-   flags:[{kind:'warn',text:'BUA Chair name TBC · Confirm speaking order'}],
+   speakers:['Abdul Samad Rabiu, CFR, CON — Chairman, BUA Group','Alhaji Aliko Dangote, GCON — Chairman, Dangote Group'],moderator:'',
+   flags:[{kind:'info',text:'Confirm speaking order with protocol team before event day'}],
    overview:{venue:'Main Plenary Hall — Podium or Panel Table',format:'Two sequential addresses',config:'Podium (confirm if both at podium or seated table). Two mics.',objective:'Forum Co-Chairs set the private-sector tone and signal business confidence in the Forum.'},
    avCues:[
      {type:'av',label:'Slides',text:'Speaker 1: BUA Group logo + [Name TBC]. Speaker 2: Dangote Group logo + Alhaji Aliko Dangote.'},
      {type:'av',label:'Audio',text:'Podium mic per speaker. Clean transition between the two.'},
      {type:'stage',label:'Format',text:'Confirm: are both Co-Chairs at podium sequentially, or seated at a table?'},
-     {type:'warn',label:'Open Item',text:'BUA Group Chair name not confirmed. Request from client ASAP — needed for MC script, slides, and protocol order.'}
+     {type:'av',label:'Note',text:'Abdul Samad Rabiu (BUA) confirmed. Confirm speaking order: Rabiu first, Dangote second. Brief both on 4-minute time limit.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'MESSAGES OF GOODWILL',sub:'Forum Co-Chairs'},
-     {slot:'Speaker 1 Lower Third',type:'lt',name:'[BUA Group Chairman — TBC]',role:'Chairman',org:'BUA Group'},
+     {slot:'Speaker 1 Lower Third',type:'lt',name:'Abdul Samad Rabiu, CFR, CON',role:'Chairman',org:'BUA Group'},
      {slot:'Speaker 2 Lower Third',type:'lt',name:'Alhaji Aliko Dangote',role:'Chairman',org:'Dangote Group'},
      {slot:'Design Note',type:'note',text:'Consider: Dangote Group logo + BUA Group logo as side-by-side holding slide before session begins.'}
    ],
-   mcScript:'We will now hear Messages of Goodwill from our distinguished Forum Co-Chairs. First, we welcome the Chairman of BUA Group — [NAME TBC]. Followed by the Chairman of Dangote Group — Alhaji Aliko Dangote.',
+   mcScript:'We will now hear Messages of Goodwill from our distinguished Forum Co-Chairs. First, we welcome the Chairman of BUA Group — Abdul Samad Rabiu. Followed by the Chairman of Dangote Group — Alhaji Aliko Dangote.',
    mcDirection:'Confirm speaking order before script is finalised. Brief both speakers on 4-minute time limit each.',
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:8,day:1,order:8,startTime:'10:30',duration:20,title:'Keynote Address — President of Nigeria',type:'keynote',
-   speakers:['President of the Federal Republic of Nigeria'],moderator:'',
+   speakers:['Asiwaju Bola Ahmed Tinubu, GCFR — President of the Federal Republic of Nigeria'],moderator:'',
    flags:[{kind:'warn',text:'Presidential protocol — coordinate with DSS'}],
    overview:{venue:'Main Plenary Hall — Podium',format:'Presidential Keynote',config:'Full stage clear. Presidential seal on screen. National Anthem on entry. All mics live.',objective:"Presidential keynote — anchor the Forum's national significance and signal federal commitment to the Lagos investment agenda."},
    avCues:[
@@ -213,9 +213,9 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:10,day:1,order:10,startTime:'12:30',duration:60,title:"Governors' Investment Showcase Panel",type:'panel',
-   speakers:['Governors of: Abia · Enugu · Imo · Kano · Lagos · Ogun · Kwara · Akwa Ibom'],
+   speakers:['Dr. Alex Otti, OFR — Governor, Abia State','Peter Ndubuisi Mbah — Governor, Enugu State','Senator Hope Uzodimma — Governor, Imo State','Alhaji Abba Kabir Yusuf — Governor, Kano State','Mr. Babajide Olusola Sanwo-Olu — Governor, Lagos State','Prince Dapo Abiodun — Governor, Ogun State','Alhaji AbdulRahman AbdulRazaq — Governor, Kwara State','Pastor Umo Bassey Eno — Governor, Akwa Ibom State'],
    moderator:'Dr. Jumoke Oduwole — Honourable Minister of Trade and Investment',
-   flags:[{kind:'warn',text:'Confirm seating order by protocol rank'}],
+   flags:[{kind:'info',text:'Confirm seating order by protocol rank before event day'}],
    overview:{venue:'Main Plenary Hall — Panel Stage',format:'High-table panel: 8 governors + chair',config:'9 seats. Name placards. 9 mics. Water on table. All Governors in holding room 15 min before.',objective:'Each Governor delivers a focused 5–6 minute investment pitch. Chair manages time strictly.'},
    avCues:[
      {type:'av',label:'Slides',text:"Session title slide: \"GOVERNORS' INVESTMENT SHOWCASE PANEL\". Panel lower third strip with all 8 governor names + states."},
@@ -227,7 +227,7 @@ export const SESSIONS: BriefingSession[] = [
    screenContent:[
      {slot:'Session Opening Slide',type:'title',title:"GOVERNORS' INVESTMENT SHOWCASE PANEL",sub:'Day 1 · 12:30 · Main Plenary Hall'},
      {slot:'Governor Lower Third — Template',type:'lt',name:'H.E. [Governor Name]',role:'Executive Governor',org:'[State] State, Federal Republic of Nigeria'},
-     {slot:'All 8 Lower Thirds — Pre-load list',type:'note',text:'1. H.E. [Abia Governor] · Abia State\n2. H.E. [Enugu Governor] · Enugu State\n3. H.E. [Imo Governor] · Imo State\n4. H.E. [Kano Governor] · Kano State\n5. H.E. Babajide Sanwo-Olu · Lagos State\n6. H.E. [Ogun Governor] · Ogun State\n7. H.E. [Kwara Governor] · Kwara State\n8. H.E. [Akwa Ibom Governor] · Akwa Ibom State\n\nConfirm all names with client before lower thirds are designed.'},
+     {slot:'All 8 Lower Thirds — Pre-load list',type:'note',text:'1. Dr. Alex Otti, OFR · Governor, Abia State\n2. Peter Ndubuisi Mbah · Governor, Enugu State\n3. Senator Hope Uzodimma · Governor, Imo State\n4. Alhaji Abba Kabir Yusuf · Governor, Kano State\n5. Mr. Babajide Olusola Sanwo-Olu · Governor, Lagos State\n6. Prince Dapo Abiodun · Governor, Ogun State\n7. Alhaji AbdulRahman AbdulRazaq · Governor, Kwara State\n8. Pastor Umo Bassey Eno · Governor, Akwa Ibom State'},
      {slot:'Chair Lower Third',type:'lt',name:'Dr. Jumoke Oduwole',role:'Honourable Minister of Trade and Investment',org:'Federal Republic of Nigeria'}
    ],
    mcScript:"Ladies and gentlemen, we now move to the Governors' Investment Showcase Panel. This high-visibility session brings together Governors from eight Nigerian states to present targeted investment opportunities to our distinguished audience. Chairing this session is the Honourable Minister of Trade and Investment — Dr. Jumoke Oduwole.",
@@ -236,7 +236,7 @@ export const SESSIONS: BriefingSession[] = [
    moderatorQuestions:['[State Governor]: What is the single most investable sector in your state right now, and what are you offering investors?','[Follow-up]: What specific barrier has your state removed in the last 12 months that was previously blocking investment?','[General]: Which of your states is best positioned to partner with Commonwealth investors on a ready-to-go project?']},
 
   {id:11,day:1,order:11,startTime:'13:30',duration:60,title:"Plenary 1 — Lagos: Africa's Global Gateway",type:'panel',
-   speakers:['Lord Marland','Dr. Jumoke Oduwole','DG NACCIMA','Chairman, Heirs Holdings','CEO Tolaram Group (Suggested)'],
+   speakers:['Lord Marland — Chair, CWEIC','Dr. Jumoke Oduwole — Minister of Trade and Investment','Sola Obadimu — NACCIMA','Tony O. Elumelu, CFR — Chairman, Heirs Holdings','Haresh Aswani — CEO, Tolaram'],
    moderator:'Mrs. Folashade Kaosarat Bada Ambrose — Commissioner, MCCTI',
    flags:[{kind:'info',text:'Governor delivers keynote to open this session'}],
    overview:{venue:'Main Plenary Hall — Panel Stage',format:'Keynote opener + panel discussion',config:"Panel table: 5–6 seats. Moderator at end. Governor returns to stage for keynote opener.",objective:"Position Lagos as Africa's primary investment gateway for Commonwealth and international capital."},
@@ -249,7 +249,7 @@ export const SESSIONS: BriefingSession[] = [
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 1',sub:"Lagos: Africa's Global Gateway"},
      {slot:'Keynote Opener',type:'lt',name:'Mr. Babajide Olusola Sanwo-Olu',role:'Executive Governor — Opening Keynote',org:'Lagos State'},
-     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate through each panellist as they speak:\n· Lord Marland — Chair, CWEIC\n· Dr. Jumoke Oduwole — Minister of Trade & Investment\n· DG NACCIMA — [Name TBC]\n· [Chairman, Heirs Holdings — TBC]\n· [CEO Tolaram Group — TBC]'},
+     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate through each panellist as they speak:\n· Lord Marland — Chair, CWEIC\n· Dr. Jumoke Oduwole — Minister of Trade & Investment\n· Sola Obadimu — NACCIMA\n· Tony O. Elumelu, CFR — Chairman, Heirs Holdings\n· Haresh Aswani — CEO, Tolaram'},
      {slot:'Moderator Lower Third',type:'lt',name:'Mrs Folashade Kaosarat Bada Ambrose',role:'Chair · Commissioner, MCCTI',org:'Lagos State Government'}
    ],
    mcScript:"We now move to our first Plenary Discussion — Lagos: Africa's Global Gateway. This session is chaired by the Honourable Commissioner for MCCTI, Mrs. Folashade Kaosarat Bada Ambrose. We begin with an Opening Keynote from His Excellency, Governor Babajide Sanwo-Olu.",
@@ -277,33 +277,33 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:13,day:1,order:13,startTime:'15:30',duration:60,title:'Plenary 2 — The Future of Technology & Innovation',type:'panel',
-   speakers:['Commissioner MIST','CEO Interswitch','CEO Moniepoint','Founder Andela','Google Nigeria Lead','Starlink Representative','CEO RusselSmith (Suggested)'],
-   moderator:'Flutterwave — Chair (confirm individual name)',
-   flags:[{kind:'warn',text:'BREAKOUT A — Elon Musk format unconfirmed'}],
+   speakers:['Mr. Olatubosun Alake — Commissioner, Ministry of Innovation, Science and Technology (MIST)','Mr. Mitchell Elegbe — Founder & Group MD/CEO, Interswitch Group','Mr. Tosin Eniolorunda — CEO, Moniepoint MFB','Mr. Iyinoluwa Samuel Aboyeji, OON — Founder, Andela','Mr. Olumide Balogun — Nigeria Country Director, Google','Representative, Starlink','Mr. Kayode Adeleke — President & CEO, RusselSmith Group'],
+   moderator:'Dipo Fatokun — Chairman, Flutterwave',
+   flags:[{kind:'info',text:'BREAKOUT A — Elon Musk confirmed: Keynote Address / Video Message'}],
    overview:{venue:'Breakout Room A — Separate AV team',format:'Panel + Elon Musk keynote contribution (format TBC)',config:'Breakout Room A. Dedicated AV & Stage team. Panel table: 7 seats + chair.',objective:'Explore AI, digital infrastructure and fintech as drivers of inclusive growth. Scale conditions for the Lagos tech sector.'},
    avCues:[
      {type:'av',label:'Room',text:'BREAKOUT ROOM A — Dedicated AV team assigned. This cue sheet is for Breakout A AV operator.'},
      {type:'av',label:'Opening Slide',text:'"PLENARY 2: THE FUTURE OF TECHNOLOGY & INNOVATION — Breakout Room A"'},
-     {type:'av',label:'Elon Musk',text:'⚠️ FORMAT NOT CONFIRMED: Live video call OR pre-recorded video. Test whichever format is confirmed at full rehearsal the day before. Backup: have pre-recorded clip regardless.'},
+     {type:'av',label:'Elon Musk',text:'CONFIRMED: Keynote Address / Video Message format. Test at full rehearsal. Backup: second copy of file. Confirm delivery format and file specs with client 48h before.'},
      {type:'av',label:'Live Call Tech',text:'If live video call: stable wired internet line (not WiFi). Video platform confirmed. Dedicated technician. Test at 14:30 during lunch break.'},
      {type:'stage',label:'Stage',text:'Breakout A has its own Stage Manager. Confirm mic setup, panel table, seating for 8. Water on table.'},
-     {type:'warn',label:'Critical',text:'Elon Musk keynote format must be confirmed before event day. Escalate to client immediately.'}
+     {type:'warn',label:'Critical',text:'Test Elon Musk video/call setup at full rehearsal. Confirm final delivery format (pre-recorded vs live) 48h before event. Dedicated technician on standby.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 2',sub:'The Future of Technology & Innovation · Breakout Room A'},
      {slot:'Elon Musk Slide — Live Call',type:'title',title:'SPECIAL KEYNOTE CONTRIBUTION',sub:'Elon Musk · Entrepreneur & Technologist · [Live Address]'},
      {slot:'Elon Musk Lower Third — Live',type:'lt',name:'Elon Musk',role:'Special Keynote Contribution',org:'[Live Video Address]'},
      {slot:'Elon Musk Slide — Pre-recorded',type:'title',title:'KEYNOTE VIDEO',sub:'Elon Musk · Entrepreneur & Technologist'},
-     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate per speaker:\n· [Flutterwave Chair — confirm name]\n· Commissioner, Ministry of Innovation, Science & Technology\n· CEO, Interswitch\n· CEO, Moniepoint\n· Founder, Andela\n· [Google Nigeria Lead — confirm name]\n· [Starlink Representative — confirm name]\n· CEO, RusselSmith'}
+     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate per speaker:\n· Dipo Fatokun — Chairman, Flutterwave\n· Olatubosun Alake — Commissioner, MIST, Lagos State\n· Mitchell Elegbe — Founder & Group MD/CEO, Interswitch Group\n· Tosin Eniolorunda — CEO, Moniepoint MFB\n· Iyinoluwa Samuel Aboyeji, OON — Founder, Andela\n· Olumide Balogun — Nigeria Country Director, Google\n· Representative, Starlink (name TBC)\n· Kayode Adeleke — President & CEO, RusselSmith Group'}
    ],
-   mcScript:'Ladies and gentlemen, our afternoon parallel sessions are now beginning. Plenary 2 — The Future of Technology and Innovation — is taking place in Breakout Room A. Please make your way there now.',
+   mcScript:'Ladies and gentlemen, our afternoon parallel sessions are now beginning. Plenary 2 — The Future of Technology and Innovation — is taking place in Breakout Room A, chaired by Dipo Fatokun, and opens with a Keynote Address from Elon Musk. Please make your way there now.',
    mcDirection:'Delivered in main hall before guests disperse. Breakout A MC handles session from this point.',
    moderatorNotes:"Session objective: explore AI, digital infrastructure and fintech as drivers of inclusive growth in Lagos. Anchor in what investors need to hear — not what tech founders want to say.",
    moderatorQuestions:["What is the single infrastructure investment that would most accelerate Lagos's tech sector in the next 5 years?","Fintech has scaled — what's the next wave, and who is positioned to lead it from Lagos?","How does Nigeria's regulatory environment compare to Kenya and South Africa for international tech investors today?","What does interest in Africa from global tech leaders signal for Lagos — and how should the city position itself?"]},
 
   {id:14,day:1,order:14,startTime:'15:30',duration:60,title:'Plenary 3 — Unlocking Investment',type:'panel',
-   speakers:['MD IFC West Africa','CEO FBNQuest','DG DMO Nigeria','British International Investment Rep','CEO Africa Finance Corp','Standard Chartered Rep','MD First Bank','Stirling Bank Rep (Suggested)'],
-   moderator:'Mr. Aig Imokhoude — Co-Chair, LIFC',
+   speakers:['Managing Director, IFC West Africa (name TBC)','Mr. Afolabi Olorode \u2014 Ag. MD/CEO, FBNQuest Merchant Bank (now Quest Merchant Bank)','Ms. Patience Oniha \u2014 Director-General, Debt Management Office Nigeria','Adeola Ukoha \u2014 Coverage Manager Nigeria, British International Investment','Mr. Samaila Zubairu \u2014 CEO, Africa Finance Corporation','Representative, Standard Chartered Bank (name TBC)','Mr. Olusegun Alebiosu \u2014 MD/CEO, First Bank of Nigeria','Abubakar Suleiman \u2014 MD/CEO, Sterling Bank'],
+   moderator:'Mr. Aig Imoukhouede — Co-Chair, Lagos Finance and Investment Council (LFIC)',
    flags:[{kind:'info',text:'BREAKOUT B — parallel to Plenary 2'}],
    overview:{venue:'Breakout Room B — Separate AV team',format:'Keynote opener + panel discussion',config:'Breakout Room B. Dedicated AV & Stage team. Panel table for 9.',objective:'Examine capital deployment mechanics — blended finance, DFI co-investment. Address barriers to financial close on large infrastructure transactions in Lagos.'},
    avCues:[
@@ -317,8 +317,8 @@ export const SESSIONS: BriefingSession[] = [
      {slot:'Session Slide',type:'title',title:'PLENARY 3',sub:'Unlocking Investment · Breakout Room B'},
      {slot:'Keynote Opener Slide',type:'title',title:'OPENING KEYNOTE',sub:'Representative, City of London / CityUK — [Name TBC]'},
      {slot:'Keynote Lower Third',type:'lt',name:'[Name TBC]',role:'Representative',org:'City of London / CityUK'},
-     {slot:'Chair Lower Third',type:'lt',name:'Mr. Aig Imokhoude',role:'Co-Chair',org:'Lagos International Finance Centre (LIFC)'},
-     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate per speaker:\n· MD, IFC West Africa\n· CEO, FBNQuest\n· DG, Debt Management Office Nigeria\n· [BII Representative — confirm name]\n· CEO, Africa Finance Corporation\n· [Standard Chartered Representative — confirm name]\n· MD, First Bank of Nigeria\n· [Stirling Bank Representative — confirm name]'}
+     {slot:'Chair Lower Third',type:'lt',name:'Mr. Aig Imoukhouede',role:'Co-Chair',org:'Lagos Finance and Investment Council (LFIC)'},
+     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate per speaker:\n· MD, IFC West Africa (name TBC)\n· Afolabi Olorode — Ag. MD/CEO, FBNQuest Merchant Bank (now Quest Merchant Bank)\n· Patience Oniha — Director-General, Debt Management Office Nigeria\n· Adeola Ukoha — Coverage Manager Nigeria, British International Investment\n· Samaila Zubairu — CEO, Africa Finance Corporation\n· Representative, Standard Chartered (name TBC)\n· Olusegun Alebiosu — MD/CEO, First Bank of Nigeria\n· Abubakar Suleiman — MD/CEO, Sterling Bank'}
    ],
    mcScript:'Plenary 3 — Unlocking Investment — is taking place simultaneously in Breakout Room B. Please make your way there now.',
    mcDirection:'Delivered in main hall alongside Plenary 2 announcement. Breakout B MC handles session from this point.',
@@ -385,25 +385,25 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:18,day:2,order:18,startTime:'10:30',duration:60,title:'Plenary 4 — Building the Cities of the Future',type:'panel',
-   speakers:['CEO Julius Berger','Commissioner Energy Lagos','DG ICRC','CEO Lekki Free Zone','MD NSIA','Global MD Arup Group','NEOM Representative','Adani Group Rep','British Steel Rep','CEO Benoy (Suggested)'],
+   speakers:['Dr. Peer Lubasch \u2014 CEO, Julius Berger Nigeria Plc','Mr. Biodun Ogunleye \u2014 Hon. Commissioner for Energy / Special Adviser on Works, Lagos State','Dr. Jobson Oseodion Ewalefoh \u2014 DG, Infrastructure Concession Regulatory Commission (ICRC)','Mr. Dai Shunfa \u2014 CEO, Lekki Free Zone','Aminu Umar-Sadiq \u2014 MD, Nigeria Sovereign Investment Authority (NSIA)','Mr. Jerome Frost \u2014 Global Managing Director, Arup Group','Representative, NEOM','Representative, Adani Group','Representative, British Steel','Mr. Tom Cartledge \u2014 CEO, Benoy','Representatives: Wellington School, Charter House School, Rugby School'],
    moderator:'Dr. Kadri Obafemi Hamzat — Deputy Governor, Lagos State',
-   flags:[{kind:'warn',text:'AfDB President: in-person or video?'}],
+   flags:[{kind:'info',text:'AfDB President: Dr. Sidi Ould Tah confirmed \u00b7 Confirm in-person vs video format'}],
    overview:{venue:'Main Plenary Hall — Panel Stage',format:'Keynote opener (AfDB President) + large panel',config:'Panel table up to 10 seats. AfDB President keynote to open. Deputy Governor chairs.',objective:'Explore infrastructure, energy and industrial ecosystems shaping globally competitive African cities. Anchor around Lekki–Epe Airport, metro rail, Fourth Mainland Bridge.'},
    avCues:[
      {type:'av',label:'Slides',text:'"PLENARY 4: BUILDING THE CITIES OF THE FUTURE". AfDB President keynote slide. Panel title cards.'},
      {type:'av',label:'AfDB President',text:'⚠️ Confirm: in-person or via video link? If video — test live connection at rehearsal. Backup plan if link fails?'},
      {type:'av',label:'Audio',text:'Up to 10 panel mics. Chair mic elevated. Confirm gooseneck or lapel with venue.'},
      {type:'stage',label:'Setup',text:'Large panel — confirm table can seat 10 comfortably. Name placards. Water. Deputy Governor confirmed for moderator briefing pack.'},
-     {type:'warn',label:'AfDB',text:'African Development Bank Group President attendance format must be confirmed before programme is locked.'}
+     {type:'warn',label:'AfDB',text:'Dr. Sidi Ould Tah (AfDB President) confirmed. Attendance format (in-person or video) still to be confirmed \u2014 test setup at rehearsal.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 4',sub:'Building the Cities of the Future'},
-     {slot:'AfDB Keynote Slide',type:'title',title:'KEYNOTE ADDRESS',sub:'President, African Development Bank Group'},
-     {slot:'AfDB Lower Third',type:'lt',name:'[AfDB President — confirm name]',role:'President',org:'African Development Bank Group'},
+     {slot:'AfDB Keynote Slide',type:'title',title:'KEYNOTE ADDRESS',sub:'Dr. Sidi Ould Tah \u00b7 President, African Development Bank Group'},
+     {slot:'AfDB Lower Third',type:'lt',name:'Dr. Sidi Ould Tah',role:'President',org:'African Development Bank Group'},
      {slot:'Chair Lower Third',type:'lt',name:'Dr. Kadri Obafemi Hamzat',role:'Chair · Deputy Governor',org:'Lagos State'},
-     {slot:'Panel Lower Thirds — list',type:'note',text:'Pre-load all panellist lower thirds. Rotate as each speaks:\n· CEO, Julius Berger Nigeria\n· Commissioner for Energy, Lagos State\n· DG, Infrastructure Concession Regulatory Commission\n· CEO, Lekki Free Zone\n· MD, NSIA\n· Global MD, Arup Group\n· [NEOM Representative — confirm name]\n· [Adani Group Representative — confirm name]\n· [British Steel Representative — confirm name]\n· CEO, Benoy'}
+     {slot:'Panel Lower Thirds — list',type:'note',text:'Pre-load all panellist lower thirds. Rotate as each speaks:\n· Dr. Peer Lubasch — CEO, Julius Berger Nigeria Plc\n· Biodun Ogunleye — Commissioner for Energy / Special Adviser on Works, Lagos State\n· Dr. Jobson Oseodion Ewalefoh — DG, ICRC\n· Dai Shunfa — CEO, Lekki Free Zone\n· Aminu Umar-Sadiq — MD, NSIA\n· Jerome Frost — Global MD, Arup Group\n· Representative, NEOM (name TBC)\n· Representative, Adani Group (name TBC)\n· Representative, British Steel (name TBC)\n· Tom Cartledge — CEO, Benoy\n· Representatives: Wellington School, Charter House School, Rugby School (names TBC)'}
    ],
-   mcScript:'We now move to Plenary Four — Building the Cities of the Future. Chairing this session is the Deputy Governor of Lagos State, Dr. Kadri Obafemi Hamzat. We begin with a Keynote Address from the President of the African Development Bank Group.',
+   mcScript:'We now move to Plenary Four — Building the Cities of the Future. Chairing this session is the Deputy Governor of Lagos State, Dr. Kadri Obafemi Hamzat. We open with a Keynote Address from the President of the African Development Bank Group — Dr. Sidi Ould Tah.',
    mcDirection:'Large panel — keep MC intro crisp. Do not list all panellists by name. Chair will introduce panellists.',
    moderatorNotes:'Session objective: explore infrastructure, energy and industrial ecosystems shaping globally competitive African cities. Key for investors: financing mechanisms, returns profile, execution capacity. Focus on Lekki–Epe Airport, Fourth Mainland Bridge, metro rail.',
    moderatorQuestions:['Which single infrastructure project in Lagos offers the clearest commercial return for private investors in the next decade?','How does Lagos compare to NEOM, Diamniadio, or Eko Atlantic as a model for intentional city-building?','What is the role of international firms in building Lagos\'s infrastructure capacity — beyond the contract?','Energy: what is the honest timeline for reliable power in Lagos, and what does it cost to solve it?']},
@@ -424,9 +424,9 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:20,day:2,order:20,startTime:'12:00',duration:60,title:'Plenary 5 — Global Partnerships for Growth',type:'panel',
-   speakers:['UK High Commissioner','Ambassador of Japan','Ambassador of Germany','Ambassador of India','Visiting Ministers','President, Afrexim Bank (Suggested)'],
+   speakers:['Dr. Richard Montgomery, CMG \u2014 High Commissioner, United Kingdom to Nigeria','H.E. SUZUKI Hideo \u2014 Ambassador of Japan to Nigeria','Mrs. Annett Gunther \u2014 Ambassador of Germany to Nigeria','Abhishek Singh \u2014 Ambassador of India to Nigeria','Visiting Ministers','Dr. George Elomb \u2014 President, Afrexim Bank'],
    moderator:'Samantha Cohen CVO OBE — CEO, CWEIC',
-   flags:[{kind:'warn',text:'Wamkele Mene: in-person or video?'}],
+   flags:[{kind:'warn',text:'Wamkele Keabetswe Mene: confirm in-person or video format'}],
    overview:{venue:'Main Plenary Hall — Panel Stage',format:'Fireside Chat opener (Wamkele Mene) → Full panel',config:'Fireside: 2 chairs, 2 mics. Swap to panel table for main discussion.',objective:"Examine how international cooperation and cross-border investment can accelerate Africa's transformation. Situate Lagos within AfCFTA architecture."},
    avCues:[
      {type:'av',label:'Fireside Setup',text:'2 chairs, centre stage. 2 lavs or directional mics. Remove podium. Transition to panel table after fireside ends (~20 min).'},
@@ -438,19 +438,19 @@ export const SESSIONS: BriefingSession[] = [
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 5',sub:'Global Partnerships for Growth'},
      {slot:'Fireside Intro Slide',type:'title',title:'FIRESIDE CHAT',sub:"AfCFTA — Africa's Trade Architecture"},
-     {slot:'Fireside Lower Third',type:'lt',name:'Wamkele Mene',role:'Secretary-General',org:'African Continental Free Trade Area (AfCFTA)'},
+     {slot:'Fireside Lower Third',type:'lt',name:'Wamkele Keabetswe Mene',role:'Secretary-General',org:'African Continental Free Trade Area (AfCFTA)'},
      {slot:'Chair Lower Third',type:'lt',name:'Samantha Cohen CVO OBE',role:'Chair · CEO',org:'Commonwealth Enterprise and Investment Council (CWEIC)'},
-     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate per speaker:\n· UK High Commissioner — [confirm name]\n· Ambassador of Japan — [confirm name]\n· Ambassador of Germany — [confirm name]\n· Ambassador of India — [confirm name]\n· [Visiting Ministers — TBC]\n· President, Afrexim Bank — [confirm name]'}
+     {slot:'Panel Lower Thirds — list',type:'note',text:'Rotate per speaker:\n· Dr. Richard Montgomery, CMG — High Commissioner, UK to Nigeria\n· H.E. SUZUKI Hideo — Ambassador of Japan to Nigeria\n· Mrs. Annett Gunther — Ambassador of Germany to Nigeria\n· Abhishek Singh — Ambassador of India to Nigeria\n· Visiting Ministers (names TBC)\n· Dr. George Elomb — President, Afrexim Bank'}
    ],
-   mcScript:'We now move to Plenary Five — Global Partnerships for Growth. Chairing this session is the CEO of the Commonwealth Enterprise and Investment Council — Samantha Cohen. We begin with a Fireside Chat with the Secretary-General of the African Continental Free Trade Area, Mr. Wamkele Mene.',
+   mcScript:'We now move to Plenary Five — Global Partnerships for Growth. Chairing this session is the CEO of the Commonwealth Enterprise and Investment Council — Samantha Cohen. We begin with a Fireside Chat with the Secretary-General of the African Continental Free Trade Area, Mr. Wamkele Keabetswe Mene.',
    mcDirection:'After announcing fireside, exit stage completely — two-chair format works best without MC visible.',
    moderatorNotes:"Session objective: examine how international cooperation accelerates Africa's transformation. Fireside opener: 15–20 minutes. Panel: 30 minutes. Q&A: 10 minutes.",
    moderatorQuestions:["Mr. Mene — where is Lagos in the AfCFTA implementation roadmap, and what would it take to make it a primary AfCFTA hub?","What is the most concrete bilateral investment outcome any of your nations has committed to with Lagos today?","How does the AfCFTA architecture change the calculus for international investors looking at Lagos versus other African markets?","What is the one thing the Commonwealth can do that no bilateral agreement can achieve for Lagos?"]},
 
   {id:21,day:2,order:21,startTime:'13:00',duration:60,title:'Plenary 6 — Talent, Creativity and Culture',type:'panel',
-   speakers:['CEO Mavin Records','CEO Netflix Africa','Founder Norrsken Africa','CEO Terra Kulture','DG National Council for Arts and Culture (Suggested)'],
+   speakers:['Don Jazzy (Michael Collins Ajereh) \u2014 CEO, Mavin Records','Chief Executive Officer, Netflix Africa (name TBC)','Mr. Niklas Adalberth \u2014 Founder, Norrsken Africa','Mrs. Bolanle Austen-Peters \u2014 CEO, Terra Kulture','Mr. Obi Asika \u2014 Director-General, National Council for Arts and Culture'],
    moderator:'Eva Omaghomi — Chair',
-   flags:[{kind:'warn',text:'Keynote speaker not finalised · Showcases format TBC'}],
+   flags:[{kind:'warn',text:'Keynote: 3 options per programme — Prof. Wole Soyinka / Bolanle Austen-Peters / Kunle Afolayan — client to confirm · Panel speakers confirmed'}],
    overview:{venue:'Main Plenary Hall — Panel Stage',format:'Keynote opener + panel + optional showcase',config:'Panel table 5–6 seats. Keynote at podium. Optional: Nollywood/Fashion Week video showcase.',objective:"Explore how Nigeria's creative economy can be institutionalised as a structured investment proposition."},
    avCues:[
      {type:'av',label:'Slides',text:'"PLENARY 6: TALENT, CREATIVITY AND CULTURE". Keynote slide — update once speaker confirmed.'},

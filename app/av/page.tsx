@@ -2,21 +2,24 @@
 import RoleHeader from '@/components/RoleHeader'
 import FlashBanner from '@/components/FlashBanner'
 import { useEventState } from '@/hooks/useEventState'
-import { useTimer, formatTimer, getTimerColor } from '@/hooks/useTimer'
+import { useRole } from '@/hooks/useRole'
+import { useTimer, formatDisplay, getTimerColor } from '@/hooks/useTimer'
 import { useClock } from '@/hooks/useClock'
 
 export default function AvPage() {
-  const { currentSession, nextSession, currentSessionId, timer, message, connected, serverTimeOffset } = useEventState()
+  useRole('av')
+  const { currentSession, nextSession, currentSessionId, timer, timerMode, message, connected, serverTimeOffset } = useEventState()
   const seconds = useTimer(timer, serverTimeOffset)
   const clock = useClock()
   const color = getTimerColor(seconds, currentSession?.duration)
   const timerColorClass = color === 'red' ? 'text-red-400' : color === 'yellow' ? 'text-yellow-400' : 'text-green-400'
+  const display = formatDisplay(seconds, timerMode, currentSession?.duration)
 
   const headerRight = (
     <div className="text-right shrink-0">
       <div className="font-mono text-zinc-600 text-[10px] tracking-widest mb-1">{clock}</div>
       <div className={`text-3xl sm:text-4xl font-mono font-black tabular-nums leading-none ${timerColorClass}`}>
-        {formatTimer(seconds)}
+        {display}
       </div>
     </div>
   )

@@ -2,17 +2,20 @@
 import { Fragment, useEffect, useRef } from 'react'
 import FlashBanner from '@/components/FlashBanner'
 import { useEventState } from '@/hooks/useEventState'
-import { useTimer, formatTimer, getTimerColor } from '@/hooks/useTimer'
+import { useRole } from '@/hooks/useRole'
+import { useTimer, formatDisplay, getTimerColor } from '@/hooks/useTimer'
 import { useClock } from '@/hooks/useClock'
 import { useChime } from '@/hooks/useChime'
 import type { Session } from '@/lib/types'
 
 export default function StagePage() {
-  const { currentSession, ordered, currentSessionId, timer, message, connected, serverTimeOffset } = useEventState()
+  useRole('stage')
+  const { currentSession, ordered, currentSessionId, timer, timerMode, message, connected, serverTimeOffset } = useEventState()
   const seconds = useTimer(timer, serverTimeOffset)
   const clock = useClock()
   const playChime = useChime()
   const color = getTimerColor(seconds, currentSession?.duration)
+  const display = formatDisplay(seconds, timerMode, currentSession?.duration)
 
   const lastChimeId = useRef<string | null>(null)
   const warnedRef = useRef(false)
@@ -67,7 +70,7 @@ export default function StagePage() {
         <div className="text-right shrink-0">
           <div className="font-mono text-zinc-600 text-[10px] tracking-widest mb-1">{clock}</div>
           <div className={`text-3xl sm:text-5xl font-mono font-black tabular-nums leading-none ${timerColorClass}`}>
-            {formatTimer(seconds)}
+            {display}
           </div>
           <div className={`text-xs font-mono mt-1 ${timerColorClass}`}>{timingStatus()}</div>
         </div>
