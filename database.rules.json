@@ -1,0 +1,32 @@
+{
+  "rules": {
+    ".read": true,
+    "sessions": {
+      ".write": true,
+      "$sessionId": {
+        ".validate": "newData.hasChildren(['title', 'order', 'status', 'day', 'type'])"
+      }
+    },
+    "currentSessionId": {
+      ".write": true
+    },
+    "timer": {
+      ".write": true,
+      ".validate": "newData.hasChildren(['running', 'baseSeconds'])"
+    },
+    "message": {
+      ".write": true,
+      ".validate": "newData.hasChildren(['active', 'text'])"
+    },
+    "briefing": {
+      ".write": true
+    },
+    "checklist": {
+      ".write": true
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}

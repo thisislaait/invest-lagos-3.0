@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gala Dinner Programme — LSIF 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0B1F45;
+      --navy-deep: #071530;
+      --gold: #F4B41A;
+      --gold-soft: #FDF3D9;
+      --gold-mid: #c8920e;
+      --red: #D7263D;
+      --teal: #0A8E7F;
+      --teal-soft: #E0F5F3;
+      --cream: #F6F5F1;
+      --border: #DDD9CF;
+      --muted: #64748B;
+      --ink: #1E293B;
+      --white: #FFFFFF;
+      --font: 'Poppins', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 15px; }
+
+    body {
+      font-family: var(--font);
+      color: var(--navy);
+      background: #ECEAE4;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .page {
+      background: var(--white);
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: 0 4px 40px rgba(11,31,69,.14), 0 1px 4px rgba(11,31,69,.08);
+    }
+
+    .stripe {
+      height: 5px;
+      background: linear-gradient(to right,
+        #F4B41A 0% 12.5%, #F97316 12.5% 25%, #D7263D 25% 37.5%,
+        #C026D3 37.5% 50%, #F472B6 50% 62.5%, #3B82F6 62.5% 75%,
+        #0A8E7F 75% 87.5%, #22C55E 87.5% 100%);
+    }
+
+    header {
+      background: var(--navy);
+      padding: 1.5rem 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .h-brand { display: flex; flex-direction: column; gap: .25rem; }
+    .h-label { font-family: var(--mono); font-size: .52rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+    .h-name { font-weight: 800; font-size: 1.05rem; color: var(--white); letter-spacing: -.01em; line-height: 1.15; }
+    .h-name span { color: var(--gold); }
+    .h-right { text-align: right; display: flex; flex-direction: column; gap: .2rem; }
+    .h-co { font-family: var(--mono); font-size: .5rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+    .h-orgs { font-family: var(--mono); font-size: .58rem; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+    .hero {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 2.5rem 2.25rem 2.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -40px; top: -60px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(244,180,26,.08);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 20px; top: -10px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 1px solid rgba(244,180,26,.06);
+    }
+
+    .hero-eyebrow { font-family: var(--mono); font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .875rem; }
+    .hero-title { font-weight: 800; font-size: 2.4rem; color: var(--white); letter-spacing: -.03em; line-height: 1; margin-bottom: .625rem; }
+    .hero-subtitle { font-weight: 300; font-size: 1.05rem; color: rgba(255,255,255,.55); letter-spacing: .01em; margin-bottom: 2rem; }
+
+    .hero-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .meta-item { display: flex; flex-direction: column; gap: .18rem; }
+    .meta-label { font-family: var(--mono); font-size: .48rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .meta-val { font-weight: 600; font-size: .8rem; color: var(--white); letter-spacing: -.01em; }
+
+    .gold-rule { height: 3px; background: var(--gold); }
+
+    .draft-banner {
+      background: var(--gold-soft);
+      border-bottom: 1px solid #e8d89c;
+      padding: .6rem 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .draft-text { font-family: var(--mono); font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; color: #8a6a00; }
+    .draft-date { font-family: var(--mono); font-size: .54rem; color: rgba(138,106,0,.6); letter-spacing: .06em; }
+
+    .programme { padding: 2rem 2.25rem 2.5rem; }
+
+    .prog-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: .875rem;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .prog-title { font-family: var(--mono); font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+    .prog-duration { font-family: var(--mono); font-size: .55rem; color: var(--muted); letter-spacing: .06em; }
+
+    .prog-item {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 0 1.125rem;
+      position: relative;
+      padding-bottom: 1.25rem;
+    }
+
+    .prog-item:last-child { padding-bottom: 0; }
+
+    .prog-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 60px; top: 28px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .prog-time { padding-top: .3rem; text-align: right; }
+    .time-val { font-family: var(--mono); font-size: .72rem; font-weight: 500; color: var(--navy); letter-spacing: .02em; display: block; }
+
+    .prog-content {
+      border-left: 3px solid var(--border);
+      padding-left: 1.125rem;
+      padding-top: .2rem;
+      padding-bottom: .2rem;
+      position: relative;
+    }
+
+    .prog-content::before {
+      content: '';
+      position: absolute;
+      left: -6px; top: 50%;
+      transform: translateY(-50%);
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 2px solid var(--white);
+    }
+
+    .prog-item.type-reception .prog-content { border-left-color: var(--teal); }
+    .prog-item.type-reception .prog-content::before { background: var(--teal); }
+    .prog-item.type-ceremony .prog-content { border-left-color: var(--navy); }
+    .prog-item.type-ceremony .prog-content::before { background: var(--navy); }
+    .prog-item.type-dinner .prog-content { border-left-color: var(--border); }
+    .prog-item.type-dinner .prog-content::before { background: #C8C4BA; }
+    .prog-item.type-performance .prog-content { border-left-color: var(--red); }
+    .prog-item.type-performance .prog-content::before { background: var(--red); }
+    .prog-item.type-close .prog-content { border-left-color: var(--navy); }
+    .prog-item.type-close .prog-content::before { background: var(--navy); }
+    .prog-item.type-end .prog-content { border-left-color: var(--border); }
+    .prog-item.type-end .prog-content::before { background: #C8C4BA; }
+
+    .item-tag {
+      font-family: var(--mono);
+      font-size: .46rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .12rem .38rem;
+      display: inline-block;
+      margin-bottom: .3rem;
+    }
+
+    .tag-reception { background: var(--teal-soft); color: var(--teal); }
+    .tag-ceremony { background: #E8ECF5; color: var(--navy); }
+    .tag-dinner { background: var(--cream); color: var(--muted); }
+    .tag-performance { background: #FDEDF0; color: var(--red); }
+    .tag-close { background: #E8ECF5; color: var(--navy); }
+    .tag-end { background: var(--cream); color: var(--muted); }
+
+    .item-title { font-weight: 700; font-size: .9rem; color: var(--navy); line-height: 1.25; margin-bottom: .22rem; letter-spacing: -.01em; }
+    .item-speaker { font-size: .77rem; color: var(--muted); line-height: 1.5; font-style: italic; }
+    .item-speaker strong { font-style: normal; font-weight: 600; color: var(--ink); }
+
+    .item-note { margin-top: .3rem; font-size: .7rem; color: var(--muted); line-height: 1.5; }
+    .item-note .note-label { font-family: var(--mono); font-size: .48rem; letter-spacing: .1em; text-transform: uppercase; color: #94A3B8; margin-right: .3rem; }
+
+    .prog-section-label {
+      font-family: var(--mono);
+      font-size: .5rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 1rem 0 .75rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .prog-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .summary-bar {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1.5px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .sum-item { background: var(--cream); padding: .875rem 1rem; display: flex; flex-direction: column; gap: .25rem; }
+    .sum-label { font-family: var(--mono); font-size: .48rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .sum-val { font-weight: 700; font-size: 1.1rem; color: var(--navy); letter-spacing: -.02em; }
+    .sum-sub { font-size: .66rem; color: var(--muted); line-height: 1.4; }
+
+    .notes-section { padding: 1.5rem 2.25rem 2rem; background: var(--cream); border-top: 1px solid var(--border); }
+    .notes-heading { font-family: var(--mono); font-size: .52rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: .875rem; }
+    .notes-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .notes-list li { font-size: .75rem; color: var(--ink); line-height: 1.55; padding-left: 1rem; position: relative; }
+    .notes-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold-mid); font-weight: 700; }
+    .notes-list li strong { font-weight: 600; }
+
+    .footer-stripe {
+      height: 3px;
+      background: linear-gradient(to right,
+        #F4B41A 0% 12.5%, #F97316 12.5% 25%, #D7263D 25% 37.5%,
+        #C026D3 37.5% 50%, #F472B6 50% 62.5%, #3B82F6 62.5% 75%,
+        #0A8E7F 75% 87.5%, #22C55E 87.5% 100%);
+    }
+
+    footer {
+      background: var(--navy);
+      padding: 1rem 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer-left { font-family: var(--mono); font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); line-height: 1.7; }
+    .footer-right { font-family: var(--mono); font-size: .5rem; letter-spacing: .08em; color: rgba(255,255,255,.25); text-align: right; }
+
+    @media print {
+      html { font-size: 13px; }
+      body { background: white; padding: 0; }
+      .page { box-shadow: none; max-width: 100%; }
+      .draft-banner { display: none; }
+      .prog-item { break-inside: avoid; }
+    }
+
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="stripe"></div>
+
+    <header>
+      <div class="h-brand">
+        <span class="h-label">Lagos State Investment Forum</span>
+        <span class="h-name">LSIF <span>2026</span></span>
+      </div>
+      <div class="h-right">
+        <span class="h-co">Co-organised by</span>
+        <span class="h-orgs">Lagos State Government / MCCTI<br>Commonwealth Enterprise and Investment Council</span>
+      </div>
+    </header>
+
+    <div class="hero">
+      <p class="hero-eyebrow">Day One &mdash; Tuesday, 8 June 2026</p>
+      <h1 class="hero-title">Gala Dinner</h1>
+      <p class="hero-subtitle">Lagos State Investment Forum 2026</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Time</span>
+          <span class="meta-val">19:00 &ndash; 21:30</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Venue</span>
+          <span class="meta-val">Eko Hotel &amp; Suites, Victoria Island</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">City</span>
+          <span class="meta-val">Lagos, Nigeria</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Duration</span>
+          <span class="meta-val">2&frac12; Hours</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-rule"></div>
+
+    <div class="draft-banner">
+      <span class="draft-text">&#9679;&nbsp; Draft for Client Review &mdash; Subject to Approval</span>
+      <span class="draft-date">Prepared: 15 May 2026</span>
+    </div>
+
+    <div class="programme">
+
+      <div class="prog-header">
+        <span class="prog-title">Programme of Events</span>
+        <span class="prog-duration">19:00 &ndash; 21:30 &nbsp;/&nbsp; 2&frac12; hours</span>
+      </div>
+
+      <!-- Arrival -->
+      <div class="prog-section-label">Arrival</div>
+
+      <div class="prog-item type-reception">
+        <div class="prog-time"><span class="time-val">19:00</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-reception">Reception</span>
+          <p class="item-title">Arrival &amp; Cocktail Reception</p>
+          <p class="item-speaker">Lobby &amp; Pre-Function Area, Eko Hotel</p>
+          <p class="item-note"><span class="note-label">Note</span>Delegates arrive at their own pace. Welcome drinks and canapés served. Ambient music throughout.</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-dinner">
+        <div class="prog-time"><span class="time-val">19:30</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-dinner">Transition</span>
+          <p class="item-title">Guests Proceed to the Ballroom</p>
+          <p class="item-note"><span class="note-label">Note</span>MC guides guests to assigned tables. VIP principals to be seated before the formal programme commences.</p>
+        </div>
+      </div>
+
+      <!-- Opening -->
+      <div class="prog-section-label">Opening</div>
+
+      <div class="prog-item type-ceremony">
+        <div class="prog-time"><span class="time-val">19:35</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-ceremony">Ceremony</span>
+          <p class="item-title">Nigerian National Anthem</p>
+          <p class="item-speaker">All guests standing</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-ceremony">
+        <div class="prog-time"><span class="time-val">19:37</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-ceremony">MC</span>
+          <p class="item-title">MC Welcome &amp; Toast</p>
+          <p class="item-note"><span class="note-label">Duration</span>1 minute &mdash; MC welcomes guests on behalf of the Governor and raises a toast to Lagos and the Forum</p>
+        </div>
+      </div>
+
+      <!-- Dinner & Entertainment -->
+      <div class="prog-section-label">Dinner &amp; Entertainment</div>
+
+      <div class="prog-item type-dinner">
+        <div class="prog-time"><span class="time-val">19:38</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-dinner">Service</span>
+          <p class="item-title">Dinner is Served &mdash; Starter Course</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-performance">
+        <div class="prog-time"><span class="time-val">19:45</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-performance">Spoken Word</span>
+          <p class="item-title">Spoken Word Performance</p>
+          <p class="item-speaker"><em>Lagos-based spoken word artist &mdash; TBC</em></p>
+          <p class="item-note"><span class="note-label">Duration</span>10 minutes &nbsp;&mdash;&nbsp; <span class="note-label">Theme</span>Commissioned piece on Lagos, investment &amp; Africa&rsquo;s future</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-performance">
+        <div class="prog-time"><span class="time-val">19:55</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-performance">Live Music</span>
+          <p class="item-title">Musical Performance</p>
+          <p class="item-speaker"><strong>Berklee College of Music Ensemble</strong></p>
+          <p class="item-note"><span class="note-label">Duration</span>15 minutes &nbsp;&mdash;&nbsp; <span class="note-label">Style</span>Jazz / Afrobeat fusion, dinner-ambient</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-dinner">
+        <div class="prog-time"><span class="time-val">20:10</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-dinner">Service</span>
+          <p class="item-title">Main Course Served</p>
+          <p class="item-note"><span class="note-label">Note</span>Open networking at tables. Soft background music continues.</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-performance">
+        <div class="prog-time"><span class="time-val">20:25</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-performance">Acapella</span>
+          <p class="item-title">Acapella Group Performance</p>
+          <p class="item-speaker"><em>Nigerian acapella group &mdash; TBC</em></p>
+          <p class="item-note"><span class="note-label">Duration</span>12 minutes &nbsp;&mdash;&nbsp; <span class="note-label">Style</span>Contemporary arrangements of Nigerian &amp; Afrobeat songs, voices only</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-performance">
+        <div class="prog-time"><span class="time-val">20:37</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-performance">Spectacular</span>
+          <p class="item-title">Equilibrist Act &mdash; Chair Balance &amp; Stacking</p>
+          <p class="item-speaker"><em>Performer / Troupe &mdash; TBC</em></p>
+          <p class="item-note"><span class="note-label">Duration</span>10 minutes &nbsp;&mdash;&nbsp; <span class="note-label">Note</span>Room dims, spotlight on performer. Stage cleared ahead of this act.</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-performance">
+        <div class="prog-time"><span class="time-val">20:47</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-performance">Live Music</span>
+          <p class="item-title">Solo Instrumentalist</p>
+          <p class="item-speaker"><em>Kora virtuoso or jazz saxophonist &mdash; TBC by client</em></p>
+          <p class="item-note"><span class="note-label">Duration</span>12 minutes &nbsp;&mdash;&nbsp; <span class="note-label">Note</span>Intimate close to entertainment. Elegant, not a concert. Plays the room down gently.</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-dinner">
+        <div class="prog-time"><span class="time-val">21:00</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-dinner">Service</span>
+          <p class="item-title">Dessert Served &amp; Open Networking</p>
+          <p class="item-note"><span class="note-label">Note</span>Informal networking continues at tables. Background music only. No further programme items.</p>
+        </div>
+      </div>
+
+      <!-- Formal Close -->
+      <div class="prog-section-label">Formal Close</div>
+
+      <div class="prog-item type-close">
+        <div class="prog-time"><span class="time-val">21:20</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-close">MC</span>
+          <p class="item-title">MC Close &amp; Governor&rsquo;s Farewell</p>
+          <p class="item-note"><span class="note-label">Note</span>MC formally closes the programme. Governor bids farewell to guests. Delegates invited to continue the evening at the hotel.</p>
+        </div>
+      </div>
+
+      <div class="prog-item type-end">
+        <div class="prog-time"><span class="time-val">21:30</span></div>
+        <div class="prog-content">
+          <span class="item-tag tag-end">End</span>
+          <p class="item-title">Formal Programme Concludes</p>
+          <p class="item-note"><span class="note-label">Note</span>Bar remains open. Day 2 begins 09:30 — delegates advised accordingly.</p>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="summary-bar">
+        <div class="sum-item">
+          <span class="sum-label">Total Duration</span>
+          <span class="sum-val">2&frac12; hrs</span>
+          <span class="sum-sub">19:00 &ndash; 21:30</span>
+        </div>
+        <div class="sum-item">
+          <span class="sum-label">Speeches</span>
+          <span class="sum-val">None</span>
+          <span class="sum-sub">MC-led only &mdash; no formal addresses</span>
+        </div>
+        <div class="sum-item">
+          <span class="sum-label">Entertainment</span>
+          <span class="sum-val">5 Acts</span>
+          <span class="sum-sub">~59 mins &nbsp;/&nbsp; each &le;15 mins</span>
+        </div>
+      </div>
+
+    </div><!-- /programme -->
+
+    <!-- Production Notes -->
+    <div class="notes-section">
+      <p class="notes-heading">Production Notes</p>
+      <ul class="notes-list">
+        <li><strong>Berklee College of Music:</strong> Rider and sound check slot not yet received. Priority item — ensemble requires stage access during Day 1 for rehearsal and sound check.</li>
+        <li><strong>Spoken Word:</strong> Artist and piece to be confirmed. Commission or curate a piece themed around Lagos, global investment and Africa&rsquo;s future. Strict 10-minute limit.</li>
+        <li><strong>Acapella Group:</strong> Nigerian group to be confirmed. Voices only — no instruments, no additional sound equipment beyond microphones.</li>
+        <li><strong>Equilibrist Act:</strong> Performer / troupe to be confirmed. Stage must be cleared and spotlight cued before this act. Ceiling clearance at Eko Hotel ballroom to be verified. This is the visual centrepiece — coordinate closely with AV on dimming and spotlight cues.</li>
+        <li><strong>Solo Instrumentalist:</strong> Artist to be confirmed by client. Kora or jazz saxophone recommended — intimate, sophisticated, appropriate for the room. Not a concert act.</li>
+        <li><strong>Protocol:</strong> Governor&rsquo;s arrival and departure to be coordinated with DSS / State House protocol team. VIP table placement to be confirmed with Commissioner&rsquo;s office.</li>
+        <li><strong>Dress Code:</strong> <em>To be confirmed by client</em> &mdash; recommend Black Tie or National Dress.</li>
+        <li><strong>Timing:</strong> If any act overruns, absorb in the main course networking window (20:10&ndash;20:25). Day 2 begins at 09:30 &mdash; a 21:30 close is firm.</li>
+      </ul>
+    </div>
+
+    <div class="footer-stripe"></div>
+    <footer>
+      <div class="footer-left">
+        Lagos State Investment Forum 2026<br>
+        Eko Hotel &amp; Suites &nbsp;&#183;&nbsp; Victoria Island, Lagos &nbsp;&#183;&nbsp; 8&ndash;10 June 2026
+      </div>
+      <div class="footer-right">
+        Prepared by the Conference Content Team<br>
+        CONFIDENTIAL &mdash; FOR CLIENT REVIEW
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
