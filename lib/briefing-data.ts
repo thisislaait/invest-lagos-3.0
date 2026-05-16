@@ -170,7 +170,7 @@ export const SESSIONS: BriefingSession[] = [
    mcDirection:'Confirm speaking order before script is finalised. Brief both speakers on 4-minute time limit each.',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:8,day:1,order:8,startTime:'10:30',duration:20,title:'Keynote Address — President of Nigeria',type:'keynote',
+  {id:8,day:1,order:8,startTime:'10:30',duration:60,title:'Keynote Address — President of Nigeria',type:'keynote',
    speakers:['Asiwaju Bola Ahmed Tinubu, GCFR — President of the Federal Republic of Nigeria'],moderator:'',
    flags:[{kind:'warn',text:'Presidential protocol — coordinate with DSS'}],
    overview:{venue:'Main Plenary Hall — Podium',format:'Presidential Keynote',config:'Full stage clear. Presidential seal on screen. National Anthem on entry. All mics live.',objective:"Presidential keynote — anchor the Forum's national significance and signal federal commitment to the Lagos investment agenda."},
@@ -276,7 +276,7 @@ export const SESSIONS: BriefingSession[] = [
    mcDirection:'Confirm lunch room name before event day to fill [ROOM TBC].',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:13,day:1,order:13,startTime:'15:30',duration:60,title:'Plenary 2 — The Future of Technology & Innovation',type:'panel',
+  {id:13,day:1,order:13,startTime:'15:30',duration:120,title:'Plenary 2 — The Future of Technology & Innovation',type:'panel',
    speakers:['Mr. Olatubosun Alake — Commissioner, Ministry of Innovation, Science and Technology (MIST)','Mr. Mitchell Elegbe — Founder & Group MD/CEO, Interswitch Group','Mr. Tosin Eniolorunda — CEO, Moniepoint MFB','Mr. Iyinoluwa Samuel Aboyeji, OON — Founder, Andela','Mr. Olumide Balogun — Nigeria Country Director, Google','Representative, Starlink','Mr. Kayode Adeleke — President & CEO, RusselSmith Group'],
    moderator:'Dipo Fatokun — Chairman, Flutterwave',
    flags:[{kind:'info',text:'BREAKOUT A — Elon Musk confirmed: Keynote Address / Video Message'}],
@@ -301,7 +301,7 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:"Session objective: explore AI, digital infrastructure and fintech as drivers of inclusive growth in Lagos. Anchor in what investors need to hear — not what tech founders want to say.",
    moderatorQuestions:["What is the single infrastructure investment that would most accelerate Lagos's tech sector in the next 5 years?","Fintech has scaled — what's the next wave, and who is positioned to lead it from Lagos?","How does Nigeria's regulatory environment compare to Kenya and South Africa for international tech investors today?","What does interest in Africa from global tech leaders signal for Lagos — and how should the city position itself?"]},
 
-  {id:14,day:1,order:14,startTime:'15:30',duration:60,title:'Plenary 3 — Unlocking Investment',type:'panel',
+  {id:14,day:1,order:14,startTime:'15:30',duration:120,title:'Plenary 3 — Unlocking Investment',type:'panel',
    speakers:['Managing Director, IFC West Africa (name TBC)','Mr. Afolabi Olorode \u2014 Ag. MD/CEO, FBNQuest Merchant Bank (now Quest Merchant Bank)','Ms. Patience Oniha \u2014 Director-General, Debt Management Office Nigeria','Adeola Ukoha \u2014 Coverage Manager Nigeria, British International Investment','Mr. Samaila Zubairu \u2014 CEO, Africa Finance Corporation','Representative, Standard Chartered Bank (name TBC)','Mr. Olusegun Alebiosu \u2014 MD/CEO, First Bank of Nigeria','Abubakar Suleiman \u2014 MD/CEO, Sterling Bank'],
    moderator:'Mr. Aig Imoukhouede — Co-Chair, Lagos Finance and Investment Council (LFIC)',
    flags:[{kind:'info',text:'BREAKOUT B — parallel to Plenary 2'}],
@@ -325,7 +325,7 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'Session objective: unlock the mechanics of capital deployment for Lagos infrastructure projects. Focus on blended finance, DFI co-investment, and barriers to financial close. Keynote from City of London rep sets the international capital market context.',
    moderatorQuestions:['What is the single biggest barrier to financial close on large Lagos infrastructure projects right now?','How should Lagos structure a blended finance vehicle to attract DFI co-investment?','What does the City of London need to see from Lagos before recommending it as an investable market to its member firms?','Which sector has the clearest pathway to bankable projects in Lagos today?']},
 
-  {id:15,day:1,order:15,startTime:'19:00',duration:120,title:'Gala Dinner',type:'performance',
+  {id:15,day:1,order:15,startTime:'19:00',duration:150,title:'Gala Dinner',type:'performance',
    speakers:['Performance: Berklee College of Music'],moderator:'',
    flags:[{kind:'warn',text:'Berklee rider TBC · Gala running order TBC'}],
    overview:{venue:'Gala Dinner Venue — TBC (Eko Hotel ballroom or garden)',format:'Seated gala dinner + live performance',config:'Full gala AV setup. Round tables. Performance stage. Separate from plenary configuration.',objective:'Celebrate Day 1, create networking opportunities, showcase cultural excellence through the Berklee College of Music.'},
@@ -348,9 +348,9 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   // DAY 2
-  {id:16,day:2,order:16,startTime:'09:30',duration:30,title:'Opening Recap — Forum Chairs',type:'speech',
-   speakers:['Forum Chairs — TBC (names to be confirmed)'],moderator:'',
-   flags:[{kind:'warn',text:'Forum Chair names TBC · Format TBC'}],
+  {id:16,day:2,order:16,startTime:'09:30',duration:30,title:'Opening Recap — Forum Chairman',type:'speech',
+   speakers:['Forum Chairman — TBC'],moderator:'',
+   flags:[{kind:'warn',text:'Forum Chairman identity TBC · Confirm with client · Programme lists singular'}],
    overview:{venue:'Main Plenary Hall — Podium or Panel',format:'Opening recap — speeches or panel dialogue (TBC)',config:'Podium or 2-seat panel. Confirm with client.',objective:'Re-open Day 2 with reflection on Day 1 outcomes. Set the agenda for Day 2. Energise delegates.'},
    avCues:[
      {type:'av',label:'Slides',text:'Day 2 opening slide: "DAY TWO — 9 JUNE 2026". Forum logo. Forum Chairs\' names + titles once confirmed.'},
@@ -364,7 +364,7 @@ export const SESSIONS: BriefingSession[] = [
      {slot:'Chair Lower Third — Template',type:'lt',name:'[Forum Chair Name — TBC]',role:'Forum Chair',org:'Lagos State Investment Forum 2026'},
      {slot:'Optional',type:'note',text:'Prepare a "Day 1 Highlights" recap slide deck (5–6 slides, key quotes/moments) as optional backdrop during opening remarks. Confirm with client.'}
    ],
-   mcScript:"Good morning and welcome to Day Two of the Lagos State Investment Forum. Yesterday was remarkable — and today we go further. I'm delighted to welcome our Forum Chairs to open today's proceedings.",
+   mcScript:"Good morning and welcome to Day Two of Invest Lagos 3.0. Yesterday was remarkable — and today we go further. I'm delighted to welcome our Forum Chairman to open today's proceedings.",
    mcDirection:'Energetic delivery — Day 2 needs a strong re-open. Forum Chairs should be standing by before MC begins.',
    moderatorNotes:'',moderatorQuestions:[]},
 
@@ -497,7 +497,7 @@ export const SESSIONS: BriefingSession[] = [
    mcDirection:"Pace deliberately. Allow full applause after Governor's remarks. Vote of Thanks speaker should be positioned before MC hands over.",
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:23,day:2,order:23,startTime:'14:30',duration:60,title:'Networking Lunch (Closing)',type:'break',
+  {id:23,day:2,order:23,startTime:'14:30',duration:90,title:'Networking Lunch (Closing)',type:'break',
    speakers:[''],moderator:'',flags:[],
    overview:{venue:'Lunch Venue',format:'Closing networking lunch — informal',config:'No stage. Ambient music. Thank-you branding on screens.',objective:'Final networking opportunity. Safe farewell to international guests.'},
    avCues:[
@@ -511,34 +511,4 @@ export const SESSIONS: BriefingSession[] = [
    mcScript:"Ladies and gentlemen, this concludes the formal programme of the Lagos State Investment Forum 2026. On behalf of Lagos State, our Forum Co-Chairs, and the entire organising team — thank you for your presence, your ideas, and your commitment to Lagos. Please join us for a Networking Lunch. Safe travels to all our international guests.",
    mcDirection:'Final words from the MC. Warm, gracious delivery. No rush.',
    moderatorNotes:'',moderatorQuestions:[]},
-
-  // DAY 3
-  {id:24,day:3,order:24,startTime:'08:00',duration:240,title:'Site Visit — Dangote Petroleum Refinery',type:'other',
-   speakers:[''],moderator:'',
-   flags:[{kind:'warn',text:'Transport & security clearance TBC'}],
-   overview:{venue:'Dangote Petroleum Refinery, Lekki',format:'Guided site visit',config:'Buses from Eko Hotel. On-site host. No AV required.',objective:"Give international delegates first-hand exposure to Nigeria's largest refinery — a flagship investment in domestic economic transformation."},
-   avCues:[
-     {type:'warn',label:'Logistics',text:'1. Buses confirmed and booked?\n2. Departure time from Eko Hotel?\n3. Security clearance for Dangote Refinery — guest list submitted?\n4. Host contact confirmed on site?\n5. Photography team joining?'},
-     {type:'av',label:'Hotel Lobby Screens',text:'Day 3 departure slide: "SITE VISIT — DANGOTE PETROLEUM REFINERY. Buses depart from [Hotel Entrance] at 08:00."'}
-   ],
-   screenContent:[
-     {slot:'Hotel Lobby Screen',type:'title',title:'DAY 3 — SITE VISITS',sub:'Buses depart at 08:00 from the hotel main entrance · Please be ready by 07:45'},
-     {slot:'Note',type:'note',text:'No AV required on site. Ensure delegates have printed schedule cards showing the Day 3 itinerary.'}
-   ],
-   mcScript:'',mcDirection:'No MC required on Day 3. Event coordinator leads logistics.',
-   moderatorNotes:'',moderatorQuestions:[]},
-
-  {id:25,day:3,order:25,startTime:'13:00',duration:240,title:'Site Visit — Lekki Free Zone',type:'other',
-   speakers:[''],moderator:'',
-   flags:[{kind:'warn',text:'Transfer logistics TBC · Host contact TBC'}],
-   overview:{venue:'Lekki Free Zone',format:'Guided site visit',config:'Transfer from Dangote Refinery or return to hotel. On-site host. No AV required.',objective:'Showcase the Lekki Free Zone as a ready-to-invest industrial and logistics hub.'},
-   avCues:[
-     {type:'warn',label:'Transfer',text:'Confirm: does the group transfer directly from Dangote Refinery to Lekki Free Zone, or return to Eko Hotel first? This determines the logistics timeline significantly.'},
-     {type:'warn',label:'Host Contact',text:'Host contact at Lekki Free Zone must be confirmed. Who is giving the site briefing?'}
-   ],
-   screenContent:[
-     {slot:'Note',type:'note',text:'No AV required. Printed itinerary and delegate list essential. Host on site should receive delegate list in advance for security clearance.'}
-   ],
-   mcScript:'',mcDirection:'No MC required. Day 3 is fully logistics-managed.',
-   moderatorNotes:'',moderatorQuestions:[]}
 ]
