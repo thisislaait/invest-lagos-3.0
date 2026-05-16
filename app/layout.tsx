@@ -17,8 +17,14 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Event Control — LSIF 2026',
+  metadataBase: new URL('https://thisislaait.github.io/invest-lagos-3.0'),
+  title: 'Invest Lagos 3.0 — Event Control',
   description: 'Lagos State Investment Forum 2026 — Live Event Dashboard',
+  openGraph: {
+    title: 'Invest Lagos 3.0',
+    description: 'Lagos State Investment Forum 2026 — Live Event Dashboard',
+    siteName: 'Invest Lagos 3.0',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
