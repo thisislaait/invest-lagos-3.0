@@ -4,15 +4,15 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const NAV = [
-  { href: '/dashboard', label: 'Programme', short: '◈', roles: null },
+  // { href: '/dashboard', label: 'Programme', short: '◈', roles: null },
   { href: '/admin',     label: 'Admin',     short: '✦', roles: ['admin', ''] },
   { href: '/stage',     label: 'Stage',     short: '▤', roles: ['admin', 'stage'] },
   { href: '/mc',        label: 'MC',        short: '⬡', roles: ['admin', 'mc'] },
   { href: '/av',        label: 'AV',        short: '▶', roles: ['admin', 'av'] },
   { href: '/moderator', label: 'Mod',       short: '◉', roles: ['admin', 'moderator'] },
   { href: '/speaker',   label: 'Speaker',   short: '◎', roles: ['admin', 'speaker'] },
-  { href: '/briefing',  label: 'Briefing',  short: '▦', roles: ['admin', 'stage', 'mc', 'av', 'moderator', 'briefing', 'checklist'] },
-  { href: '/checklist', label: 'Checklist', short: '☑', roles: ['admin', 'stage', 'briefing', 'checklist'] },
+  // { href: '/briefing',  label: 'Briefing',  short: '▦', roles: ['admin', 'stage', 'mc', 'av', 'moderator', 'briefing', 'checklist'] },
+  // { href: '/checklist', label: 'Checklist', short: '☑', roles: ['admin', 'stage', 'briefing', 'checklist'] },
   { href: '/roles',     label: 'Roles',     short: '⌂', roles: null },
 ] as const
 

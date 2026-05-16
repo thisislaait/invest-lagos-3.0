@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Poppins, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
-import BottomNav from '@/components/BottomNav'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,7 +26,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${poppins.variable} ${jetbrains.variable}`}>
       <body className="font-sans antialiased bg-[#0a0a08] text-white min-h-screen">
         {children}
-        <BottomNav />
       </body>
     </html>
   )
