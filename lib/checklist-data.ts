@@ -34,8 +34,8 @@ export const STATUS_LABEL: Record<AssetStatus, string> = {
 
 export const TYPE_BADGE: Record<string, string> = {
   'Template': 'bg-[#1E293B] text-white',
-  'Session Slide': 'bg-[#0B1F45] text-white',
-  'Lower Third': 'bg-[#F4B41A] text-[#0B1F45]',
+  'Session Slide': 'bg-[#071f10] text-white',
+  'Lower Third': 'bg-[#4ade80] text-[#071f10]',
   'Holding Slide': 'bg-[#94A3B8] text-white',
   'Break Slide': 'bg-[#E2DFD6] text-[#64748B]',
   'Backdrop': 'bg-[#0A8E7F] text-white',

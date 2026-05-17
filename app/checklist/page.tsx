@@ -83,7 +83,7 @@ export default function ChecklistPage() {
       <div className="h-1 bg-gradient-to-r from-amber-400 via-orange-500 via-red-600 via-purple-600 via-pink-400 via-blue-500 via-teal-600 to-green-600" />
 
       {/* Header */}
-      <header className="bg-[#0B1F45] px-4 sm:px-8 py-4 flex items-center justify-between gap-3 flex-wrap">
+      <header className="bg-[#071f10] px-4 sm:px-8 py-4 flex items-center justify-between gap-3 flex-wrap">
         <div>
           <div className="font-bold text-white text-[1rem] leading-tight">Screen Content Checklist — Lagos State Investment Forum 2026</div>
           <div className="font-mono text-[0.55rem] text-white/30 tracking-widest uppercase mt-1">For Design Team · Eko Hotel &amp; Suites · 8–10 June 2026</div>
@@ -97,7 +97,7 @@ export default function ChecklistPage() {
           </button>
           <button
             onClick={() => downloadCSV(allAssets)}
-            className="inline-flex items-center gap-1.5 font-semibold text-[0.78rem] px-4 py-2 cursor-pointer border-none bg-[#F4B41A] text-[#0B1F45] hover:bg-amber-400 transition-all"
+            className="inline-flex items-center gap-1.5 font-semibold text-[0.78rem] px-4 py-2 cursor-pointer border-none bg-[#4ade80] text-[#071f10] hover:bg-green-400 transition-all"
           >
             ↓ Download CSV
           </button>
@@ -110,21 +110,21 @@ export default function ChecklistPage() {
         <div>
           <button
             onClick={() => setBriefOpen(v => !v)}
-            className="w-full flex items-center justify-between bg-[#0B1F45] px-4 sm:px-6 py-3 cursor-pointer border-none mb-0.5 text-left"
+            className="w-full flex items-center justify-between bg-[#071f10] px-4 sm:px-6 py-3 cursor-pointer border-none mb-0.5 text-left"
           >
             <div className="flex items-center gap-3">
               <span className="font-bold text-white text-[0.85rem]">For the Designer — Brand Assets &amp; Technical Specs</span>
               <span className="font-mono text-[0.5rem] text-white/40 tracking-widest uppercase hidden sm:block">{briefOpen ? 'Click to collapse' : 'Click to expand'}</span>
             </div>
-            <span className={`text-[#F4B41A] text-base transition-transform duration-200 ${briefOpen ? 'rotate-180' : ''}`}>▼</span>
+            <span className={`text-[#4ade80] text-base transition-transform duration-200 ${briefOpen ? 'rotate-180' : ''}`}>▼</span>
           </button>
 
           {briefOpen && (
-            <div className="bg-[#0d1b35] flex flex-wrap gap-6 px-4 sm:px-6 py-5 mb-4 border-b-4 border-[#F4B41A]">
+            <div className="bg-[#071f10] flex flex-wrap gap-6 px-4 sm:px-6 py-5 mb-4 border-b-4 border-[#4ade80]">
               <div className="flex-1 min-w-[160px]">
-                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#F4B41A] mb-3 pb-1.5 border-b border-white/10">Brand Colours</div>
+                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#4ade80] mb-3 pb-1.5 border-b border-white/10">Brand Colours</div>
                 <div className="flex gap-2 flex-wrap mb-3">
-                  {[['#0B1F45','Navy'],['#F4B41A','Gold'],['#D7263D','Red'],['#0A8E7F','Teal'],['#F6F5F1','Cream']].map(([hex]) => (
+                  {[['#071f10','Navy'],['#4ade80','Gold'],['#D7263D','Red'],['#0A8E7F','Teal'],['#F6F5F1','Cream']].map(([hex]) => (
                     <div key={hex} className="flex flex-col items-center gap-1">
                       <div className="w-7 h-7 rounded-sm border border-white/10" style={{ background: hex }} />
                       <span className="font-mono text-[0.45rem] text-white/50 text-center">{hex}</span>
@@ -136,33 +136,33 @@ export default function ChecklistPage() {
               </div>
 
               <div className="flex-1 min-w-[160px]">
-                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#F4B41A] mb-3 pb-1.5 border-b border-white/10">Screen Sizes</div>
+                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#4ade80] mb-3 pb-1.5 border-b border-white/10">Screen Sizes</div>
                 <div className="font-mono text-[0.63rem] text-white/80 leading-[2.1]">
-                  Main Stage backdrop: <span className="text-[#F4B41A]">3840 × 2160</span> (4K)<br />
-                  Breakout / Lobby screens: <span className="text-[#F4B41A]">1920 × 1080</span><br />
-                  Portrait totems: <span className="text-[#F4B41A]">1080 × 1920</span><br />
-                  Lower thirds: <span className="text-[#F4B41A]">1920 × 1080</span><br />
-                  Print (MoU backdrop): <span className="text-[#F4B41A]">3000 × 2000 @ 300dpi</span>
+                  Main Stage backdrop: <span className="text-[#4ade80]">3840 × 2160</span> (4K)<br />
+                  Breakout / Lobby screens: <span className="text-[#4ade80]">1920 × 1080</span><br />
+                  Portrait totems: <span className="text-[#4ade80]">1080 × 1920</span><br />
+                  Lower thirds: <span className="text-[#4ade80]">1920 × 1080</span><br />
+                  Print (MoU backdrop): <span className="text-[#4ade80]">3000 × 2000 @ 300dpi</span>
                 </div>
               </div>
 
               <div className="flex-1 min-w-[160px]">
-                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#F4B41A] mb-3 pb-1.5 border-b border-white/10">File Delivery</div>
+                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#4ade80] mb-3 pb-1.5 border-b border-white/10">File Delivery</div>
                 <div className="text-[0.74rem] text-white/80 leading-[2]">
                   Static slides → PNG + source file<br />
                   Animated loops → MP4, H.264<br />
                   Print → PDF @ 300 dpi<br />
                   Deliver to shared Google Drive folder
                 </div>
-                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#F4B41A] mt-3 mb-2 pb-1.5 border-b border-white/10">File Naming</div>
+                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#4ade80] mt-3 mb-2 pb-1.5 border-b border-white/10">File Naming</div>
                 <div className="font-mono text-[0.63rem] text-white/80 leading-[2]">
                   [ID]_[ShortName]_FINAL.png<br />
-                  e.g. <span className="text-[#F4B41A]">D1-09_LT_Sanwo-Olu_FINAL.png</span>
+                  e.g. <span className="text-[#4ade80]">D1-09_LT_Sanwo-Olu_FINAL.png</span>
                 </div>
               </div>
 
               <div className="flex-1 min-w-[160px]">
-                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#F4B41A] mb-3 pb-1.5 border-b border-white/10">Start Here — Priority Order</div>
+                <div className="font-mono text-[0.52rem] tracking-widest uppercase text-[#4ade80] mb-3 pb-1.5 border-b border-white/10">Start Here — Priority Order</div>
                 <div className="text-[0.75rem] text-white/80 leading-[2.1]">
                   ① Master Templates (T01–T06) — design these first<br />
                   ② Lower thirds with confirmed names<br />
@@ -172,11 +172,6 @@ export default function ChecklistPage() {
                 </div>
               </div>
 
-              <div className="flex-[2] min-w-[220px]">
-                <div className="bg-amber-400/10 border-l-4 border-[#F4B41A] px-3 py-2.5 text-[0.76rem] text-white/75 leading-relaxed">
-                  <strong className="text-[#F4B41A]">Note on this document:</strong> The "Screen Content" column tells you what text goes on each asset — that&apos;s our job as the content team. The design, layout, and typography decisions are yours. Where you see <strong>[TBC]</strong>, design the template but leave that field empty until we send you confirmed copy. Items without ⚠️ are cleared for production.
-                </div>
-              </div>
             </div>
           )}
         </div>
@@ -191,7 +186,7 @@ export default function ChecklistPage() {
             { num: stats.templates, label: 'Master Templates', warn: false },
           ].map(s => (
             <div key={s.label} className="bg-white border border-[#E2DFD6] px-3 sm:px-4 py-2 flex items-center gap-2 sm:gap-3">
-              <div className={`text-lg sm:text-xl font-bold ${s.warn ? 'text-[#D7263D]' : 'text-[#0B1F45]'}`}>{s.num}</div>
+              <div className={`text-lg sm:text-xl font-bold ${s.warn ? 'text-[#D7263D]' : 'text-[#071f10]'}`}>{s.num}</div>
               <div className="font-mono text-[0.55rem] sm:text-[0.58rem] tracking-widest uppercase text-[#64748B] leading-tight">{s.label}</div>
             </div>
           ))}
@@ -204,7 +199,7 @@ export default function ChecklistPage() {
             <button
               key={f.val}
               onClick={() => setDayFilter(f.val)}
-              className={`font-mono text-[0.6rem] tracking-widest uppercase px-2.5 py-1.5 cursor-pointer border-[1.5px] transition-all ${dayFilter === f.val ? 'bg-[#0B1F45] text-white border-[#0B1F45]' : 'bg-white text-[#64748B] border-[#E2DFD6] hover:border-[#0B1F45] hover:text-[#0B1F45]'}`}
+              className={`font-mono text-[0.6rem] tracking-widest uppercase px-2.5 py-1.5 cursor-pointer border-[1.5px] transition-all ${dayFilter === f.val ? 'bg-[#071f10] text-white border-[#071f10]' : 'bg-white text-[#64748B] border-[#E2DFD6] hover:border-[#071f10] hover:text-[#071f10]'}`}
             >
               {f.label}
             </button>
@@ -215,7 +210,7 @@ export default function ChecklistPage() {
             <button
               key={t}
               onClick={() => setTypeFilter(typeFilter === t ? 'all' : t)}
-              className={`font-mono text-[0.6rem] tracking-widest uppercase px-2.5 py-1.5 cursor-pointer border-[1.5px] transition-all ${typeFilter === t ? 'bg-[#0B1F45] text-white border-[#0B1F45]' : 'bg-white text-[#64748B] border-[#E2DFD6] hover:border-[#0B1F45] hover:text-[#0B1F45]'}`}
+              className={`font-mono text-[0.6rem] tracking-widest uppercase px-2.5 py-1.5 cursor-pointer border-[1.5px] transition-all ${typeFilter === t ? 'bg-[#071f10] text-white border-[#071f10]' : 'bg-white text-[#64748B] border-[#E2DFD6] hover:border-[#071f10] hover:text-[#071f10]'}`}
             >
               {t}
             </button>
@@ -236,7 +231,7 @@ export default function ChecklistPage() {
             <thead>
               <tr>
                 {['#','Asset Name & Production Note','Type','Day','Session · Time','Screen Location','Dimensions','Qty','Repeat / Reuse','Status','Screen Content'].map(h => (
-                  <th key={h} className="bg-[#0B1F45] text-white font-semibold text-[0.65rem] tracking-widest uppercase px-3 sm:px-4 py-3 text-left whitespace-nowrap sticky top-0 z-10">
+                  <th key={h} className="bg-[#071f10] text-white font-semibold text-[0.65rem] tracking-widest uppercase px-3 sm:px-4 py-3 text-left whitespace-nowrap sticky top-0 z-10">
                     {h}
                   </th>
                 ))}
@@ -248,8 +243,8 @@ export default function ChecklistPage() {
                   if (!visibleInSection(idx)) return null
                   return (
                     <tr key={`section-${idx}`}>
-                      <td colSpan={11} className="bg-[#0B1F45] text-white font-bold text-[0.7rem] tracking-widest uppercase px-4 py-2.5 font-mono">
-                        <span className="text-[#F4B41A] mr-2">▸</span>{row.section}
+                      <td colSpan={11} className="bg-[#071f10] text-white font-bold text-[0.7rem] tracking-widest uppercase px-4 py-2.5 font-mono">
+                        <span className="text-[#4ade80] mr-2">▸</span>{row.section}
                       </td>
                     </tr>
                   )
@@ -258,18 +253,18 @@ export default function ChecklistPage() {
                 if (!filteredIds.has(row.id)) return null
 
                 const qtyDisplay = typeof row.qty === 'number'
-                  ? (row.qty > 1 ? <span className="inline-flex items-center justify-center bg-[#0B1F45] text-white font-mono text-[0.58rem] font-bold px-1.5 py-0.5 ml-1.5">×{row.qty}</span> : '1')
+                  ? (row.qty > 1 ? <span className="inline-flex items-center justify-center bg-[#071f10] text-white font-mono text-[0.58rem] font-bold px-1.5 py-0.5 ml-1.5">×{row.qty}</span> : '1')
                   : <span className="inline-flex items-center justify-center bg-[#D7263D] text-white font-mono text-[0.58rem] font-bold px-1.5 py-0.5 ml-1.5">×{row.qty}</span>
 
                 return (
                   <tr key={row.id} className="border-b border-[#E2DFD6] hover:bg-[#f8f7f5] transition-colors">
                     <td className="px-3 sm:px-4 py-3 font-mono text-[0.62rem] text-[#64748B] whitespace-nowrap align-top">{row.id}</td>
                     <td className="px-3 sm:px-4 py-3 align-top min-w-[200px]">
-                      <div className="font-semibold text-[#0B1F45] mb-1 leading-snug">{row.name}</div>
+                      <div className="font-semibold text-[#071f10] mb-1 leading-snug">{row.name}</div>
                       {row.note && <div className="text-[0.72rem] text-[#64748B] leading-snug">{row.note}</div>}
                     </td>
                     <td className="px-3 sm:px-4 py-3 align-top whitespace-nowrap">
-                      <span className={`inline-block font-mono text-[0.52rem] tracking-widest uppercase px-1.5 py-0.5 font-medium ${TYPE_BADGE[row.type] ?? 'bg-[#0B1F45] text-white'}`}>{row.type}</span>
+                      <span className={`inline-block font-mono text-[0.52rem] tracking-widest uppercase px-1.5 py-0.5 font-medium ${TYPE_BADGE[row.type] ?? 'bg-[#071f10] text-white'}`}>{row.type}</span>
                     </td>
                     <td className="px-3 sm:px-4 py-3 align-top whitespace-nowrap text-[0.75rem]">{row.day}</td>
                     <td className="px-3 sm:px-4 py-3 align-top text-[0.75rem] min-w-[140px]">
@@ -293,7 +288,7 @@ export default function ChecklistPage() {
                     </td>
                     <td className="px-3 sm:px-4 py-3 align-top min-w-[180px]">
                       {row.copy ? (
-                        <div className="bg-[#F5F3FF] border-l-4 border-[#F4B41A] px-2 py-1.5 font-mono text-[0.62rem] leading-relaxed text-[#1E1B4B] whitespace-pre-line">{row.copy}</div>
+                        <div className="bg-[#f0fdf4] border-l-4 border-[#4ade80] px-2 py-1.5 font-mono text-[0.62rem] leading-relaxed text-[#1E1B4B] whitespace-pre-line">{row.copy}</div>
                       ) : (
                         <span className="text-[#E2DFD6] text-[0.7rem]">—</span>
                       )}
