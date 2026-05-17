@@ -41,6 +41,7 @@ export const TYPE_BADGE: Record<string, string> = {
   'Backdrop': 'bg-[#0A8E7F] text-white',
   'Print': 'bg-[#D7263D] text-white',
   'Wayfinding': 'bg-[#7C3AED] text-white',
+  'Sourced Asset': 'bg-[#64748B] text-white',
 }
 
 export const STATUS_BADGE: Record<AssetStatus, string> = {
@@ -76,7 +77,7 @@ export const ASSETS: ChecklistRow[] = [
   { id:'T04', name:'Holding / Waiting Slide — Animated Loop',
     note:'Loops between sessions. No session-specific content. 10–15 second soft loop. Export as MP4 H.264.',
     type:'Template', day:'Templates', session:'Between all sessions', time:'—',
-    locations:['All Screens'], dims:'1920 × 1080 px\n(export as MP4, H.264)', qty:1, repeat:'—', status:'tbc', tbcFlag:false,
+    locations:['All Screens'], dims:'1920 × 1080 px\n(export as MP4, H.264)', qty:1, repeat:'—', status:'template', tbcFlag:false,
     copy:'LAGOS STATE INVESTMENT FORUM 2026\nEko Hotel & Suites · Victoria Island · Lagos\n8 – 10 June 2026' },
 
   { id:'T05', name:'Day Opening Slide — Master Template',
@@ -86,10 +87,17 @@ export const ASSETS: ChecklistRow[] = [
     copy:'VERSION A — Day 1:\nDAY ONE · 8 June 2026\nLAGOS STATE INVESTMENT FORUM 2026\n\nVERSION B — Day 2:\nDAY TWO · 9 June 2026\nLAGOS STATE INVESTMENT FORUM 2026' },
 
   { id:'T06', name:'Panel Strip — All Panellists Name Bar',
-    note:'Horizontal strip at bottom of frame showing ALL panellist names simultaneously. Different from individual lower thirds. Used for Governors Panel and Plenary 4.',
+    note:'Horizontal strip at bottom of frame showing ALL panellist names simultaneously. Different from individual lower thirds. Used for Governors Panel and any large multi-person panel (Plenary 1, 4, 5). Confirm with Programme which sessions use the strip vs individual lower thirds only.',
     type:'Template', day:'Templates', session:'Large panel sessions', time:'—',
-    locations:['Main Stage'], dims:'1920 × 1080 px\n(strip element: 1920 × 120 px)', qty:1, repeat:'Base for Governors Panel + Plenary 4', status:'template', tbcFlag:false,
+    locations:['Main Stage'], dims:'1920 × 1080 px\n(strip element: 1920 × 120 px)', qty:1, repeat:'Base for Governors Panel + Plenaries 1, 4, 5', status:'template', tbcFlag:false,
     copy:'One line across the bottom of screen:\n[Name · State/Org] separator [Name · State/Org] separator ... (all panellists)' },
+
+  { id:'T07', name:'Virtual Speaker — Screen Layout Template',
+    note:'Defines what the main stage screen shows DURING an actual virtual contribution — not the intro slide before the call. Two layout options: A) full-screen video feed with lower third overlay; B) split screen (video left, session context right). Agree which approach with AV before producing. One consistent layout used across all virtual slots — Musk, AfDB President, Wamkele Mene.',
+    type:'Template', day:'Templates', session:'All Virtual Contributions', time:'—',
+    locations:['Main Stage','Breakout A'],
+    dims:'1920 × 1080 px\n(AV operator applies lower third over live feed)', qty:1, repeat:'Base for all virtual speaker slots', status:'template', tbcFlag:false,
+    copy:'OPTION A — Full screen + lower third overlay:\nMain screen: full video feed\nLower third: [Name / Title / Organisation]\n\nOPTION B — Split screen:\nLeft 60%: video feed\nRight 40%: session title + speaker name\n\n⚠️ Confirm layout with AV team before producing. One approach only — be consistent.' },
 
   { section: 'DAY 1 — 8 JUNE 2026' },
 
@@ -137,10 +145,10 @@ export const ASSETS: ChecklistRow[] = [
     copy:'OPENING ADDRESS\nExecutive Governor, Lagos State' },
 
   { id:'D1-08', name:'Governor — Official Portrait Backdrop',
-    note:"Full-screen official portrait. No text overlay needed. Displayed on Governor's entry and during address. Photo to be supplied by Lagos State / MCCTI.",
-    type:'Backdrop', day:'Day 1', session:'Opening Address — Governor Sanwo-Olu', time:'09:50',
+    note:'NOT a design deliverable. Full-screen official portrait sourced from Lagos State Government / MCCTI — Programme to request and receive file, then hand to AV. Designer formats it to 3840×2160 once received. No text overlay.',
+    type:'Sourced Asset', day:'Day 1', session:'Opening Address — Governor Sanwo-Olu', time:'09:50',
     locations:['Main Stage'], dims:'3840 × 2160 px', qty:1, repeat:'—', status:'confirm', tbcFlag:true,
-    copy:'Graphic only — no text overlay\nFull-screen official portrait: Mr. Babajide Olusola Sanwo-Olu\nPhoto supplied by Lagos State Government / MCCTI' },
+    copy:'Graphic only — no text overlay\nFull-screen official portrait: Mr. Babajide Olusola Sanwo-Olu\nSource: Lagos State Government / MCCTI\nProgramme to request → pass to AV' },
 
   { id:'D1-09', name:'LT: Mr. Babajide Olusola Sanwo-Olu',
     note:'Reused across 3 sessions: Opening Address, Plenary 1, and Day 2 Closing — one file.',
@@ -203,10 +211,10 @@ export const ASSETS: ChecklistRow[] = [
     copy:'KEYNOTE ADDRESS\nPresident of the Federal Republic of Nigeria\n\n⚠️ Do not use personal name — official title only' },
 
   { id:'D1-19', name:'Presidential Seal — Full Screen Backdrop',
-    note:'Displayed during National Anthem and presidential entry. Vector seal — obtain from official channels only. No text.',
-    type:'Backdrop', day:'Day 1', session:'Keynote Address — President of Nigeria', time:'10:30',
+    note:'NOT a design deliverable. Vector seal must be obtained from official channels only (State House / DSS liaison). Programme or client to source and pass to AV. Designer formats to 3840×2160 once received. Cannot be recreated — must be official file.',
+    type:'Sourced Asset', day:'Day 1', session:'Keynote Address — President of Nigeria', time:'10:30',
     locations:['Main Stage'], dims:'3840 × 2160 px', qty:1, repeat:'—', status:'confirm', tbcFlag:true,
-    copy:'Graphic only — no text overlay\nPresidential Seal of the Federal Republic of Nigeria\nHigh-res vector — sourced from official channels' },
+    copy:'Graphic only — no text overlay\nPresidential Seal of the Federal Republic of Nigeria\nSource: State House / DSS liaison — official file only\nProgramme / client to obtain → pass to AV' },
 
   { id:'D1-20', name:'LT: President of the Federal Republic of Nigeria',
     note:'Official title only — no personal name without DSS / State House Protocol clearance.',
@@ -258,10 +266,10 @@ export const ASSETS: ChecklistRow[] = [
     copy:"PLENARY 1\nLAGOS: AFRICA'S GLOBAL GATEWAY\nDay 1 · 13:30 · Main Plenary Hall" },
 
   { id:'D1-28', name:"Plenary 1 — New Panellist Lower Thirds ×3",
-    note:'Lord Marland (REUSE D1-06) and Dr. Oduwole (REUSE D1-26) already exist. Only 3 new files needed — all names TBC.',
+    note:'Lord Marland (REUSE D1-06) and Dr. Oduwole (REUSE D1-26) already exist. 3 new files needed. Speaker names are known but exact titles must be confirmed before finalising.',
     type:'Lower Third', day:'Day 1', session:"Plenary 1 — Lagos: Africa's Global Gateway", time:'13:30',
     locations:['Main Stage','Confidence Monitor'], dims:'1920 × 1080 px', qty:3, repeat:'T01 · 2 reused (D1-06 + D1-26)', status:'confirm', tbcFlag:true,
-    copy:'REUSE: D1-06 (Lord Marland) + D1-26 (Dr. Oduwole) — no new files for those.\n\nNEW — 3 templates (names TBC):\n[DG, NACCIMA — TBC] / Director-General / NACCIMA\n[Chairman, Heirs Holdings — TBC] / Chairman / Heirs Holdings Group\n[CEO, Tolaram Group — TBC] / CEO / Tolaram Group' },
+    copy:'REUSE: D1-06 (Lord Marland) + D1-26 (Dr. Oduwole) — no new files for those.\n\nNEW — 3 files (confirm exact titles before finalising):\nSola Obadimu / Director-General / NACCIMA\nTony O. Elumelu CFR / Chairman / Heirs Holdings Group\nHaresh Aswani / CEO / Tolaram Group\n\n⚠️ Names confirmed. Verify current titles with speaker management before sending to design.' },
 
   { id:'D1-29', name:'Networking Lunch — Break Slide',
     note:'Delegates split between Breakout A and B after lunch — room directions important.',
@@ -275,6 +283,20 @@ export const ASSETS: ChecklistRow[] = [
     locations:['Lobby Screens','Corridor Screens'],
     dims:'1920 × 1080 px (landscape)\n1080 × 1920 px (portrait totems)', qty:2, repeat:'—', status:'tbc', tbcFlag:false,
     copy:'AFTERNOON SESSIONS BEGIN AT 15:30\nPlenary 2  →  Breakout Room A\nPlenary 3  →  Breakout Room B' },
+
+  { id:'D1-30a', name:'Breakout A — Door Screen (In Session)',
+    note:'Mini screen mounted outside Breakout Room A door. Displayed while Plenary 2 is running. Confirm screen orientation with venue coordinator — deliver both formats.',
+    type:'Wayfinding', day:'Day 1', session:'Plenary 2 — Breakout Room A', time:'15:30 – 17:30',
+    locations:['Breakout A — Corridor Screen'],
+    dims:'1920 × 1080 px (landscape)\n1080 × 1920 px (portrait)', qty:2, repeat:'—', status:'confirm', tbcFlag:true,
+    copy:'NOW IN SESSION\nPLENARY 2 · TECHNOLOGY & INNOVATION\n15:30 – 17:30 · Breakout Room A\nPlease enter quietly\n\n⚠️ Confirm screen exists and orientation with venue coordinator' },
+
+  { id:'D1-30b', name:'Breakout B — Door Screen (In Session)',
+    note:'Mini screen mounted outside Breakout Room B door. Displayed while Plenary 3 is running. Same design as D1-30a — swap room and session only.',
+    type:'Wayfinding', day:'Day 1', session:'Plenary 3 — Breakout Room B', time:'15:30 – 17:30',
+    locations:['Breakout B — Corridor Screen'],
+    dims:'1920 × 1080 px (landscape)\n1080 × 1920 px (portrait)', qty:2, repeat:'Variant of D1-30a — swap room + session', status:'confirm', tbcFlag:true,
+    copy:'NOW IN SESSION\nPLENARY 3 · UNLOCKING INVESTMENT\n15:30 – 17:30 · Breakout Room B\nPlease enter quietly\n\n⚠️ Confirm screen exists and orientation with venue coordinator' },
 
   { id:'D1-31', name:'Plenary 2 — Session Slide (Breakout A)',
     note:'Room identifier in the slide is critical — attendees are navigating between two parallel rooms.',
@@ -370,16 +392,23 @@ export const ASSETS: ChecklistRow[] = [
     copy:'[Forum Chair Name — TBC]\nForum Chair\nLagos State Investment Forum 2026\n\n⚠️ Two versions needed. Both names TBC.' },
 
   { id:'D2-04', name:'Day 1 Highlights Deck',
-    note:'Optional: 5–6 recap slides assembled by content team on the night of Day 1. Confirm with client if required.',
+    note:'⚠️ URGENT DECISION THIS WEEK — if this is happening, overnight production on Day 1 evening must be planned now (10 days out). Content team assembles on the night; designer must have a blank template ready to populate. If client says no — remove from plan entirely. Do not leave this as TBC past 1 June.',
     type:'Session Slide', day:'Day 2', session:'Opening Recap', time:'09:30',
     locations:['Main Stage'], dims:'3840 × 2160 px', qty:6, repeat:'—', status:'confirm', tbcFlag:true,
-    copy:'5–6 recap slides — content assembled night of Day 1\nFormat: key quote + speaker name  OR  moment + caption\n\n⚠️ Confirm with client whether required. If yes — on-the-night production needed.' },
+    copy:'5–6 recap slides — content assembled night of Day 1\nFormat: key quote + speaker name  OR  moment + caption\n\n⚠️ Client decision required by 1 June. If yes: designer delivers blank template before event. Content team populates overnight on Day 1.' },
 
   { id:'D2-05', name:'Deal Room / Networking — Gap Slide',
     note:'⚠️ 30-minute gap in programme (10:00–10:30) — intent not yet confirmed. May change.',
     type:'Break Slide', day:'Day 2', session:'Programme Gap (10:00–10:30)', time:'10:00',
     locations:['All Screens'], dims:'1920 × 1080 px', qty:1, repeat:'T03 variant', status:'confirm', tbcFlag:true,
     copy:'NETWORKING & DEAL ROOM\nDelegates are invited to visit the Deal Room and Exhibition\nPlenary 4 begins at 10:30\n\n⚠️ Slot intent TBC — may be replaced by another session' },
+
+  { id:'D2-05a', name:'Deal Room Door Screens — In-Session Slides (×5)',
+    note:'5 deal rooms total. If mini-screens are mounted outside each door, they need a branded in-session slide. Confirm screen existence and orientation with venue coordinator first — if no screens, this item drops entirely.',
+    type:'Wayfinding', day:'Day 2', session:'Deal Rooms — All Day', time:'TBC',
+    locations:['Deal Room Corridors'],
+    dims:'Confirm with venue coordinator\n(likely 1920 × 1080 px or 1080 × 1920 px)', qty:5, repeat:'One design — swap room number ×5', status:'confirm', tbcFlag:true,
+    copy:'DEAL ROOM [1 / 2 / 3 / 4 / 5]\nIN SESSION\nLAGOS STATE INVESTMENT FORUM 2026\n\n⚠️ Confirm with venue coordinator: do screens exist outside deal room doors?' },
 
   { id:'D2-06', name:'Plenary 4 — Session Slide',
     note:'',
@@ -478,10 +507,10 @@ export const ASSETS: ChecklistRow[] = [
     copy:'5 lower thirds — all names TBC:\n[CEO, Mavin Records] / CEO / Mavin Records\n[Director, Netflix Sub-Saharan Africa] / Director, Content / Netflix\n[Founder, Norrsken Africa] / Founder / Norrsken Africa\n[CEO, Terra Kulture — if not keynoting] / CEO / Terra Kulture\n[DG, NCAC] / Director-General / National Council for Arts and Culture' },
 
   { id:'D2-22', name:'Nollywood & Lagos Fashion Week — Showcase Slide',
-    note:'⚠️ Format TBC — video reel or live presentation. If video: file must be delivered 48h before event for AV quality check.',
+    note:'⚠️ Format decision needed by 1 June. If video reel: file must be in AV hands by 7 June for quality check — that is 48h before the session. If live presentation: slides needed. Either way, this cannot be confirmed on the day. Escalate to client now.',
     type:'Session Slide', day:'Day 2', session:'Plenary 6', time:'13:00',
     locations:['Main Stage'], dims:'3840 × 2160 px', qty:1, repeat:'—', status:'confirm', tbcFlag:true,
-    copy:'NOLLYWOOD & LAGOS FASHION WEEK\nCreative Economy Showcase · Plenary 6\nLagos State Investment Forum 2026\n\n⚠️ Format TBC — video reel or live. If video: deliver file 48h before event.' },
+    copy:'NOLLYWOOD & LAGOS FASHION WEEK\nCreative Economy Showcase · Plenary 6\nLagos State Investment Forum 2026\n\n⚠️ Format decision due 1 June. Video file delivery deadline: 7 June. Escalate to client.' },
 
   { id:'D2-23', name:'Closing Session — Opening Slide',
     note:'',

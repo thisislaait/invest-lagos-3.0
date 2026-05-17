@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react'
 import { AssetItem, isSection, STATUS_LABEL, STATUS_BADGE, TYPE_BADGE } from '@/lib/checklist-data'
 import { useChecklistData } from '@/hooks/useChecklistData'
 
-const ALL_TYPES = ['Template','Session Slide','Lower Third','Holding Slide','Break Slide','Backdrop','Print','Wayfinding']
+const ALL_TYPES = ['Template','Session Slide','Lower Third','Holding Slide','Break Slide','Backdrop','Print','Wayfinding','Sourced Asset']
 
 function downloadCSV(items: AssetItem[]) {
   const headers = ['ID','Asset Name','Production Note','Type','Day','Session','Time','Screen Location','Dimensions','Quantity','Repeat / Reuse','Status','Screen Content']
