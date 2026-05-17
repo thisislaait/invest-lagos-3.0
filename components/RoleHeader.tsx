@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 interface Props {
   role: string
   clock?: string
@@ -11,7 +9,7 @@ export default function RoleHeader({ role, clock, connected, right }: Props) {
   return (
     <div className="flex items-center justify-between px-5 py-3 border-b border-[#1c1c1a]">
       <div className="flex items-center gap-4">
-        <Link href="/" className="text-zinc-600 hover:text-zinc-400 font-mono text-sm transition-colors">←</Link>
+        <a href="/invest-lagos-3.0/" className="text-zinc-600 hover:text-zinc-400 font-mono text-sm transition-colors">←</a>
         <span className="text-[10px] tracking-widest uppercase font-mono text-zinc-600">{role}</span>
         {connected === false && (
           <span className="text-[10px] tracking-widest uppercase font-mono text-red-500 animate-pulse">● offline</span>
