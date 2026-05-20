@@ -99,6 +99,22 @@ export const ASSETS: ChecklistRow[] = [
     dims:'1920 × 1080 px\n(AV operator applies lower third over live feed)', qty:1, repeat:'Base for all virtual speaker slots', status:'template', tbcFlag:false,
     copy:'OPTION A — Full screen + lower third overlay:\nMain screen: full video feed\nLower third: [Name / Title / Organisation]\n\nOPTION B — Split screen:\nLeft 60%: video feed\nRight 40%: session title + speaker name\n\n⚠️ Confirm layout with AV team before producing. One approach only — be consistent.' },
 
+  { section: 'RAPPORTEURS — Programme Operational' },
+
+  { id:'RP-01', name:'Rapporteur Assignment — Confirmed per Session',
+    note:'Confirm with client who sources the rapporteurs. One per session minimum. Once confirmed, Programme assigns each rapporteur to their session(s) and issues a brief. If client-sourced, Programme still owns the briefing. Feeds communiqué content (D2-24) — no confirmed rapporteurs means no communiqué.',
+    type:'Print', day:'Day 1 + Day 2', session:'All Sessions', time:'Pre-event — confirm by 1 June',
+    locations:['Programme Office'],
+    dims:'N/A', qty:'TBC', repeat:'N/A', status:'confirm', tbcFlag:true,
+    copy:'N/A' },
+
+  { id:'RP-02', name:'Rapporteur Session Brief Packs (Print)',
+    note:'One printed brief per rapporteur per session. Programme produces and distributes on event morning. Must include: session title, speakers + titles, key themes to capture, output format (paragraph summary / bullet points), and submission deadline (end of each session day, to feed communiqué by 13:30 Day 2).',
+    type:'Print', day:'Day 1 + Day 2', session:'All Sessions', time:'Distribute by 08:00 each day',
+    locations:['Lavender (Speakers Holding Room)', 'Programme Office'],
+    dims:'A4 printed', qty:'TBC — one per rapporteur per session', repeat:'New content each session', status:'tbc', tbcFlag:true,
+    copy:'SESSION: [Title]\nDATE / TIME: [Date, Start–End]\nSPEAKERS: [Name / Title / Organisation]\n\nKEY THEMES TO CAPTURE:\n— [Theme 1]\n— [Theme 2]\n— [Theme 3]\n\nOUTPUT FORMAT: [Summary paragraph / Bullet points]\nSUBMIT TO: Ugo (Programme) by [Time] on [Date]' },
+
   { section: 'DAY 1 — 8 JUNE 2026' },
 
   { id:'D1-01', name:'Opening Ceremony — Holding Slide',
@@ -403,12 +419,12 @@ export const ASSETS: ChecklistRow[] = [
     locations:['All Screens'], dims:'1920 × 1080 px', qty:1, repeat:'T03 variant', status:'confirm', tbcFlag:true,
     copy:'NETWORKING & DEAL ROOM\nDelegates are invited to visit the Deal Room and Exhibition\nPlenary 4 begins at 10:30\n\n⚠️ Slot intent TBC — may be replaced by another session' },
 
-  { id:'D2-05a', name:'Deal Room Door Screens — In-Session Slides (×5)',
-    note:'5 deal rooms total. If mini-screens are mounted outside each door, they need a branded in-session slide. Confirm screen existence and orientation with venue coordinator first — if no screens, this item drops entirely.',
+  { id:'D2-05a', name:'Deal Room Door Screens — In-Session Slides (×6)',
+    note:'6 deal rooms confirmed from venue allocation: America, Antarctica, Asia, Africa, Australia, Europe. If mini-screens are mounted outside each door, they need a branded in-session slide. Confirm screen existence and orientation with venue coordinator — if no screens, this item drops entirely. No screens mentioned in OAKEN venue coordination document.',
     type:'Wayfinding', day:'Day 2', session:'Deal Rooms — All Day', time:'TBC',
     locations:['Deal Room Corridors'],
-    dims:'Confirm with venue coordinator\n(likely 1920 × 1080 px or 1080 × 1920 px)', qty:5, repeat:'One design — swap room number ×5', status:'confirm', tbcFlag:true,
-    copy:'DEAL ROOM [1 / 2 / 3 / 4 / 5]\nIN SESSION\nLAGOS STATE INVESTMENT FORUM 2026\n\n⚠️ Confirm with venue coordinator: do screens exist outside deal room doors?' },
+    dims:'Confirm with venue coordinator\n(likely 1920 × 1080 px or 1080 × 1920 px)', qty:6, repeat:'One design — swap room name ×6', status:'confirm', tbcFlag:true,
+    copy:'DEAL ROOM [AMERICA / ANTARCTICA / ASIA / AFRICA / AUSTRALIA / EUROPE]\nIN SESSION\nLAGOS STATE INVESTMENT FORUM 2026\n\n⚠️ Confirm with venue coordinator: do screens exist outside deal room doors?' },
 
   { id:'D2-06', name:'Plenary 4 — Session Slide',
     note:'',
