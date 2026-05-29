@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screen Content Tracker — Invest Lagos 3.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#071f10;--gold:#4ade80;--gold-soft:#dcfce7;--gold-mid:#22c55e;
+      --cream:#F6F5F1;--border:#DDD9CF;--muted:#64748B;--ink:#1E293B;
+      --white:#FFFFFF;--bg:#ECEAE4;
+      --font:'Poppins',sans-serif;--mono:'JetBrains Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:14px}
+    body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+    /* ── Header ── */
+    .page-header{background:var(--navy);padding:.875rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .header-left{display:flex;align-items:center;gap:.875rem}
+    .header-logo{height:30px;width:auto}
+    .header-title{font-weight:700;font-size:.92rem;color:var(--white)}
+    .header-sub{font-family:var(--mono);font-size:.44rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-top:.15rem}
+    .header-nav{display:flex;align-items:center;gap:.5rem}
+    .header-link{font-size:.7rem;color:rgba(255,255,255,.7);text-decoration:none;border:1px solid rgba(255,255,255,.2);padding:.3rem .7rem;transition:all .15s}
+    .header-link:hover{color:var(--gold);border-color:var(--gold)}
+
+    /* ── Stats bar ── */
+    .stats-bar{background:var(--white);border-bottom:1px solid var(--border);padding:.625rem 1.5rem;display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap}
+    .stat{display:flex;align-items:baseline;gap:.35rem}
+    .stat-num{font-family:var(--mono);font-size:1.05rem;font-weight:500;color:var(--navy)}
+    .stat-label{font-size:.68rem;color:var(--muted)}
+    .stat-div{height:14px;width:1px;background:var(--border)}
+
+    /* ── Filters ── */
+    .filters{background:var(--white);border-bottom:1px solid var(--border);padding:.625rem 1.5rem;display:flex;align-items:center;gap:.625rem;flex-wrap:wrap}
+    .search-wrap{position:relative;flex:1;min-width:180px;max-width:300px}
+    .search-wrap svg{position:absolute;left:.625rem;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--muted);pointer-events:none}
+    .search-wrap input{width:100%;padding:.4rem .75rem .4rem 2rem;border:1px solid var(--border);font-family:var(--font);font-size:.78rem;color:var(--ink);background:var(--cream);outline:none;border-radius:0}
+    .search-wrap input:focus{border-color:var(--navy)}
+    .filter-group{display:flex;align-items:center;gap:.3rem}
+    .filter-label{font-family:var(--mono);font-size:.44rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .filter-select{padding:.38rem .55rem;border:1px solid var(--border);font-family:var(--font);font-size:.72rem;color:var(--ink);background:var(--cream);cursor:pointer;outline:none;border-radius:0}
+    .filter-select:focus{border-color:var(--navy)}
+    .clear-btn{font-family:var(--font);font-size:.7rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:.38rem .4rem;text-decoration:underline;text-underline-offset:2px}
+    .clear-btn:hover{color:var(--ink)}
+    .result-count{font-family:var(--mono);font-size:.46rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.5rem .25rem}
+
+    /* ── Table ── */
+    .table-wrap{padding:.75rem 1.5rem 2rem;overflow-x:auto}
+    table{width:100%;border-collapse:collapse;background:var(--white);font-size:.78rem}
+    thead th{
+      background:var(--navy);color:var(--white);font-weight:600;font-size:.66rem;
+      letter-spacing:.04em;padding:.625rem .75rem;text-align:left;white-space:nowrap;
+      cursor:pointer;user-select:none;border-right:1px solid rgba(255,255,255,.07)
+    }
+    thead th:last-child{border-right:none;cursor:default}
+    thead th:hover:not(:last-child){background:#0d3320}
+    .sort-arrow{margin-left:.3rem;font-size:.55rem;opacity:.35}
+    thead th.sort-asc .sort-arrow::after{content:'↑';opacity:1}
+    thead th.sort-desc .sort-arrow::after{content:'↓';opacity:1}
+    thead th:not(.sort-asc):not(.sort-desc) .sort-arrow::after{content:'⇅'}
+    tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+    tbody tr:nth-child(even){background:#fafaf8}
+    tbody tr:hover{background:#f4f3ef !important}
+    tbody tr.hidden{display:none}
+    tbody td{padding:.55rem .75rem;vertical-align:top;border-right:1px solid #f0ede6}
+    tbody td:last-child{border-right:none}
+
+    /* ── Column widths ── */
+    .col-day{min-width:75px}
+    .col-session{min-width:155px;max-width:200px;font-size:.7rem;color:var(--muted);line-height:1.4}
+    .col-time{min-width:50px;font-family:var(--mono);font-size:.62rem;color:var(--muted);white-space:nowrap}
+    .col-desc{min-width:270px;max-width:340px;line-height:1.55}
+    .col-type{min-width:115px;white-space:nowrap}
+    .col-screen{min-width:140px;font-size:.7rem;color:var(--muted);line-height:1.4}
+    .col-team{min-width:160px;font-size:.7rem;line-height:1.4}
+    .col-status{min-width:105px}
+    .col-notes{min-width:190px;max-width:260px;font-size:.68rem;color:var(--muted);line-height:1.55}
+
+    /* ── Chips ── */
+    .day-chip{display:inline-block;font-family:var(--mono);font-size:.43rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .4rem;white-space:nowrap}
+    .day-chip.d1{background:var(--navy);color:var(--white)}
+    .day-chip.d1g{background:#112244;color:#93c5fd}
+    .day-chip.gala{background:#0B1F45;color:#a5b4fc}
+    .day-chip.d2{background:#14532d;color:var(--gold)}
+
+    .type-badge{display:inline-block;font-family:var(--mono);font-size:.43rem;letter-spacing:.07em;text-transform:uppercase;padding:.18rem .42rem;background:#f0ede6;color:#64748b;white-space:nowrap}
+
+    .status-chip{display:inline-flex;align-items:center;gap:.25rem;font-size:.66rem;font-weight:500;padding:.22rem .55rem;cursor:pointer;user-select:none;border:1px solid transparent;transition:all .15s;white-space:nowrap}
+    .status-chip:hover{opacity:.8}
+    .status-chip.not-started{background:#f0ede6;color:var(--muted);border-color:var(--border)}
+    .status-chip.in-progress{background:#fef9c3;color:#a16207;border-color:#fde047}
+    .status-chip.ready{background:var(--gold-soft);color:#166534;border-color:var(--gold)}
+
+    .tbc{font-family:var(--mono);font-size:.43rem;letter-spacing:.08em;text-transform:uppercase;background:#fef3c7;color:#b45309;padding:.1rem .3rem;vertical-align:middle;margin-left:.2rem}
+
+    .empty-state{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem}
+    .no-results{display:none}
+    .no-results.visible td{text-align:center;padding:2.5rem;color:var(--muted);border:none;font-size:.8rem}
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-left">
+    <img src="/invest-lagos-3.0/images/LI-logo.jpeg" alt="Invest Lagos" class="header-logo" />
+    <div>
+      <div class="header-title">Screen Content Tracker</div>
+      <div class="header-sub">Invest Lagos 3.0 — All assets, scene by scene</div>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <a href="/invest-lagos-3.0/lib/simulation.html" class="header-link">← Simulation</a>
+    <a href="/invest-lagos-3.0/admin" class="header-link">Admin</a>
+  </nav>
+</header>
+
+<div class="stats-bar" id="stats-bar"></div>
+
+<div class="filters">
+  <div class="search-wrap">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="5"/><path d="M15 15l-3-3"/></svg>
+    <input type="text" id="search" placeholder="Search assets, sessions, speakers…" oninput="applyFilters()" />
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Day</span>
+    <select class="filter-select" id="f-day" onchange="applyFilters()">
+      <option value="">All days</option>
+      <option>Day 1</option>
+      <option>Day 1 / Gala</option>
+      <option>Gala Dinner</option>
+      <option>Day 2</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Type</span>
+    <select class="filter-select" id="f-type" onchange="applyFilters()">
+      <option value="">All types</option>
+      <option>Lower Third</option>
+      <option>Session Title Card</option>
+      <option>Video / Reel</option>
+      <option>Live Feed</option>
+      <option>Holding Slide</option>
+      <option>Data Slide</option>
+      <option>Countdown</option>
+      <option>Wayfinding</option>
+      <option>Backdrop</option>
+      <option>Closing Graphic</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Team</span>
+    <select class="filter-select" id="f-team" onchange="applyFilters()">
+      <option value="">All teams</option>
+      <option>Branding &amp; Signage</option>
+      <option>Technical Management — Temi</option>
+      <option>Speaker Management — Obehi / Jacqui</option>
+      <option>Government &amp; VIP Protocol — Obehi</option>
+      <option>Media &amp; PR — David / Victor</option>
+      <option>Exhibition &amp; Pavilion — Alhassan / Tosin Onipade</option>
+      <option>Cultural Performance — Nkem / David / Michael</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Status</span>
+    <select class="filter-select" id="f-status" onchange="applyFilters()">
+      <option value="">All statuses</option>
+      <option value="not-started">Not Started</option>
+      <option value="in-progress">In Progress</option>
+      <option value="ready">Ready</option>
+    </select>
+  </div>
+  <button class="clear-btn" onclick="clearFilters()">Clear filters</button>
+</div>
+
+<div class="result-count" id="result-count"></div>
+
+<div class="table-wrap">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th class="col-day" onclick="sortTable(0)">Day<span class="sort-arrow"></span></th>
+        <th class="col-session" onclick="sortTable(1)">Session<span class="sort-arrow"></span></th>
+        <th class="col-time" onclick="sortTable(2)">Time<span class="sort-arrow"></span></th>
+        <th class="col-desc">Asset Description</th>
+        <th class="col-type" onclick="sortTable(4)">Type<span class="sort-arrow"></span></th>
+        <th class="col-screen" onclick="sortTable(5)">Screen Location<span class="sort-arrow"></span></th>
+        <th class="col-team" onclick="sortTable(6)">Team<span class="sort-arrow"></span></th>
+        <th class="col-status" onclick="sortTable(7)">Status<span class="sort-arrow"></span></th>
+        <th class="col-notes">Notes / Dependencies</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <tr class="no-results"><td colspan="9"></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+const rows = [
+  // ── DAY 1 ─────────────────────────────────────────────────────────────────
+
+  // S1 Hotel Exterior & Approach
+  {id:'r001',day:'Day 1',session:'Hotel Exterior & Approach',time:'07:00',desc:'Outdoor brand film — Lagos aerial footage, port, infrastructure, Forum logo on continuous loop',type:'Video / Reel',screen:'Outdoor LED / Façade',team:'Branding & Signage',notes:'No text-heavy slides. Loop active from 06:30.'},
+  {id:'r002',day:'Day 1',session:'Hotel Exterior & Approach',time:'07:00',desc:'LSIF 2026 / Lagos State Government / CWEIC co-branded façade banners and directional vinyl signage',type:'Backdrop',screen:'Outdoor / Façade + Drop-off',team:'Branding & Signage',notes:'Eye-level on façade. Signage posts from drop-off → entrance → registration hall.'},
+
+  // S2 Registration
+  {id:'r003',day:'Day 1',session:'Registration & Check-in',time:'07:30',desc:'Welcome reel: LSIF 2026 animated logo → Lagos investment statistics → confirmed speaker portraits with name and title → agenda highlights → sponsor logos',type:'Video / Reel',screen:'Foyer screens',team:'Branding & Signage',notes:'Speaker portraits require confirmed headshots + approved titles from Speaker Management before production can begin.'},
+  {id:'r004',day:'Day 1',session:'Registration & Check-in',time:'07:30',desc:'Countdown clock to 09:30 — persistent corner overlay on all foyer screens',type:'Countdown',screen:'Foyer screens',team:'Technical Management — Temi',notes:'Overlay on all foyer screens throughout registration period.'},
+
+  // S3 Pre-Plenary Networking
+  {id:'r005',day:'Day 1',session:'Pre-Plenary Networking',time:'09:00',desc:'Building anticipation sequence — slow aerial Lagos footage, Forum logo building frame by frame. Transitions from welcome reel.',type:'Video / Reel',screen:'Foyer screens',team:'Branding & Signage',notes:'Activates at 09:00. Countdown becomes more prominent.'},
+  {id:'r006',day:'Day 1',session:'Pre-Plenary Networking',time:'09:10',desc:'LSIF 2026 holding slide — navy background, gold animated border — plenary hall pre-show state',type:'Holding Slide',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Activates at 09:10 when hall lights come to full. MC does final mic check backstage.'},
+  {id:'r007',day:'Day 1',session:'Pre-Plenary Networking',time:'09:15',desc:'"The Forum opens in 15 minutes. Please make your way to the Plenary Hall." — on-screen directional message',type:'Wayfinding',screen:'Foyer screens',team:'Technical Management — Temi',notes:'Coincides with usher directional sweep.'},
+
+  // S4 Call to Order
+  {id:'r008',day:'Day 1',session:'Call to Order',time:'09:25',desc:'60-second opening film — Lagos at sunrise, the port, construction, markets, innovation hubs. Ends on Forum logo. No narration, music only.',type:'Video / Reel',screen:'All plenary screens',team:'Media & PR — David / Victor',notes:'Must be produced and loaded in AV queue before event day. Technical Management to load. No narration — music only. Silence after logo reveal.'},
+
+  // S5 Cultural Performance
+  {id:'r009',day:'Day 1',session:'Cultural Performance',time:'09:30',desc:'Live performance feed — all screens carry the performance. No lower thirds or text overlays during the act.',type:'Live Feed',screen:'All plenary screens',team:'Technical Management — Temi',notes:'Performance type TBC. Camera brief confirmed with Nkem / Cultural Performance team at production recce.'},
+
+  // S6 Official Opening Ceremony
+  {id:'r010',day:'Day 1',session:'Official Opening Ceremony',time:'09:40',desc:'Lower third — Commissioner Folasade Ambrose-Medebem / Commissioner for Commerce, Industry & Cooperatives, Lagos State',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Fires 5 seconds after speaker reaches podium. Title confirmed by Speaker Management.'},
+  {id:'r011',day:'Day 1',session:'Official Opening Ceremony',time:'09:45',desc:'Lower third — Lord Marland / Chairman, Commonwealth Enterprise & Investment Council (CWEIC)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Fires 5 seconds after speaker reaches podium.'},
+  {id:'r012',day:'Day 1',session:'Official Opening Ceremony',time:'09:50',desc:'Lower third — His Excellency Mr. Babajide Sanwo-Olu / Governor, Lagos State',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:'Dedicated podium mic channel. Nigerian flag + Lagos State flag flanking lectern.'},
+  {id:'r013',day:'Day 1',session:'Official Opening Ceremony',time:'10:00',desc:'Lower third — Commonwealth Secretary-General (full title TBC)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Full approved title to be confirmed with Protocol before production.'},
+  {id:'r014',day:'Day 1',session:'Official Opening Ceremony',time:'10:08',desc:'Lower thirds — Visiting Heads of Government (multiple, TBC) — one per speaker in confirmed protocol order',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:'Names, titles and protocol order must be cleared by Obehi in advance. Do not produce until formally confirmed.'},
+  {id:'r015',day:'Day 1',session:'Official Opening Ceremony',time:'10:20',desc:'Lower third — Mrs. Kanayo Awani / President & Group Managing Director, Afreximbank (Message of Goodwill)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r016',day:'Day 1',session:'Official Opening Ceremony',time:'10:20',desc:'Lower third — Wamkele Keabetswe Mene / Secretary-General, African Continental Free Trade Area (AfCFTA) (Message of Goodwill)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r017',day:'Day 1',session:'Official Opening Ceremony',time:'09:40',desc:'LSIF holding graphic with gold pulse animation — displayed between each speaker transition throughout the ceremony',type:'Holding Slide',screen:'All plenary screens',team:'Branding & Signage',notes:'Returns after each speaker exits. Consistent animated version of the LSIF 2026 brand.'},
+
+  // S7 Presidential Keynote
+  {id:'r018',day:'Day 1',session:'Presidential Keynote',time:'10:30',desc:'Lower third — His Excellency Asiwaju Bola Ahmed Tinubu, GCFR / President, Federal Republic of Nigeria',type:'Lower Third',screen:'All plenary screens',team:'Government & VIP Protocol — Obehi',notes:'No sponsor logos on screens during the Presidential address. Cleared with DSS. Exact wording confirmed with Protocol.'},
+  {id:'r019',day:'Day 1',session:'Presidential Keynote',time:'10:30',desc:'Nigerian coat of arms — subtle watermark overlay on all screens during Presidential address',type:'Backdrop',screen:'All plenary screens',team:'Branding & Signage',notes:'Subtle, not dominant. Background layer only.'},
+
+  // S8 Governors' Walk-through Pavilion
+  {id:'r020',day:'Day 1',session:"Governors' Walk-through Pavilion",time:'11:30',desc:'Lagos investment opportunity content per pavilion — sector by sector: infrastructure, tech, energy, agri, real estate. Each pavilion runs its own dedicated screen content.',type:'Data Slide',screen:'Exhibition pavilion screens',team:'Exhibition & Pavilion — Alhassan / Tosin Onipade',notes:'Coordinate content brief with individual exhibitors. Each stand supplies or approves its own content.'},
+  {id:'r021',day:'Day 1',session:"Governors' Walk-through Pavilion",time:'11:30',desc:'Remaining programme for the day displayed on overhead exhibition hall screens — so delegates know when to return',type:'Wayfinding',screen:'Exhibition hall overhead screens',team:'Technical Management — Temi',notes:'Displayed throughout the walk-through window. Updates at 12:15 and 12:25 to drive delegates back to the hall.'},
+
+  // S9 Governors' Investment Showcase
+  {id:'r022',day:'Day 1',session:"Governors' Investment Showcase Panel",time:'12:30',desc:'Lower third — Minister Jumoke Oduwole / Minister of Industry, Trade & Investment, Federal Republic of Nigeria (keynote opener)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Fires as Minister reaches podium for the keynote opener.'},
+  {id:'r023',day:'Day 1',session:"Governors' Investment Showcase Panel",time:'12:30',desc:'Lower third — Zain Asher / Anchor, CNN International (moderator)',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:''},
+  {id:'r024',day:'Day 1',session:"Governors' Investment Showcase Panel",time:'12:30',desc:'8 Governor lower thirds — one per governor, one per state, fires as each governor speaks. Labelled by seat/state in the AV queue.',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:'8 individual files required. Governor names, states and confirmed seat order must be provided to Technical Management before the session.'},
+  {id:'r025',day:'Day 1',session:"Governors' Investment Showcase Panel",time:'12:30',desc:'State investment graphic — state map outline + headline investment statistic — one per state, displayed on side screens while each governor speaks',type:'Data Slide',screen:'Side screens — Plenary Hall',team:'Branding & Signage',notes:'8 individual state graphics required. Investment data approved by each governor\'s team in advance.'},
+
+  // S10 Plenary 1
+  {id:'r026',day:'Day 1',session:"Plenary 1 — Lagos: Africa's Global Gateway",time:'13:30',desc:"Session title graphic — Plenary 1: Lagos: Africa's Global Gateway",type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:''},
+  {id:'r027',day:'Day 1',session:"Plenary 1 — Lagos: Africa's Global Gateway",time:'13:30',desc:'Lower third — His Excellency Mr. Babajide Sanwo-Olu / Governor, Lagos State (keynote opener)',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:'Governor returns from pavilion for keynote. Separate dedicated mic channel from Opening Ceremony.'},
+  {id:'r028',day:'Day 1',session:"Plenary 1 — Lagos: Africa's Global Gateway",time:'13:30',desc:'Lower third — Lord Marland / Chairman, Commonwealth Enterprise & Investment Council (panellist)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r029',day:'Day 1',session:"Plenary 1 — Lagos: Africa's Global Gateway",time:'13:30',desc:'Lower third — Commissioner Folasade Ambrose-Medebem / Commissioner for Commerce, Industry & Cooperatives (panellist)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r030',day:'Day 1',session:"Plenary 1 — Lagos: Africa's Global Gateway",time:'13:30',desc:'Moderator lower third — TBC',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:'Moderator not yet confirmed. Lower third cannot be produced until name and title received.'},
+  {id:'r031',day:'Day 1',session:"Plenary 1 — Lagos: Africa's Global Gateway",time:'13:30',desc:'Additional panellist lower thirds — TBC (number and cast TBC)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Cannot produce until panellists confirmed by Programme.'},
+
+  // S11 Networking Lunch
+  {id:'r032',day:'Day 1',session:'Networking Lunch',time:'14:30',desc:'Day 1 highlights reel — key morning quotes, Forum stats, Lagos photography, speaker moments. On loop in dining hall.',type:'Video / Reel',screen:'Dining hall screens',team:'Media & PR — David / Victor',notes:'Same-day production from morning footage. Target: ready by 14:15 for lunch start.'},
+  {id:'r033',day:'Day 1',session:'Networking Lunch',time:'14:30',desc:'Sponsor logos — rotating loop on dining hall screens',type:'Backdrop',screen:'Dining hall screens',team:'Branding & Signage',notes:'Layered alongside highlights reel.'},
+  {id:'r034',day:'Day 1',session:'Networking Lunch',time:'14:30',desc:'"Afternoon sessions begin 15:30 — Plenary 2 (Technology & Innovation) then Plenary 3 (Unlocking Investment), Main Plenary Hall."',type:'Wayfinding',screen:'Dining hall screens',team:'Technical Management — Temi',notes:'Persistent lower band or static slide. Must be visible throughout lunch.'},
+
+  // S12 Plenary 2 — Technology & Innovation
+  {id:'r035',day:'Day 1',session:'Plenary 2 — Technology & Innovation',time:'15:30',desc:'Session title graphic — Plenary 2: Technology & Innovation',type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:''},
+  {id:'r036',day:'Day 1',session:'Plenary 2 — Technology & Innovation',time:'15:30',desc:'Lower third — Tosin Elorunda / CEO, Moniepoint (keynote)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Fires on podium arrival. Switches to lapel lower third when he moves to panel table.'},
+  {id:'r037',day:'Day 1',session:'Plenary 2 — Technology & Innovation',time:'15:30',desc:'Lagos tech and fintech data — investment metrics, sector graphics, startup ecosystem stats',type:'Data Slide',screen:'Side screens — Plenary Hall',team:'Branding & Signage',notes:'Coordinate data accuracy with Programme team. Centre screen stays on live feed.'},
+  {id:'r038',day:'Day 1',session:'Plenary 2 — Technology & Innovation',time:'15:30',desc:'Lower third — Rolake Akinkugbe (moderator) — full title to be confirmed',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:'Full title to be confirmed by Speaker Management.'},
+  {id:'r039',day:'Day 1',session:'Plenary 2 — Technology & Innovation',time:'15:30',desc:'Panellist lower thirds — TBC (full cast to be confirmed)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Cannot produce until panellists confirmed by Programme.'},
+
+  // S12b Plenary 3 — Unlocking Investment
+  {id:'r040',day:'Day 1',session:'Plenary 3 — Unlocking Investment',time:'16:30',desc:'Session title graphic — Plenary 3: Unlocking Investment',type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:'5-minute stage changeover from Plenary 2 — audience remains seated.'},
+  {id:'r041',day:'Day 1',session:'Plenary 3 — Unlocking Investment',time:'16:30',desc:'Lower third — Aigboje Aig-Imoukhuede OON / Co-Chair, Lagos State Investment Forum 2026 (keynote opener)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r042',day:'Day 1',session:'Plenary 3 — Unlocking Investment',time:'16:30',desc:'Lower third — Temi Marcella / Alcent Capital (moderator)',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:''},
+  {id:'r043',day:'Day 1',session:'Plenary 3 — Unlocking Investment',time:'16:30',desc:'Lower thirds — BII representative / British International Investment; Africa Finance Corporation representative; First Bank panellist; Sterling Bank panellist',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'4 lower thirds required. Individual names and full titles to be confirmed by Speaker Management.'},
+  {id:'r044',day:'Day 1',session:'Plenary 3 — Unlocking Investment',time:'16:30',desc:'Lagos investment data — capital flows, infrastructure pipeline, sector investment figures',type:'Data Slide',screen:'Side screens — Plenary Hall',team:'Branding & Signage',notes:''},
+
+  // S13a Day One Closing Plenary
+  {id:'r045',day:'Day 1',session:'Day One Closing Plenary',time:'17:30',desc:'Lower third — Aigboje Aig-Imoukhuede OON / Co-Chair, Lagos State Investment Forum 2026 (Co-Chair Reflections)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r046',day:'Day 1',session:'Day One Closing Plenary',time:'17:30',desc:'Day 1 highlight reel — 60-second curated best-of: key moments, quotes, sessions. Plays on side screens during Co-Chair reflections.',type:'Video / Reel',screen:'Side screens — Plenary Hall',team:'Media & PR — David / Victor',notes:'Same-day production. Must be compiled and ready by 17:25. Exact cue point confirmed with Ugo.'},
+  {id:'r047',day:'Day 1',session:'Day One Closing Plenary',time:'17:40',desc:'Lower third — His Excellency Mr. Babajide Sanwo-Olu / Governor, Lagos State (Day 1 Closing Remarks)',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:'Governor exits via stage-left directly after remarks.'},
+
+  // S13 Pre-Gala Break
+  {id:'r048',day:'Day 1 / Gala',session:'Pre-Gala Break',time:'17:50',desc:'Gala Dinner holding content — warm Lagos night photography, slow Forum branding. Text overlay: "Gala Dinner — 19:00, Grand Ballroom. Dress Code: [TBC]." Countdown to 19:00.',type:'Holding Slide',screen:'Hotel lobby & corridor screens',team:'Branding & Signage',notes:'Dress code text requires client confirmation before production. Slower visual register than daytime content.'},
+  {id:'r049',day:'Day 1 / Gala',session:'Pre-Gala Break',time:'17:50',desc:'Countdown to 19:00 Gala Dinner — persistent on lobby and corridor screens',type:'Countdown',screen:'Hotel lobby & corridor screens',team:'Technical Management — Temi',notes:''},
+
+  // G1 Cocktail Reception
+  {id:'r050',day:'Gala Dinner',session:'Arrival & Cocktail Reception',time:'19:00',desc:'LSIF Gala branding — gold on navy, slow animations. Loop: "Gala Dinner / Lagos State Investment Forum 2026". Screens function as décor, not signage.',type:'Backdrop',screen:'Pre-function area screens',team:'Branding & Signage',notes:'No statistics, no programme slides. Visual register only. Feels like room design, not an information display.'},
+
+  // G2 Guests Seated
+  {id:'r051',day:'Gala Dinner',session:'Guests Proceed to Ballroom & Seated',time:'19:30',desc:'Gala holding graphic — navy to dark blue gradient, gold Forum wordmark, subtle animated light effect',type:'Holding Slide',screen:'Ballroom screens',team:'Branding & Signage',notes:''},
+  {id:'r052',day:'Gala Dinner',session:'Guests Proceed to Ballroom & Seated',time:'19:30',desc:'Table numbers — brief display on entry to help guests locate seats, then holding graphic returns',type:'Wayfinding',screen:'Ballroom screens',team:'Technical Management — Temi',notes:'Table plan must be finalised before this can be produced.'},
+
+  // G3 Anthem & MC Toast
+  {id:'r053',day:'Gala Dinner',session:'Nigerian National Anthem & MC Welcome Toast',time:'19:35',desc:'Nigerian coat of arms or clean navy/gold graphic during anthem — nothing distracting. All guests standing.',type:'Backdrop',screen:'All ballroom screens',team:'Branding & Signage',notes:'No lower third for the MC. Returns to holding graphic for the toast.'},
+
+  // G4 Spoken Word
+  {id:'r054',day:'Gala Dinner',session:'Spoken Word Performance',time:'19:45',desc:'Abstract Lagos visual accompaniment — ocean, city at night, hands exchanging documents. No text overlays.',type:'Video / Reel',screen:'Ballroom screens',team:'Branding & Signage',notes:'Coordinate visual brief with spoken word artist once confirmed. Brief: Lagos, investment, Africa\'s future.'},
+  {id:'r055',day:'Gala Dinner',session:'Spoken Word Performance',time:'19:45',desc:'Artist lower third — [Name] / Spoken Word Artist — shown briefly at the start of the performance only',type:'Lower Third',screen:'Ballroom screens',team:'Technical Management — Temi',notes:'Artist TBC. Lower third produced once confirmed.'},
+
+  // G5 Berklee
+  {id:'r056',day:'Gala Dinner',session:'Berklee College of Music — Live Performance',time:'19:55',desc:'Live camera feed of ensemble — warm close-ups of instruments and musicians. No titles or lower thirds after the initial introduction.',type:'Live Feed',screen:'Ballroom screens',team:'Technical Management — Temi',notes:'Camera brief: musical, not informational framing. Follow the ensemble — instruments, faces, ensemble wide shots.'},
+
+  // G6 Acapella
+  {id:'r057',day:'Gala Dinner',session:'Acapella Group Performance',time:'20:25',desc:'Live feed — close-ups on faces and mouths. Intimate framing. Reinforces that this is human and unaccompanied.',type:'Live Feed',screen:'Ballroom screens',team:'Technical Management — Temi',notes:'Group TBC. Camera brief: human, warm, tight framing.'},
+
+  // G7 Equilibrist
+  {id:'r058',day:'Gala Dinner',session:'Equilibrist Act',time:'20:37',desc:'Live tracking feed — single tight spotlight follows performer. Camera tracks performance so delegates at the back see the scale.',type:'Live Feed',screen:'Ballroom screens',team:'Technical Management — Temi',notes:'House lights drop to 20% on performer entry. Zero PA during act. Ceiling clearance confirmed at production recce. Critical staging coordination required.'},
+
+  // G8 Solo Instrumentalist
+  {id:'r059',day:'Gala Dinner',session:'Solo Instrumentalist — Closing Performance',time:'20:47',desc:'Live feed — close-up of instrument and performer\'s hands. Warm, slow camera moves throughout the set.',type:'Live Feed',screen:'Ballroom screens',team:'Technical Management — Temi',notes:'Artist TBC (kora or jazz saxophone). If kora: strings, gourd, hands. If saxophone: keys, breath, body.'},
+
+  // G9 Dessert & Close
+  {id:'r060',day:'Gala Dinner',session:'Dessert, Networking & Formal Close',time:'21:20',desc:'Thank you graphic — "Thank you for being part of LSIF 2026 / Day Two begins at 09:00."',type:'Closing Graphic',screen:'Ballroom screens',team:'Branding & Signage',notes:'Appears after MC close. Intentional and quiet — a reminder, not a fanfare.'},
+
+  // ── DAY 2 ─────────────────────────────────────────────────────────────────
+
+  // D1 Arrival & Re-registration
+  {id:'r061',day:'Day 2',session:'Arrival & Light Re-registration',time:'08:30',desc:'Day 1 highlights reel — best moments, key quotes, photography from exhibition and sessions. Transitions to Day 2 agenda as 08:45 approaches.',type:'Video / Reel',screen:'Foyer screens',team:'Media & PR — David / Victor',notes:'Produced overnight from Day 1 footage. Must be ready and loaded before 08:30 Day 2.'},
+  {id:'r062',day:'Day 2',session:'Arrival & Light Re-registration',time:'08:30',desc:'Countdown to 09:00 — corner overlay on foyer screens',type:'Countdown',screen:'Foyer screens',team:'Technical Management — Temi',notes:''},
+
+  // D2 Day 2 Opening
+  {id:'r063',day:'Day 2',session:'Day Two Opening',time:'09:00',desc:'60-second Day 1 highlights reel — plays before speakers take the stage to set the energy for the day',type:'Video / Reel',screen:'All plenary screens',team:'Media & PR — David / Victor',notes:'Same reel as foyer version, played on plenary screens as the Day 2 opener.'},
+  {id:'r064',day:'Day 2',session:'Day Two Opening',time:'09:00',desc:'Lower third — Mrs. Folasade Ambrose-Medebem / Commissioner for Commerce, Industry & Cooperatives',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r065',day:'Day 2',session:'Day Two Opening',time:'09:00',desc:'Lower third — Zain Asher / Anchor, CNN International (co-host for Day 2 opening)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r066',day:'Day 2',session:'Day Two Opening',time:'09:00',desc:'Day 2 agenda slide — full Day 2 running order displayed on side screens during the forward preview portion',type:'Session Title Card',screen:'Side screens — Plenary Hall',team:'Branding & Signage',notes:'Gives delegates a visual map of the full day ahead.'},
+
+  // D3 Plenary 4 — Cities of the Future
+  {id:'r067',day:'Day 2',session:'Plenary 4 — Building the Cities of the Future',time:'09:30',desc:'Session title graphic — Plenary 4: Building the Cities of the Future',type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:''},
+  {id:'r068',day:'Day 2',session:'Plenary 4 — Building the Cities of the Future',time:'09:30',desc:'Lower third — Dr. Sidi Ould Tah / President, African Development Bank Group (keynote). Attendance format (in-person or video) to be confirmed.',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'If video attendance: dedicated screen, remote feed setup, backup connection confirmed 48hrs in advance. Test call 30 mins before session.'},
+  {id:'r069',day:'Day 2',session:'Plenary 4 — Building the Cities of the Future',time:'09:30',desc:'Remote video feed — dedicated screen and clean connection for AfDB President (if attending remotely)',type:'Live Feed',screen:'Dedicated remote screen — Plenary Hall',team:'Technical Management — Temi',notes:'Only required if AfDB President attends remotely. Confirm with Programme. Vision mixer has dedicated input for remote feed.'},
+  {id:'r070',day:'Day 2',session:'Plenary 4 — Building the Cities of the Future',time:'09:30',desc:'Lower third — Deputy Governor Obafemi Hamzat / Deputy Governor, Lagos State (Chair)',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:''},
+  {id:'r071',day:'Day 2',session:'Plenary 4 — Building the Cities of the Future',time:'09:30',desc:'Lower thirds — Segun Ogunsanya / Managing Director & CEO, NSIA; Prof. Akin Abayomi / Commissioner for Health, Lagos State; Adesuwa Ladoja / Lagos Free Zone; Shahzad Athar / Adani Group; Tom Cartledge / CEO, Benoy',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'5 lower thirds. Full titles and bios confirmed by Speaker Management before production.'},
+
+  // D4 Networking Break
+  {id:'r072',day:'Day 2',session:'Networking Break',time:'10:30',desc:'Exhibition and deal room promotions. "Plenary 5 begins at 11:00 — Global Partnerships for Growth." At 10:50: soft call-to-order message.',type:'Wayfinding',screen:'Foyer / exhibition screens',team:'Technical Management — Temi',notes:'Standard break format. Deal room availability displayed.'},
+
+  // D5 Plenary 5 — Global Partnerships
+  {id:'r073',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'Session title graphic — Plenary 5: Global Partnerships for Growth',type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:''},
+  {id:'r074',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'Lower third — Samantha Cohen (fireside chair) — full title TBC',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:'Full title to be confirmed by Speaker Management.'},
+  {id:'r075',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'Lower third — Wamkele Keabetswe Mene / Secretary-General, African Continental Free Trade Area (AfCFTA)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Fireside speaker. Two-shot camera setup for Mene and Cohen.'},
+  {id:'r076',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'AfCFTA trade corridor graphic — continental trade context, on side screens during fireside',type:'Data Slide',screen:'Side screens — Plenary Hall',team:'Branding & Signage',notes:''},
+  {id:'r077',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'Lower third — Zaki Cooper (moderator, panel portion) — full title TBC',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:''},
+  {id:'r078',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'Lower third — HE Jonny Baxter / British High Commissioner to Nigeria',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r079',day:'Day 2',session:'Plenary 5 — Global Partnerships for Growth',time:'11:00',desc:'Additional panellist lower thirds — TBC',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Panellists not yet confirmed. Cannot produce until names received.'},
+
+  // D5b 2nd Networking Break
+  {id:'r080',day:'Day 2',session:'2nd Networking Break & Exhibition Access',time:'12:00',desc:'Exhibition promotions and afternoon agenda. "Plenary 6 — Talent, Creativity and Culture begins at 13:00 in the Main Plenary Hall." Call-to-order message at 12:50.',type:'Wayfinding',screen:'Foyer / exhibition screens',team:'Technical Management — Temi',notes:'60-minute break. Longer than morning break to allow meaningful exhibition engagement.'},
+
+  // D6 Plenary 6 — Culture
+  {id:'r081',day:'Day 2',session:'Plenary 6 — Talent, Creativity and Culture',time:'13:00',desc:'Session title graphic — Plenary 6: Talent, Creativity and Culture',type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:''},
+  {id:'r082',day:'Day 2',session:'Plenary 6 — Talent, Creativity and Culture',time:'13:00',desc:'Lower third — HE Hannatu Musa Musawa / Honourable Minister, Art, Culture, Tourism & Creative Economy, Federal Republic of Nigeria (keynote)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'Full ministerial title. Confirm podium vs. seated preference with her protocol team before event.'},
+  {id:'r083',day:'Day 2',session:'Plenary 6 — Talent, Creativity and Culture',time:'13:00',desc:'Lower third — Rolake Akinkugbe (moderator) — full title to be confirmed',type:'Lower Third',screen:'Main Plenary Hall',team:'Speaker Management — Obehi / Jacqui',notes:''},
+  {id:'r084',day:'Day 2',session:'Plenary 6 — Talent, Creativity and Culture',time:'13:00',desc:'Lower third — Bolanle Austen-Peters / Founder, Terra Kulture (confirmed panellist)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:''},
+  {id:'r085',day:'Day 2',session:'Plenary 6 — Talent, Creativity and Culture',time:'13:00',desc:'Remaining panellist lower thirds — TBC (4 more panellists to be confirmed)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'4 lower thirds outstanding. Cannot produce until names confirmed by Programme.'},
+  {id:'r086',day:'Day 2',session:'Plenary 6 — Talent, Creativity and Culture',time:'13:00',desc:'Cultural sector graphics — Nollywood, fashion, music, art, cultural infrastructure — side screens throughout. Most visually dynamic session on the programme.',type:'Data Slide',screen:'Side screens — Plenary Hall',team:'Branding & Signage',notes:'Coordinate screen content brief directly with Rolake Akinkugbe before the session. Visual language should feel creative, not corporate.'},
+
+  // D6b Plenary 7 — Energy (Breakout A)
+  {id:'r087',day:'Day 2',session:'Plenary 7 — Energy & Sustainability (Breakout A)',time:'14:00',desc:'Session title graphic — Plenary 7: Energy & Sustainability. Displayed in Breakout Room A.',type:'Session Title Card',screen:'Breakout Room A screens',team:'Branding & Signage',notes:'Runs parallel with Masterclass in Breakout B. Fully independent AV setup.'},
+  {id:'r088',day:'Day 2',session:'Plenary 7 — Energy & Sustainability (Breakout A)',time:'14:00',desc:'Lower third — Commissioner Abiodun Ogunleye / Commissioner for Energy & Mineral Resources, Lagos State',type:'Lower Third',screen:'Breakout Room A',team:'Technical Management — Temi',notes:'Dedicated technician from Technical Management assigned to this room.'},
+  {id:'r089',day:'Day 2',session:'Plenary 7 — Energy & Sustainability (Breakout A)',time:'14:00',desc:'Lower third — CANEX / Afreximbank representative (TBC)',type:'Lower Third',screen:'Breakout Room A',team:'Technical Management — Temi',notes:'Identity TBC. Cannot produce until confirmed by Programme.'},
+  {id:'r090',day:'Day 2',session:'Plenary 7 — Energy & Sustainability (Breakout A)',time:'14:00',desc:'Lower third — Rolake Akinkugbe (moderator)',type:'Lower Third',screen:'Breakout Room A',team:'Speaker Management — Obehi / Jacqui',notes:''},
+  {id:'r091',day:'Day 2',session:'Plenary 7 — Energy & Sustainability (Breakout A)',time:'14:00',desc:'Energy sector graphics — Lagos infrastructure pipeline, energy investment data, sector stats',type:'Data Slide',screen:'Breakout Room A side screens',team:'Branding & Signage',notes:''},
+
+  // D6c Masterclass — Culture (Breakout B)
+  {id:'r092',day:'Day 2',session:'Masterclass — Talent, Creativity & Culture (Breakout B)',time:'14:00',desc:'Session title graphic — Masterclass: Talent, Creativity & Culture. Displayed in Breakout Room B.',type:'Session Title Card',screen:'Breakout Room B screens',team:'Branding & Signage',notes:'Smaller, more intimate room. Visual register should feel different from the main hall policy sessions.'},
+  {id:'r093',day:'Day 2',session:'Masterclass — Talent, Creativity & Culture (Breakout B)',time:'14:00',desc:'Lower third — Keke Hammond — full title TBC',type:'Lower Third',screen:'Breakout Room B',team:'Technical Management — Temi',notes:'Full title to be confirmed by Speaker Management.'},
+  {id:'r094',day:'Day 2',session:'Masterclass — Talent, Creativity & Culture (Breakout B)',time:'14:00',desc:'Lower third — Zain Asher / Anchor, CNN International (moderator)',type:'Lower Third',screen:'Breakout Room B',team:'Speaker Management — Obehi / Jacqui',notes:'Separate dedicated technician from Technical Management assigned to Breakout B.'},
+  {id:'r095',day:'Day 2',session:'Masterclass — Talent, Creativity & Culture (Breakout B)',time:'14:00',desc:'Creative economy visual content — intimate, talent-focused. Should feel creative and not corporate.',type:'Backdrop',screen:'Breakout Room B screens',team:'Branding & Signage',notes:'Different visual register from main hall sessions.'},
+
+  // D6d Lagos Fashion Show
+  {id:'r096',day:'Day 2',session:'Lagos Fashion Show',time:'14:45',desc:'Live runway feed — all main hall screens carry the live fashion show. No lower thirds or text overlays throughout.',type:'Live Feed',screen:'All main hall screens',team:'Technical Management — Temi',notes:'Full lighting rig engaged. Camera operators briefed on fashion show coverage. Designer/label TBC.'},
+  {id:'r097',day:'Day 2',session:'Lagos Fashion Show',time:'14:45',desc:'Holding graphic between fashion show close and Closing Session opening',type:'Holding Slide',screen:'All main hall screens',team:'Technical Management — Temi',notes:'Brief transition hold while MC takes the stage for the Closing Session intro.'},
+
+  // D7 Closing Session
+  {id:'r098',day:'Day 2',session:"Closing Session — Communiqué, MoU Signing & Governor's Close",time:'15:00',desc:'MoU signing graphic — names of signing parties and sector of agreement. One graphic fires per signatory pair as they approach the table.',type:'Session Title Card',screen:'All plenary screens',team:'Branding & Signage',notes:'Individual graphic per MoU agreement. Total number of signatories TBC. Plan 2 minutes per signing. Press pool camera on signing table throughout.'},
+  {id:'r099',day:'Day 2',session:"Closing Session — Communiqué, MoU Signing & Governor's Close",time:'15:00',desc:'Lower third — Mr. Babatunde Onigbanjo / Permanent Secretary, Ministry of Commerce, Cooperatives, Trade & Investment, MCCTI (Vote of Thanks)',type:'Lower Third',screen:'Main Plenary Hall',team:'Technical Management — Temi',notes:'2 minutes maximum before Governor\'s close.'},
+  {id:'r100',day:'Day 2',session:"Closing Session — Communiqué, MoU Signing & Governor's Close",time:'15:00',desc:'Lower third — His Excellency Mr. Babajide Sanwo-Olu / Governor, Lagos State (Closing Remarks)',type:'Lower Third',screen:'Main Plenary Hall',team:'Government & VIP Protocol — Obehi',notes:''},
+  {id:'r101',day:'Day 2',session:"Closing Session — Communiqué, MoU Signing & Governor's Close",time:'15:00',desc:'Closing graphic — "Lagos State Investment Forum 2026 / Thank you for investing in Lagos."',type:'Closing Graphic',screen:'All plenary screens',team:'Branding & Signage',notes:'Final image of the Forum. Appears after Governor\'s closing remarks.'},
+
+  // D8 Closing Lunch
+  {id:'r102',day:'Day 2',session:'Closing Networking Lunch & Delegate Departure',time:'15:30',desc:'Closing montage — two days of faces, handshakes, signing moments, performance highlights, aerial Lagos. No text. Pure atmosphere. The last image a delegate sees.',type:'Video / Reel',screen:'Dining hall screens',team:'Media & PR — David / Victor',notes:'Same-day production. Must be compiled and ready by 15:25. Coordinate with Technical Management for load-in.'},
+];
+
+// ── Status management ──────────────────────────────────────────────────────
+const STATUS_CYCLE = ['not-started','in-progress','ready'];
+const STATUS_LABELS = {'not-started':'Not Started','in-progress':'In Progress','ready':'Ready'};
+const STORAGE_KEY = 'lsif_screen_status';
+
+function loadStatuses() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function saveStatuses(s) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch(e) {}
+}
+
+let statuses = loadStatuses();
+
+function getStatus(id) {
+  return statuses[id] || 'not-started';
+}
+
+function cycleStatus(id) {
+  const cur = getStatus(id);
+  const idx = STATUS_CYCLE.indexOf(cur);
+  const next = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
+  statuses[id] = next;
+  saveStatuses(statuses);
+  const chip = document.querySelector('[data-row-id="' + id + '"]');
+  if (chip) {
+    chip.className = 'status-chip ' + next;
+    chip.textContent = STATUS_LABELS[next];
+  }
+  updateStats();
+  applyFilters();
+}
+
+// ── Day chip class ─────────────────────────────────────────────────────────
+function dayClass(day) {
+  if (day === 'Day 2') return 'd2';
+  if (day === 'Gala Dinner') return 'gala';
+  if (day === 'Day 1 / Gala') return 'd1g';
+  return 'd1';
+}
+
+// ── Render rows ────────────────────────────────────────────────────────────
+function renderRows(data) {
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+
+  const noRow = document.createElement('tr');
+  noRow.className = 'no-results';
+  noRow.innerHTML = '<td colspan="9">No assets match your filters.</td>';
+  tbody.appendChild(noRow);
+
+  data.forEach(r => {
+    const st = getStatus(r.id);
+    const tr = document.createElement('tr');
+    tr.dataset.id = r.id;
+    tr.dataset.day = r.day;
+    tr.dataset.type = r.type;
+    tr.dataset.team = r.team;
+    tr.dataset.status = st;
+    tr.dataset.search = [r.session, r.desc, r.team, r.screen, r.notes, r.type].join(' ').toLowerCase();
+
+    tr.innerHTML =
+      '<td class="col-day"><span class="day-chip ' + dayClass(r.day) + '">' + r.day + '</span></td>' +
+      '<td class="col-session">' + r.session + '</td>' +
+      '<td class="col-time">' + r.time + '</td>' +
+      '<td class="col-desc">' + r.desc + '</td>' +
+      '<td class="col-type"><span class="type-badge">' + r.type + '</span></td>' +
+      '<td class="col-screen">' + r.screen + '</td>' +
+      '<td class="col-team">' + r.team + '</td>' +
+      '<td class="col-status"><span class="status-chip ' + st + '" data-row-id="' + r.id + '" onclick="cycleStatus(\'' + r.id + '\')">' + STATUS_LABELS[st] + '</span></td>' +
+      '<td class="col-notes">' + (r.notes || '—') + '</td>';
+
+    tbody.appendChild(tr);
+  });
+}
+
+// ── Sorting ────────────────────────────────────────────────────────────────
+let sortCol = -1;
+let sortDir = 1;
+
+function sortTable(col) {
+  if (sortCol === col) {
+    sortDir *= -1;
+  } else {
+    sortCol = col;
+    sortDir = 1;
+  }
+  const ths = document.querySelectorAll('thead th');
+  ths.forEach((th, i) => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (i === col) th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+  });
+
+  const keys = ['day','session','time','desc','type','screen','team'];
+  const key = keys[col];
+  if (!key) return;
+
+  const sorted = [...currentData].sort((a, b) => {
+    const va = (a[key] || '').toLowerCase();
+    const vb = (b[key] || '').toLowerCase();
+    if (va < vb) return -sortDir;
+    if (va > vb) return sortDir;
+    return 0;
+  });
+
+  currentData = sorted;
+  renderRows(sorted);
+  applyFilters();
+}
+
+// ── Filtering ──────────────────────────────────────────────────────────────
+let currentData = [...rows];
+
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const fDay = document.getElementById('f-day').value;
+  const fType = document.getElementById('f-type').value;
+  const fTeam = document.getElementById('f-team').value;
+  const fStatus = document.getElementById('f-status').value;
+
+  let visible = 0;
+  const trs = document.querySelectorAll('#table-body tr[data-id]');
+  trs.forEach(tr => {
+    const matchQ = !q || tr.dataset.search.includes(q);
+    const matchDay = !fDay || tr.dataset.day === fDay;
+    const matchType = !fType || tr.dataset.type === fType;
+    const matchTeam = !fTeam || tr.dataset.team === fTeam;
+    const st = getStatus(tr.dataset.id);
+    const matchStatus = !fStatus || st === fStatus;
+    tr.dataset.status = st;
+
+    const show = matchQ && matchDay && matchType && matchTeam && matchStatus;
+    tr.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+
+  const noRow = document.querySelector('.no-results');
+  if (noRow) noRow.classList.toggle('visible', visible === 0);
+
+  const rc = document.getElementById('result-count');
+  if (rc) rc.textContent = visible + ' of ' + rows.length + ' assets';
+  updateStats();
+}
+
+function clearFilters() {
+  document.getElementById('search').value = '';
+  document.getElementById('f-day').value = '';
+  document.getElementById('f-type').value = '';
+  document.getElementById('f-team').value = '';
+  document.getElementById('f-status').value = '';
+  applyFilters();
+}
+
+// ── Stats bar ──────────────────────────────────────────────────────────────
+function updateStats() {
+  const total = rows.length;
+  let notStarted = 0, inProgress = 0, ready = 0, tbcCount = 0;
+  rows.forEach(r => {
+    const s = getStatus(r.id);
+    if (s === 'not-started') notStarted++;
+    else if (s === 'in-progress') inProgress++;
+    else if (s === 'ready') ready++;
+    if (r.notes.toLowerCase().includes('tbc') || r.desc.toLowerCase().includes('tbc')) tbcCount++;
+  });
+
+  document.getElementById('stats-bar').innerHTML =
+    '<div class="stat"><span class="stat-num">' + total + '</span><span class="stat-label">total assets</span></div>' +
+    '<div class="stat-div"></div>' +
+    '<div class="stat"><span class="stat-num">' + notStarted + '</span><span class="stat-label">not started</span></div>' +
+    '<div class="stat-div"></div>' +
+    '<div class="stat"><span class="stat-num" style="color:#a16207">' + inProgress + '</span><span class="stat-label">in progress</span></div>' +
+    '<div class="stat-div"></div>' +
+    '<div class="stat"><span class="stat-num" style="color:#166534">' + ready + '</span><span class="stat-label">ready</span></div>' +
+    '<div class="stat-div"></div>' +
+    '<div class="stat"><span class="stat-num" style="color:#b45309">' + tbcCount + '</span><span class="stat-label">awaiting confirmation</span></div>';
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+currentData = [...rows];
+renderRows(currentData);
+updateStats();
+applyFilters();
+</script>
+
+</body>
+</html>
