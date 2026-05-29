@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speaker Programme Brief — LSIF 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#071f10;--gold:#4ade80;--gold-mid:#22c55e;--gold-soft:#dcfce7;
+      --ink:#1a2332;--muted:#64748b;--light:#f8f7f4;--border:#e2ddd6;
+      --white:#ffffff;--red:#b91c1c;--amber:#d97706;
+      --serif:'EB Garamond',Georgia,serif;
+      --sans:'Poppins',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:15px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--sans);color:var(--ink);background:#f0ede7;line-height:1.6}
+
+    /* ── Page wrapper ── */
+    .page{max-width:760px;margin:2rem auto 4rem;background:var(--white);box-shadow:0 2px 20px rgba(0,0,0,.08)}
+
+    /* ── Cover ── */
+    .cover{background:var(--navy);padding:3rem 3rem 2.5rem;position:relative;overflow:hidden}
+    .cover::after{content:'';position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(74,222,128,.08)}
+    .cover-flag{display:flex;align-items:center;gap:.625rem;margin-bottom:2rem}
+    .cover-logo{height:36px;width:auto;filter:brightness(10)}
+    .cover-edition{font-family:var(--sans);font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:500}
+    .cover-label{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.75rem}
+    .cover-title{font-family:var(--serif);font-size:2.2rem;font-weight:500;color:var(--white);line-height:1.2;letter-spacing:-.01em;margin-bottom:.5rem}
+    .cover-sub{font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:2rem;line-height:1.5}
+    .cover-meta{display:flex;gap:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08)}
+    .meta-item{font-size:.72rem}
+    .meta-label{color:rgba(255,255,255,.3);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.2rem}
+    .meta-value{color:var(--white)}
+
+    /* ── Body sections ── */
+    .body{padding:2.5rem 3rem}
+
+    .intro-block{background:var(--light);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;margin-bottom:2.5rem;font-size:.88rem;line-height:1.75;color:var(--ink)}
+    .intro-block strong{font-weight:600}
+
+    /* Section header */
+    .sec-label{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.25rem}
+    .sec-title{font-family:var(--serif);font-size:1.35rem;font-weight:500;color:var(--navy);margin-bottom:.5rem;line-height:1.3}
+    .sec-rule{height:1px;background:var(--border);margin-bottom:1.75rem}
+    .section{margin-bottom:3rem}
+
+    /* Requirements list */
+    .req-list{list-style:none;display:grid;gap:.625rem;margin-bottom:1rem}
+    .req-item{display:flex;align-items:flex-start;gap:.875rem;padding:.75rem 1rem;background:var(--light);font-size:.83rem}
+    .req-num{font-size:.56rem;font-weight:700;color:var(--gold-mid);min-width:1.25rem;padding-top:.1rem;font-family:var(--sans);letter-spacing:.06em}
+    .req-text{line-height:1.5;color:var(--ink)}
+    .req-text strong{font-weight:600}
+
+    /* Day banner */
+    .day-banner{background:var(--navy);padding:.875rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between}
+    .day-banner-title{font-weight:700;font-size:.88rem;color:var(--white);letter-spacing:.01em}
+    .day-banner-date{font-size:.65rem;color:rgba(255,255,255,.35);letter-spacing:.06em}
+
+    /* Session block */
+    .session-block{margin-bottom:2rem}
+    .session-name{font-weight:700;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:.875rem;display:flex;align-items:center;gap:.75rem}
+    .session-name::after{content:'';flex:1;height:1px;background:var(--border)}
+    .session-time{font-size:.7rem;color:var(--muted);font-weight:400;letter-spacing:.02em;text-transform:none}
+
+    /* Speaker card */
+    .speaker{display:flex;align-items:flex-start;gap:1rem;padding:.875rem 0;border-bottom:1px solid var(--border)}
+    .speaker:last-child{border-bottom:none}
+    .speaker-left{flex:1;min-width:0}
+    .speaker-name{font-weight:700;font-size:.92rem;color:var(--navy);margin-bottom:.1rem}
+    .speaker-title{font-size:.78rem;color:var(--muted);line-height:1.4;margin-bottom:.4rem}
+    .speaker-role{display:inline-block;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .5rem;font-weight:600;margin-bottom:.5rem}
+    .role-keynote{background:#fef3c7;color:#b45309}
+    .role-moderator{background:#e0f5f3;color:#0a8e7f}
+    .role-panellist{background:#f0fdf4;color:#166534}
+    .role-chair{background:#eff6ff;color:#1e40af}
+    .role-remarks{background:#f5f3ff;color:#6d28d9}
+    .role-cohost{background:#fdf2f8;color:#9d174d}
+    .speaker-needs{margin-top:.35rem}
+    .needs-label{font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem;font-weight:600}
+    .need-tag{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;color:var(--muted);margin-right:.4rem;margin-bottom:.3rem}
+    .need-dot{width:5px;height:5px;border-radius:50%;background:var(--border);flex-shrink:0}
+    .need-dot.pending{background:var(--amber)}
+    .speaker-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;flex-shrink:0;padding-top:.1rem}
+
+    /* Status badge */
+    .badge{display:inline-block;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:.2rem .55rem}
+    .badge-confirmed{background:var(--gold-soft);color:#166534}
+    .badge-pending{background:#fef9c3;color:#a16207}
+    .badge-tbc{background:#fee2e2;color:#b91c1c}
+    .badge-awaiting{background:#f0f9ff;color:#0369a1}
+
+    /* TBC speaker block */
+    .tbc-speaker{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px dashed var(--border)}
+    .tbc-speaker:last-child{border-bottom:none}
+    .tbc-role-tag{font-size:.64rem;color:var(--muted);flex:1}
+    .tbc-role-tag strong{display:block;font-size:.78rem;color:var(--ink);font-weight:600;margin-bottom:.1rem}
+
+    /* Pending section */
+    .pending-grid{display:grid;gap:1rem}
+    .pending-item{background:var(--light);padding:1rem 1.25rem;border-left:3px solid #fde047}
+    .pending-item-title{font-weight:700;font-size:.85rem;color:var(--navy);margin-bottom:.25rem}
+    .pending-item-desc{font-size:.78rem;color:var(--muted);line-height:1.5}
+    .pending-item-note{font-size:.72rem;color:var(--amber);margin-top:.35rem;font-weight:500}
+
+    /* Deadline block */
+    .deadline-block{background:var(--navy);padding:1.75rem 2rem;margin-top:2.5rem}
+    .deadline-block .sec-title{color:var(--white);margin-bottom:.75rem}
+    .deadline-block .sec-label{color:var(--gold);margin-bottom:.25rem}
+    .deadline-text{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:1.25rem}
+    .deadline-row{display:flex;align-items:flex-start;gap:3rem;flex-wrap:wrap}
+    .deadline-col .col-label{font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.25rem}
+    .deadline-col .col-value{font-size:.85rem;color:var(--white);font-weight:500}
+    .deadline-col .col-sub{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:.1rem}
+
+    /* Footer */
+    .doc-footer{padding:1.5rem 3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.68rem;color:var(--muted)}
+
+    /* Gala banner */
+    .day-banner.gala{background:linear-gradient(to right,#0b1a35,#112244)}
+
+    /* Print */
+    @media print{
+      body{background:white}
+      .page{box-shadow:none;margin:0}
+      .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .day-banner{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .deadline-block{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .speaker{break-inside:avoid}
+    }
+
+    @media(max-width:600px){
+      .body{padding:1.75rem 1.5rem}
+      .cover{padding:2rem 1.5rem 1.75rem}
+      .deadline-block{padding:1.5rem}
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Cover ── -->
+  <div class="cover">
+    <div class="cover-flag">
+      <img src="/invest-lagos-3.0/images/LI-logo.jpeg" alt="Invest Lagos" class="cover-logo" />
+      <span class="cover-edition">Edition 3.0</span>
+    </div>
+    <div class="cover-label">Conference Content Team · Programme Document</div>
+    <div class="cover-title">Speaker Programme Brief</div>
+    <div class="cover-sub">Lagos State Investment Forum 2026 · Eko Hotel &amp; Suites, Victoria Island<br>8–10 June 2026</div>
+    <div class="cover-meta">
+      <div class="meta-item"><span class="meta-label">Prepared by</span><span class="meta-value">Conference Content Team</span></div>
+      <div class="meta-item"><span class="meta-label">Document date</span><span class="meta-value">29 May 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Version</span><span class="meta-value">1.0 — For Committee Review</span></div>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- ── Introduction ── -->
+    <div class="intro-block">
+      This document sets out the confirmed programme speakers for the Lagos State Investment Forum 2026, the information we require from each speaker's team ahead of the event, and the sessions where speaker confirmation remains outstanding.<br><br>
+      We ask the Committee to review the pending items in <strong>Section C</strong> and to share the relevant speaker management files with the Conference Content Team at the earliest opportunity. A consolidated speaker information file — including official biographies, headshots, and confirmed designations — will allow us to complete all production materials on schedule.
+    </div>
+
+    <!-- ── Section A: Requirements ── -->
+    <div class="section">
+      <div class="sec-label">Section A</div>
+      <div class="sec-title">Information Required from All Speaker Teams</div>
+      <div class="sec-rule"></div>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.7">The following items are required for every confirmed speaker on the programme, without exception. Where a speaker's team has already submitted this information, it is noted against their entry in Section B.</p>
+      <ul class="req-list">
+        <li class="req-item"><span class="req-num">01</span><span class="req-text"><strong>Professional headshot</strong> — High-resolution photograph, minimum 2MB, portrait orientation, plain or neutral background preferred. JPEG or PNG format.</span></li>
+        <li class="req-item"><span class="req-num">02</span><span class="req-text"><strong>Official biography</strong> — 150 to 200 words, written in the third person, reflecting the speaker's current role and relevant achievements.</span></li>
+        <li class="req-item"><span class="req-num">03</span><span class="req-text"><strong>Confirmed name, title, and institutional affiliation</strong> — Exactly as it should appear on screen and in the official programme. Any changes to title or designation must be communicated no later than 4 June.</span></li>
+        <li class="req-item"><span class="req-num">04</span><span class="req-text"><strong>Presentation or slide deck</strong> — Where applicable. PowerPoint or PDF format, 16:9 (widescreen). Due no later than <strong>5 June 2026</strong> to allow technical review.</span></li>
+        <li class="req-item"><span class="req-num">05</span><span class="req-text"><strong>Confirmed arrival time and any protocol requirements</strong> — Required for all Ministers, Governors, Heads of Government, and other VIP principals. To be coordinated through the Protocol team.</span></li>
+      </ul>
+    </div>
+
+    <!-- ── Section B: Confirmed Programme ── -->
+    <div class="section">
+      <div class="sec-label">Section B</div>
+      <div class="sec-title">Confirmed Programme — Speaker Entries</div>
+      <div class="sec-rule"></div>
+
+      <!-- DAY 1 -->
+      <div class="day-banner">
+        <span class="day-banner-title">Day One — Conference Programme</span>
+        <span class="day-banner-date">Monday, 8 June 2026</span>
+      </div>
+
+      <!-- Opening Ceremony -->
+      <div class="session-block">
+        <div class="session-name">Official Opening Ceremony <span class="session-time">09:40 – 10:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">His Excellency Asiwaju Bola Ahmed Tinubu, GCFR</div>
+            <div class="speaker-title">President, Federal Republic of Nigeria</div>
+            <span class="speaker-role role-keynote">Presidential Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Confirmed title/designation for screen display</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Protocol team briefing and arrival confirmation</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">His Excellency Mr. Babajide Sanwo-Olu</div>
+            <div class="speaker-title">Governor, Lagos State</div>
+            <span class="speaker-role role-remarks">Opening Remarks</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Arrival time and protocol sequence confirmed</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot (current, 2026)</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Updated biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Lord Marland of Odstock</div>
+            <div class="speaker-title">Chairman, Commonwealth Enterprise &amp; Investment Council (CWEIC)</div>
+            <span class="speaker-role role-remarks">Opening Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Confirmed title for screen display</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Commonwealth Secretary-General</div>
+            <div class="speaker-title">Commonwealth Secretariat</div>
+            <span class="speaker-role role-remarks">Opening Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full name and confirmed title</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-awaiting">Name TBC</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Mrs. Kanayo Awani</div>
+            <div class="speaker-title">President &amp; Group Managing Director, Afreximbank</div>
+            <span class="speaker-role role-remarks">Message of Goodwill</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Confirmed current title</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Wamkele Keabetswe Mene</div>
+            <div class="speaker-title">Secretary-General, African Continental Free Trade Area (AfCFTA)</div>
+            <span class="speaker-role role-remarks">Message of Goodwill</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Visiting Heads of Government</strong>Multiple speakers — names and protocol order to be confirmed by Government Protocol team. Individual requirements will be issued once the full list is confirmed.</div>
+          <span class="badge badge-tbc">Pending List</span>
+        </div>
+      </div>
+
+      <!-- Governors' Panel -->
+      <div class="session-block">
+        <div class="session-name">Governors' Investment Showcase Panel <span class="session-time">12:30 – 13:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Minister Jumoke Oduwole</div>
+            <div class="speaker-title">Honourable Minister of Industry, Trade &amp; Investment, Federal Republic of Nigeria</div>
+            <span class="speaker-role role-keynote">Keynote Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Confirmed ministerial title for screen display</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Any slides or data for the keynote address</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Zain Asher</div>
+            <div class="speaker-title">Anchor, CNN International</div>
+            <span class="speaker-role role-moderator">Moderator</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and short biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Session briefing call to be scheduled</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Eight State Governors</strong>Panel participants — one governor per state. Names, states, and confirmed titles required from the Committee. Each governor requires the standard headshot, biography, and title confirmation listed in Section A.</div>
+          <span class="badge badge-tbc">List Pending</span>
+        </div>
+      </div>
+
+      <!-- Plenary 1 -->
+      <div class="session-block">
+        <div class="session-name">Plenary 1 — Lagos: Africa's Global Gateway <span class="session-time">13:30 – 14:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">His Excellency Mr. Babajide Sanwo-Olu</div>
+            <div class="speaker-title">Governor, Lagos State</div>
+            <span class="speaker-role role-keynote">Keynote Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Any data slides or keynote materials</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Lord Marland of Odstock</div>
+            <div class="speaker-title">Chairman, Commonwealth Enterprise &amp; Investment Council (CWEIC)</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Mrs. Folasade Ambrose-Medebem</div>
+            <div class="speaker-title">Commissioner for Commerce, Industry &amp; Cooperatives, Lagos State</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Session Moderator</strong>To be confirmed. Full name, title, and contact required once identified.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Additional Panellists</strong>Number and identities to be confirmed by the Committee.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+      </div>
+
+      <!-- Plenary 2 -->
+      <div class="session-block">
+        <div class="session-name">Plenary 2 — Technology &amp; Innovation <span class="session-time">15:30 – 16:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Tosin Elorunda</div>
+            <div class="speaker-title">Chief Executive Officer, Moniepoint</div>
+            <span class="speaker-role role-keynote">Keynote Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Any presentation materials</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Rolake Akinkugbe</div>
+            <div class="speaker-title">Moderator — full title to be confirmed</div>
+            <span class="speaker-role role-moderator">Moderator</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full current title and institutional affiliation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Panel — Full Cast</strong>Panel participants to be confirmed by the Committee. Each confirmed panellist requires standard Section A information.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+      </div>
+
+      <!-- Plenary 3 -->
+      <div class="session-block">
+        <div class="session-name">Plenary 3 — Unlocking Investment <span class="session-time">16:30 – 17:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Aigboje Aig-Imoukhuede OON</div>
+            <div class="speaker-title">Co-Chair, Lagos State Investment Forum 2026</div>
+            <span class="speaker-role role-keynote">Keynote Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Any presentation materials</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Temi Marcella</div>
+            <div class="speaker-title">Alcent Capital</div>
+            <span class="speaker-role role-moderator">Moderator</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full title and designation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Panel — BII (British International Investment)</strong>Representative name to be confirmed. Please provide full name, title, and Section A materials.</div>
+          <span class="badge badge-tbc">Name TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Panel — Africa Finance Corporation (AFC)</strong>Representative name to be confirmed.</div>
+          <span class="badge badge-tbc">Name TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Panel — First Bank of Nigeria</strong>Representative name to be confirmed.</div>
+          <span class="badge badge-tbc">Name TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Panel — Sterling Bank</strong>Representative name to be confirmed.</div>
+          <span class="badge badge-tbc">Name TBC</span>
+        </div>
+      </div>
+
+      <!-- Day 1 Closing -->
+      <div class="session-block">
+        <div class="session-name">Day One Closing Plenary <span class="session-time">17:30 – 17:50</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Aigboje Aig-Imoukhuede OON</div>
+            <div class="speaker-title">Co-Chair, Lagos State Investment Forum 2026</div>
+            <span class="speaker-role role-remarks">Co-Chair Reflections — Day One</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">His Excellency Mr. Babajide Sanwo-Olu</div>
+            <div class="speaker-title">Governor, Lagos State</div>
+            <span class="speaker-role role-remarks">Closing Remarks — Day One</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GALA -->
+      <div class="day-banner gala">
+        <span class="day-banner-title">Gala Dinner — Evening Programme</span>
+        <span class="day-banner-date">Monday, 8 June 2026 · 19:00 onwards</span>
+      </div>
+
+      <div class="session-block">
+        <div class="session-name">Evening Programme — Performance Line-up</div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Berklee College of Music Ensemble</div>
+            <div class="speaker-title">Live jazz performance during dinner service</div>
+            <span class="speaker-role role-panellist">Confirmed Act</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Confirmed set list and technical rider</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Ensemble composition and performer names</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Spoken Word Artist</strong>Commissioned piece themed around Lagos, investment, and Africa's future. Maximum 10 minutes. Name and brief to be confirmed.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Acapella Group</strong>Nigerian ensemble. Contemporary arrangements. Name to be confirmed.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Equilibrist / Physical Performance Act</strong>Chair balance and stacking performance. Technical and venue requirements to be confirmed.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Solo Instrumentalist</strong>Closing performance — kora or jazz saxophone. Artist to be confirmed.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+      </div>
+
+      <!-- DAY 2 -->
+      <div class="day-banner">
+        <span class="day-banner-title">Day Two — Conference Programme</span>
+        <span class="day-banner-date">Tuesday, 9 June 2026</span>
+      </div>
+
+      <!-- Day 2 Opening -->
+      <div class="session-block">
+        <div class="session-name">Day Two Opening <span class="session-time">09:00 – 09:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Mrs. Folasade Ambrose-Medebem</div>
+            <div class="speaker-title">Commissioner for Commerce, Industry &amp; Cooperatives, Lagos State</div>
+            <span class="speaker-role role-remarks">Day Two Opening Address</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Zain Asher</div>
+            <div class="speaker-title">Anchor, CNN International</div>
+            <span class="speaker-role role-cohost">Day Two Co-Host</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plenary 4 -->
+      <div class="session-block">
+        <div class="session-name">Plenary 4 — Building the Cities of the Future <span class="session-time">09:30 – 10:30</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Dr. Sidi Ould Tah</div>
+            <div class="speaker-title">President, African Development Bank Group (AfDB)</div>
+            <span class="speaker-role role-keynote">Keynote Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span><strong>Attendance format — in person or by video link. Please confirm urgently.</strong></span>
+              <span class="need-tag"><span class="need-dot pending"></span>Any presentation materials</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Deputy Governor Obafemi Hamzat</div>
+            <div class="speaker-title">Deputy Governor, Lagos State</div>
+            <span class="speaker-role role-chair">Session Chair</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Segun Ogunsanya</div>
+            <div class="speaker-title">Managing Director &amp; Chief Executive, Nigeria Sovereign Investment Authority (NSIA)</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Prof. Akin Abayomi</div>
+            <div class="speaker-title">Commissioner for Health, Lagos State</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Adesuwa Ladoja</div>
+            <div class="speaker-title">Lagos Free Zone</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full title and institutional designation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Shahzad Athar</div>
+            <div class="speaker-title">Adani Group</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full title and designation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Tom Cartledge</div>
+            <div class="speaker-title">Chief Executive Officer, Benoy</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plenary 5 -->
+      <div class="session-block">
+        <div class="session-name">Plenary 5 — Global Partnerships for Growth <span class="session-time">11:00 – 12:00</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Wamkele Keabetswe Mene</div>
+            <div class="speaker-title">Secretary-General, African Continental Free Trade Area (AfCFTA)</div>
+            <span class="speaker-role role-keynote">Fireside Conversation</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography (if not yet submitted from Day 1)</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Samantha Cohen</div>
+            <div class="speaker-title">Title and institutional affiliation to be confirmed</div>
+            <span class="speaker-role role-chair">Fireside Chair</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full current title and affiliation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Zaki Cooper</div>
+            <div class="speaker-title">Title and institutional affiliation to be confirmed</div>
+            <span class="speaker-role role-moderator">Panel Moderator</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full current title and affiliation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">His Excellency Jonny Baxter</div>
+            <div class="speaker-title">British High Commissioner to Nigeria</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Protocol requirements and arrival confirmation</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Additional Panellists</strong>Number and identities to be confirmed by the Committee.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+      </div>
+
+      <!-- Plenary 6 -->
+      <div class="session-block">
+        <div class="session-name">Plenary 6 — Talent, Creativity and Culture <span class="session-time">13:00 – 14:00</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">HE Hannatu Musa Musawa</div>
+            <div class="speaker-title">Honourable Minister for Art, Culture, Tourism &amp; Creative Economy, Federal Republic of Nigeria</div>
+            <span class="speaker-role role-keynote">Keynote Address</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Confirmed ministerial title for screen display</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Protocol requirements and arrival confirmation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Any presentation materials</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Rolake Akinkugbe</div>
+            <div class="speaker-title">Title and institutional affiliation to be confirmed</div>
+            <span class="speaker-role role-moderator">Moderator</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Bolanle Austen-Peters</div>
+            <div class="speaker-title">Founder, Terra Kulture</div>
+            <span class="speaker-role role-panellist">Panellist</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Four Additional Panellists</strong>To be confirmed by the Committee. This is the most visible cultural session of the Forum and the full panel should reflect the depth of Nigeria's creative economy.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+      </div>
+
+      <!-- Plenary 7 + Masterclass -->
+      <div class="session-block">
+        <div class="session-name">Plenary 7 — Energy &amp; Sustainability / Masterclass: Culture <span class="session-time">14:00 – 14:45 · Parallel Sessions</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Commissioner Abiodun Ogunleye</div>
+            <div class="speaker-title">Commissioner for Energy &amp; Mineral Resources, Lagos State</div>
+            <span class="speaker-role role-keynote">Session Opener — Plenary 7</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Rolake Akinkugbe</div>
+            <div class="speaker-title">Moderator — Plenary 7 (Energy &amp; Sustainability)</div>
+            <span class="speaker-role role-moderator">Moderator</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Plenary 7 — CANEX / Afreximbank Panellist</strong>Representative name to be confirmed. Please provide full name, title, and Section A materials.</div>
+          <span class="badge badge-tbc">Name TBC</span>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Keke Hammond</div>
+            <div class="speaker-title">Title and institutional affiliation to be confirmed</div>
+            <span class="speaker-role role-panellist">Masterclass — Talent, Creativity &amp; Culture</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Full title and institutional designation</span>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and biography</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Zain Asher</div>
+            <div class="speaker-title">Anchor, CNN International</div>
+            <span class="speaker-role role-moderator">Masterclass Moderator</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>Additional Masterclass Participants</strong>To be confirmed. This is an intimate format — a small group of high-quality voices on talent and the creative economy.</div>
+          <span class="badge badge-tbc">TBC</span>
+        </div>
+      </div>
+
+      <!-- Day 2 Closing -->
+      <div class="session-block">
+        <div class="session-name">Closing Session — Communiqué, MoU Signing &amp; Governor's Close <span class="session-time">15:00 – 15:15</span></div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">Mr. Babatunde Onigbanjo</div>
+            <div class="speaker-title">Permanent Secretary, Ministry of Commerce, Cooperatives, Trade &amp; Investment (MCCTI)</div>
+            <span class="speaker-role role-remarks">Vote of Thanks</span>
+            <div class="speaker-needs">
+              <div class="needs-label">Outstanding requirements</div>
+              <span class="need-tag"><span class="need-dot pending"></span>Headshot and confirmed designation</span>
+            </div>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="speaker">
+          <div class="speaker-left">
+            <div class="speaker-name">His Excellency Mr. Babajide Sanwo-Olu</div>
+            <div class="speaker-title">Governor, Lagos State</div>
+            <span class="speaker-role role-remarks">Closing Remarks — Day Two</span>
+          </div>
+          <div class="speaker-right">
+            <span class="badge badge-confirmed">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="tbc-speaker">
+          <div class="tbc-role-tag"><strong>MoU Signatories</strong>Full list of signing parties and their institutional affiliations required. Each signatory will be formally acknowledged during the ceremony. Please provide names and designations for each party.</div>
+          <span class="badge badge-tbc">List Pending</span>
+        </div>
+      </div>
+
+    </div><!-- /section B -->
+
+    <!-- ── Section C: Pending ── -->
+    <div class="section">
+      <div class="sec-label">Section C</div>
+      <div class="sec-title">Sessions Awaiting Speaker Confirmation</div>
+      <div class="sec-rule"></div>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.7">The following require urgent attention. Production timelines for speaker introductions and on-screen materials cannot begin until these are resolved.</p>
+      <div class="pending-grid">
+        <div class="pending-item">
+          <div class="pending-item-title">Eight State Governors — Governors' Investment Showcase</div>
+          <div class="pending-item-desc">The full list of participating governors, their states, and confirmed titles is required. Each governor requires a headshot, biography, and state investment highlights for screen display during their contribution.</div>
+          <div class="pending-item-note">Urgency: High — 8 individual preparation files required</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Visiting Heads of Government — Opening Ceremony</div>
+          <div class="pending-item-desc">The full list of attending Heads of Government, their correct titles, and protocol order must be shared with the content and protocol teams. Names cannot be used in any printed or on-screen material until formally confirmed.</div>
+          <div class="pending-item-note">Urgency: High — Protocol order required for ceremony sequencing</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Plenary 1 — Session Moderator</div>
+          <div class="pending-item-desc">The moderator for this session has not yet been confirmed. Once identified, full name, title, and biographical information should be submitted to the Conference Content Team.</div>
+          <div class="pending-item-note">Urgency: Medium — Required for session preparation and moderator briefing</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Plenary 2 — Full Panel</div>
+          <div class="pending-item-desc">The keynote and moderator are confirmed. The full list of panellists is outstanding. Each confirmed panellist requires standard Section A information.</div>
+          <div class="pending-item-note">Urgency: Medium</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Plenary 3 — Institutional Panel Representatives</div>
+          <div class="pending-item-desc">Confirmed: the keynote speaker and moderator. Outstanding: the named representatives from BII (British International Investment), Africa Finance Corporation, First Bank, and Sterling Bank. Please supply full names and titles for each.</div>
+          <div class="pending-item-note">Urgency: Medium — Four individuals required</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Plenary 5 — Additional Panellists</div>
+          <div class="pending-item-desc">The fireside speakers and moderator are confirmed. Additional panel members are outstanding. Please advise on numbers and identities.</div>
+          <div class="pending-item-note">Urgency: Medium</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Plenary 6 — Four Additional Panellists</div>
+          <div class="pending-item-desc">Three speakers are confirmed for this session. Four additional panellist positions are outstanding. This is the programme's flagship culture session and the full cast should be confirmed as a priority.</div>
+          <div class="pending-item-note">Urgency: Medium-High — Cultural session identity depends on the confirmed cast</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Dr. Sidi Ould Tah — Attendance Format (Plenary 4)</div>
+          <div class="pending-item-desc">Dr. Sidi Ould Tah is confirmed as the Plenary 4 keynote speaker. The production team requires urgent confirmation of whether he will attend in person or by video link. The two formats require significantly different technical preparation.</div>
+          <div class="pending-item-note">Urgency: High — Technical preparation cannot begin until this is confirmed</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">Gala Dinner Performance Line-up</div>
+          <div class="pending-item-desc">Beyond the Berklee College of Music ensemble, four performance acts are outstanding: spoken word artist, acapella group, physical performance act, and solo instrumentalist. Each requires a technical rider and advance communication with the production team.</div>
+          <div class="pending-item-note">Urgency: High — All sound checks must be completed before 18:30 on 8 June</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-item-title">MoU Signatories — Closing Ceremony</div>
+          <div class="pending-item-desc">The full list of parties signing Memoranda of Understanding at the closing ceremony is required, including the names of all signatories and their institutional affiliations. Each agreement will be formally acknowledged during the ceremony.</div>
+          <div class="pending-item-note">Urgency: Medium — Required for ceremony scripting and materials preparation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Deadline block ── -->
+    <div class="deadline-block">
+      <div class="sec-label" style="color:var(--gold);margin-bottom:.25rem">Section D</div>
+      <div class="sec-title" style="color:var(--white);margin-bottom:.75rem">Submission &amp; Contact</div>
+      <div class="deadline-text">
+        To keep production on schedule, we ask the Committee to share your speaker management file directly with the Conference Content Team. This should include all confirmed speaker details — headshots, biographies, official titles, and any relevant protocol notes — in a single consolidated submission. Individual items may then be followed up as needed.<br><br>
+        For all speaker communications, presentation submissions, and programme updates, please direct correspondence to the team contacts below.
+      </div>
+      <div class="deadline-row">
+        <div class="deadline-col">
+          <div class="col-label">Information submission deadline</div>
+          <div class="col-value">Thursday, 4 June 2026</div>
+          <div class="col-sub">For all biographies, headshots, and title confirmations</div>
+        </div>
+        <div class="deadline-col">
+          <div class="col-label">Presentation slides deadline</div>
+          <div class="col-value">Thursday, 5 June 2026</div>
+          <div class="col-sub">PowerPoint or PDF · 16:9 · delivered to the content team</div>
+        </div>
+        <div class="deadline-col">
+          <div class="col-label">Content Team Lead</div>
+          <div class="col-value">Ugo Rennaiye</div>
+          <div class="col-sub">Conference Content Team</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="doc-footer">
+    <span>Lagos State Investment Forum 2026 · Speaker Programme Brief · v1.0</span>
+    <span>Conference Content Team · Confidential</span>
+  </div>
+
+</div>
+</body>
+</html>
