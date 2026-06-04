@@ -30,9 +30,8 @@ export type BriefingSession = {
   moderatorQuestions: string[]
 }
 
-// Source: Invest_Lagos_3_0_Programme 200526.pdf (20 May 2026 version)
-// Last updated: 23 May 2026
-// Day One Closing Plenary moved to 17:30 (production decision — avoids Plenary 3 overlap)
+// Source: Invest_Lagos_3_0_Programme 020626 MG new.docx.pdf (2 June 2026 version)
+// Last updated: 4 June 2026
 
 export const SESSIONS: BriefingSession[] = [
 
@@ -44,7 +43,7 @@ export const SESSIONS: BriefingSession[] = [
 
   {id:1,day:1,order:1,startTime:'09:30',duration:10,title:'Cultural Performance',type:'performance',
    speakers:['TBC — Cultural Performer'],moderator:'',
-   flags:[{kind:'warn',text:'Performer TBC'}],
+   flags:[{kind:'warn',text:'Performer TBC'},{kind:'ok',text:'MC confirmed for Opening Ceremony: Ms. Mojibade Sosanya'}],
    overview:{venue:'Main Plenary Hall — Stage',format:'Live Performance',config:'Open stage, spotlight, performer mic',objective:'Set the cultural tone for the Opening Ceremony and welcome guests as they are seated.'},
    avCues:[
      {type:'av',label:'Lighting',text:'Warm amber wash. Single follow-spot on performer. House lights at 30%.'},
@@ -207,7 +206,7 @@ export const SESSIONS: BriefingSession[] = [
    mcDirection:'Full stop after "please rise." Wait for the room to stand and for full applause. Do not continue speaking until President reaches the podium.',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:9,day:1,order:9,startTime:'11:30',duration:60,title:"Governors' Walk-through Pavilion",type:'other',
+  {id:9,day:1,order:9,startTime:'12:30',duration:60,title:"Governors' Pavilion Walk-through",type:'other',
    speakers:['President of Nigeria · Governor Sanwo-Olu · Selected VIP Guests'],moderator:'',
    flags:[{kind:'warn',text:'Tour route, guide and VIP list TBC'},{kind:'info',text:'Previously titled "Official Opening of Pavilions & Exhibition" — renamed in updated programme'}],
    overview:{venue:'Exhibition Pavilion & Lobby',format:'Guided VIP tour — President and Governor lead, delegates observe',config:'No stage. Roaming mic for guide. Photography team in position. Refreshments served.',objective:'The President and Governor of Lagos State, accompanied by selected VIP Guests, tour the pavilion. Delegates are invited to observe — this is a VIP-led moment, not open floor time.'},
@@ -223,16 +222,16 @@ export const SESSIONS: BriefingSession[] = [
      {slot:'Pavilion Screens',type:'title',title:'WELCOME TO THE EXHIBITION',sub:'Delegates are warmly invited to observe the Governor\'s tour · Refreshments are served'},
      {slot:'Note',type:'note',text:'No speaker lower thirds required. Focus on wayfinding and branding across all lobby and pavilion screens.'}
    ],
-   mcScript:'Distinguished guests, the President and Governor of Lagos State will now lead a guided tour of our Pavilion and Exhibition. Delegates are warmly invited to observe. Refreshments are being served in the lobby. We reconvene in the Plenary Hall at 12:30.',
+   mcScript:'Distinguished guests, the President and Governor of Lagos State will now lead a guided tour of our Pavilion and Exhibition. Delegates are warmly invited to observe. Refreshments are being served in the lobby. We reconvene in the Plenary Hall at 13:30.',
    mcDirection:'Deliver before VIP party departs for pavilion. Speak clearly — some guests may already be moving.',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:10,day:1,order:10,startTime:'12:30',duration:60,title:"Panel 1 — Governors' Investment Showcase",type:'panel',
-   speakers:['Dr. Jumoke Oduwole — Hon. Minister of Trade & Investment (Keynote)','Participating State Governors — TBC (confirmed list pending from client)'],
-   moderator:'Zain Asher — CNN',
+  {id:10,day:1,order:10,startTime:'11:30',duration:60,title:"Panel 1 — Governors' Investment Showcase",type:'panel',
+   speakers:['Participating State Governors — TBC (confirmed list pending from client)'],
+   moderator:'',
    flags:[
      {kind:'warn',text:'Governors\' confirmed list TBC — needed for MC script and lower thirds'},
-     {kind:'info',text:'Change: Dr. Jumoke Oduwole now delivers keynote address (not chair). Zain Asher CNN confirmed as moderator.'},
+     {kind:'info',text:'No moderator listed in 2 June 2026 programme. Session is self-facilitated. Dr. Jumoke Oduwole moved to Plenary 1 (Opening Remarks).'},
      {kind:'warn',text:'Speaking order and seating by protocol rank — confirm with client before event day'}
    ],
    overview:{venue:'Main Plenary Hall — Panel Stage',format:'Keynote address + Governors\' investment pitches moderated by Zain Asher',config:'Panel table. Name placards. Water on table. Governors in holding room 15 min before.',objective:'State Governors present targeted investment opportunities to investors, DFIs and private sector decision-makers. Format designed to maximise deal-ready engagement.'},
@@ -240,46 +239,46 @@ export const SESSIONS: BriefingSession[] = [
      {type:'av',label:'Slides',text:"Session title: \"PANEL 1 — GOVERNORS' INVESTMENT SHOWCASE\". Keynote: Dr. Jumoke Oduwole lower third. Individual Governor lower thirds as each pitches."},
      {type:'av',label:'Individual Lower Thirds',text:'Switch to individual lower third for each governor as they speak. Pre-load all confirmed governors in protocol order.'},
      {type:'av',label:'Audio',text:'Panel table mics — one per governor + moderator. Keynote speaker at podium mic.'},
-     {type:'stage',label:'Setup',text:'Governors in holding room 15 minutes before session. Name placards in protocol order. Zain Asher to be briefed on format and timing before session.'},
+     {type:'stage',label:'Setup',text:'Governors in holding room 15 minutes before session. Name placards in protocol order. Session self-facilitated — confirm format with client (chair or open pitch format).'},
      {type:'warn',label:'Critical',text:'Confirmed governor list required from client ASAP — MC script, lower thirds, name placards and seating order all depend on it.'}
    ],
    screenContent:[
-     {slot:'Session Opening Slide',type:'title',title:"PANEL 1 — GOVERNORS' INVESTMENT SHOWCASE",sub:'Day 1 · 12:30 · Main Plenary Hall'},
-     {slot:'Keynote Lower Third',type:'lt',name:'Dr. Jumoke Oduwole',role:'Keynote Address · Hon. Minister of Trade & Investment',org:'Federal Republic of Nigeria'},
-     {slot:'Moderator Lower Third',type:'lt',name:'Zain Asher',role:'Moderator',org:'CNN'},
+     {slot:'Session Opening Slide',type:'title',title:"PANEL 1 — GOVERNORS' INVESTMENT SHOWCASE",sub:'Day 1 · 11:30 · Main Plenary Hall'},
+     {slot:'Session Subtitle',type:'note',text:'The Nigerian Economy and Opportunities for Sub-national Economic Acceleration'},
      {slot:'Governor Lower Third — Template',type:'lt',name:'H.E. [Governor Name]',role:'Executive Governor',org:'[State] State, Federal Republic of Nigeria'},
      {slot:'Note',type:'note',text:'Pre-load individual governor lower thirds once confirmed list received from client. Seating order from protocol team determines lower third sequence.'}
    ],
-   mcScript:'Ladies and gentlemen, we now move to Panel One — the Governors\' Investment Showcase. This high-visibility session brings together State Governors to present targeted investment opportunities to our distinguished audience. We begin with a Keynote Address from the Honourable Minister of Trade and Investment — Dr. Jumoke Oduwole. This session is moderated by CNN\'s Zain Asher.',
-   mcDirection:'Allow governors to be seated before MC intro. Dr. Oduwole introduced for keynote first, then Zain Asher takes over as moderator.',
-   moderatorNotes:"Each Governor delivers a focused 5–6 minute pitch on their state's investment opportunities. Zain Asher manages time strictly — visible signal agreed with Stage Manager. Sequence: Keynote by Dr. Oduwole → Governor pitches in protocol order → Q&A at moderator's discretion.",
-   moderatorQuestions:['[Governor]: What is the single most investable sector in your state right now, and what are you offering investors?','[Follow-up]: What specific barrier has your state removed in the last 12 months that was previously blocking investment?','[General to room]: Which of your states is best positioned to partner with Commonwealth investors on a ready-to-go project?']},
+   mcScript:'Ladies and gentlemen, we now move to Panel One — the Governors\' Investment Showcase: The Nigerian Economy and Opportunities for Sub-national Economic Acceleration. This high-visibility session brings together State Governors to present targeted investment opportunities to our distinguished audience.',
+   mcDirection:'Allow all governors to be seated before MC intro. Confirm session facilitation format with client before event day.',
+   moderatorNotes:'',
+   moderatorQuestions:['[Governor]: What is the single most investable sector in your state right now, and what are you offering investors?','[Follow-up]: What specific barrier has your state removed in the last 12 months that was previously blocking investment?']},
 
   {id:11,day:1,order:11,startTime:'13:30',duration:60,title:"Plenary 1 — Lagos: Africa's Global Gateway",type:'panel',
-   speakers:['Mr. Babajide Olusola Sanwo-Olu — Governor, Lagos State (Keynote)','Mrs. Folashade Ambrose-Medebem HC — Commissioner, MCCTI (Panellist)','Lord Marland — Chair, CWEIC (Panellist)'],
-   moderator:'TBC',
+   speakers:['Her Excellency Dr. Jumoke Oduwole — Hon. Minister for Trade & Investment (Opening Remarks)','Mrs. Folashade Ambrose-Medebem, HC — Commissioner, MCCTI','Engr. Jani Ibrahim — President, NACCIMA','Princess Zahrah Mohammed Audu — Director General, PEBEC','Mr. Yann Gilbert — President, European Business Chamber, Nigeria'],
+   moderator:'Mrs. Rolake Akinkugbe-Filani',
    flags:[
-     {kind:'info',text:'Governor Sanwo-Olu gives keynote address to open this plenary.'},
-     {kind:'info',text:'Change: Commissioner Ambrose moves from moderator to panellist. Lord Marland also panellist. No named moderator in updated programme — confirm with client.'},
-     {kind:'warn',text:'Moderator not named in updated programme — awaiting confirmation'}
+     {kind:'ok',text:'Opening Remarks confirmed: Her Excellency Dr. Jumoke Oduwole, Hon. Minister for Trade & Investment'},
+     {kind:'ok',text:'Moderator confirmed: Mrs. Rolake Akinkugbe-Filani'},
+     {kind:'info',text:'Panel: Ambrose-Medebem/MCCTI, Jani Ibrahim/NACCIMA, Princess Zahrah/PEBEC, Yann Gilbert/European Business Chamber Nigeria'}
    ],
-   overview:{venue:'Main Plenary Hall — Panel Stage',format:'Governor\'s keynote address + panel discussion',config:'Panel table: Governor keynotes at podium, then joins Commissioner Ambrose and Lord Marland on panel.',objective:"Position Lagos as Africa's primary investment gateway. Governor sets the strategic tone, panel examines the structural conditions that make Lagos uniquely capable of absorbing large-scale capital."},
+   overview:{venue:'Main Plenary Hall — Panel Stage',format:'Opening Remarks + panel discussion',config:'Panel table for 5. Opening Remarks at podium, then Dr. Oduwole joins panel. Moderator: Rolake Akinkugbe-Filani.',objective:"Position Lagos as Africa's primary investment gateway for trade and investment. Minister Oduwole opens with the federal trade and investment policy framing; panellists examine structural conditions and enabling environment for large-scale capital."},
    avCues:[
      {type:'av',label:'Opening Slide',text:"\"PLENARY 1: LAGOS — AFRICA'S GLOBAL GATEWAY\". Session branding."},
-     {type:'av',label:'Keynote transition',text:"Governor's lower third for keynote opener. Transition to full panel once he joins the table."},
-     {type:'av',label:'Audio',text:"Governor at podium mic for keynote — switch to panel mic when he joins the table. 3 panel mics total."},
-     {type:'stage',label:'Setup',text:"Panel: Commissioner Ambrose + Lord Marland seated before Governor's keynote begins. Governor speaks at podium then joins panel. His seat is reserved at panel table."},
-     {type:'warn',label:'Moderator',text:'No moderator named in current programme. Confirm with client whether a moderator is being added or if panel self-moderates with guidance from Commissioner Ambrose.'}
+     {type:'av',label:'Opening Remarks',text:"Dr. Jumoke Oduwole at podium — lower third: 'Hon. Minister for Trade & Investment, Federal Republic of Nigeria'. Transition to panel table once she joins."},
+     {type:'av',label:'Audio',text:"Podium mic for Opening Remarks. Switch to panel mic when Dr. Oduwole joins the table. 5 panel mics + moderator mic."},
+     {type:'stage',label:'Setup',text:'Full panel seated before session begins. Dr. Oduwole delivers Opening Remarks from podium, then joins panel table. Rolake Akinkugbe-Filani seated as moderator.'},
+     {type:'av',label:'Lower Thirds',text:'Pre-load all 5 panellist lower thirds. Rotate as each panellist speaks. Moderator lower third on entry.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 1',sub:"Lagos: Africa's Global Gateway"},
-     {slot:'Keynote Opener',type:'lt',name:'Mr. Babajide Olusola Sanwo-Olu',role:'Executive Governor — Opening Keynote',org:'Lagos State'},
-     {slot:'Panel Lower Thirds',type:'note',text:'Rotate through each panellist as they speak:\n· Mr. Babajide Olusola Sanwo-Olu — Executive Governor, Lagos State\n· Mrs. Folashade Ambrose-Medebem HC — Commissioner, MCCTI, Lagos State\n· Lord Marland — Chair, CWEIC'}
+     {slot:'Opening Remarks',type:'lt',name:'Her Excellency Dr. Jumoke Oduwole',role:'Opening Remarks · Hon. Minister for Trade & Investment',org:'Federal Republic of Nigeria'},
+     {slot:'Moderator Lower Third',type:'lt',name:'Mrs. Rolake Akinkugbe-Filani',role:'Moderator',org:'EnergyInc Advisors'},
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate through each panellist as they speak:\n· Mrs. Folashade Ambrose-Medebem, HC — Commissioner, MCCTI, Lagos State\n· Engr. Jani Ibrahim — President, NACCIMA\n· Princess Zahrah Mohammed Audu — Director General, PEBEC\n· Mr. Yann Gilbert — President, European Business Chamber, Nigeria'}
    ],
-   mcScript:"We now move to our first Plenary — Lagos: Africa's Global Gateway. We begin with an Opening Keynote from the Executive Governor of Lagos State, Mr. Babajide Sanwo-Olu.",
-   mcDirection:'Governor returns to stage — alert him 5 minutes before session start. Confirm panel is fully seated before MC begins. Moderator intro to follow once confirmed.',
-   moderatorNotes:"Session objective: position Lagos as Africa's primary investment gateway. 60 minutes: ~10 min keynote → 35 min panel → 15 min Q&A.",
-   moderatorQuestions:["What makes Lagos uniquely capable of absorbing large-scale capital compared to other African cities?","How does Nigeria's current policy environment affect investor confidence — and what has changed in the past 2 years?","Which sector offers the fastest time-to-return for an investor entering Lagos today?","What is the single biggest barrier for Commonwealth investors entering Lagos, and who is responsible for removing it?"]},
+   mcScript:"We now move to Plenary One — Lagos: Africa's Global Gateway. We begin with Opening Remarks from the Honourable Minister for Trade and Investment — Her Excellency Dr. Jumoke Oduwole. This session is moderated by Mrs. Rolake Akinkugbe-Filani.",
+   mcDirection:'Confirm full panel is seated before MC begins. Dr. Oduwole delivers Opening Remarks from podium, then joins the panel table. Rolake Akinkugbe-Filani takes over as moderator.',
+   moderatorNotes:"Session objective: position Lagos as Africa's primary investment gateway for trade and investment. 60 minutes: ~10 min Opening Remarks (Dr. Oduwole) → 35 min panel discussion → 15 min Q&A.",
+   moderatorQuestions:["Minister Oduwole — what is the single federal policy change that would most immediately accelerate private investment into Lagos?","What does Lagos offer Commonwealth and international investors that no other African city can match right now?","How is PEBEC's enabling business environment work translating into measurable outcomes for investors on the ground?","What is the biggest structural barrier to investment that remains — and who is responsible for removing it?"]},
 
   {id:12,day:1,order:12,startTime:'14:30',duration:60,title:'Networking Lunch',type:'break',
    speakers:[''],moderator:'',
@@ -292,7 +291,7 @@ export const SESSIONS: BriefingSession[] = [
      {type:'warn',label:'Breakout Rooms',text:'Sectoral Working Lunches — confirm rooms, hosts, and attendee lists with client.'}
    ],
    screenContent:[
-     {slot:'Lunch Slide',type:'title',title:'NETWORKING LUNCH',sub:'Please reconvene at 15:30 · Plenary 2 — Technology & Innovation in Main Hall'},
+     {slot:'Lunch Slide',type:'title',title:'NETWORKING LUNCH',sub:'Please reconvene at 15:30 · Plenary 2 — The Future of Technology & Innovation in Main Hall'},
      {slot:'Note',type:'note',text:'Plenaries 2 and 3 are now sequential in the main plenary hall. No breakout rooms for afternoon sessions. Update directional signage accordingly.'}
    ],
    mcScript:'Ladies and gentlemen, we now break for Networking Lunch. Invitation-Only Sectoral Working Lunches are running in parallel — check your delegate pack for room assignments. We reconvene at 15:30 for Plenary Two in the Main Hall.',
@@ -300,104 +299,108 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:13,day:1,order:13,startTime:'15:30',duration:60,title:'Plenary 2 — The Future of Technology & Innovation',type:'panel',
-   speakers:['Mr. Tosin Elorunda — CEO, Moniepoint MFB (Keynote)','Mr. Olugbenga Ayoola — CEO, Flutterwave','Mr. Tunbosun Alake — Honourable Commissioner, Ministry of Innovation, Science & Technology, Lagos State','Lord Christopher Geidt, Baron Geidt','Chief Executive Officer, RusselSmith (name TBC)','Mr. Mitchell Elegbe — Founder and Group CEO, Interswitch'],
-   moderator:'Ms. Rolake Akinkugbe',
+   speakers:['Mr. Tosin Eniolorunda — Chief Executive Officer, Moniepoint MFB (Opening Remarks)','Mr. Olugbenga Agboola — Chief Executive Officer, Flutterwave','Mr. Tunbosun Alake — Honourable Commissioner, Ministry of Innovation, Science & Technology, Lagos State','Lord Geidt — Director, Burstock','Mr. Kayode Adeleke — Chief Executive Officer, Arridex','Mrs. Olatomiwa Williams — Chief Growth & AI Officer (Middle East & Africa), Microsoft'],
+   moderator:'Mr. Zaki Cooper',
    flags:[
-     {kind:'warn',text:'CEO RusselSmith name TBC — confirm with client'},
-     {kind:'info',text:'Moderator name spelled "Akikugbe" in 3 places in the PDF and "Akinkugbe" in 1 — confirm correct spelling with client'},
-     {kind:'info',text:'Change: Elon Musk keynote format removed entirely. Session is now main hall plenary, not breakout. Tosin Elorunda confirmed as keynote.'}
+     {kind:'ok',text:'Moderator: Mr. Zaki Cooper (updated from Rolake Akinkugbe-Filani in 2 June 2026 programme)'},
+     {kind:'info',text:'Kayode Adeleke now listed as CEO of Arridex (not RusselSmith). Update name placard and lower third.'},
+     {kind:'info',text:'Lord Geidt now listed as Director, Burstock (not Baron Geidt). Mitchell Elegbe moved to Plenary 3. Olatomiwa Williams/Microsoft added.'}
    ],
    overview:{venue:'Main Plenary Hall',format:'Keynote address + panel discussion',config:'Panel table: 6 panellists + keynote at podium, then joins panel. Main hall — single track.',objective:'Explore how AI, digital infrastructure and fintech are shaping the next generation of African enterprise. Identify talent, regulatory and capital conditions needed to scale Lagos\'s technology sector.'},
    avCues:[
      {type:'av',label:'Opening Slide',text:'"PLENARY 2: THE FUTURE OF TECHNOLOGY & INNOVATION"'},
-     {type:'av',label:'Keynote',text:'Tosin Elorunda keynote: podium lower third. Transition to panel table after keynote.'},
+     {type:'av',label:'Keynote',text:'Tosin Eniolorunda keynote: podium lower third. Transition to panel table after keynote.'},
      {type:'av',label:'Audio',text:'6 panel mics + moderator mic. Keynote at podium mic then panel mic.'},
      {type:'stage',label:'Stage',text:'Main plenary hall. Panel table for 7 (6 panellists + moderator). No breakout room needed.'},
-     {type:'warn',label:'Name TBC',text:'CEO RusselSmith name not in programme — request from client for lower third and name placard.'}
+     {type:'av',label:'Lower Thirds',text:'Kayode Adeleke: CEO, Arridex. Lord Geidt: Director, Burstock. Olatomiwa Williams: Chief Growth & AI Officer (MEA), Microsoft. Pre-load all before session.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 2',sub:'The Future of Technology & Innovation'},
-     {slot:'Keynote Lower Third',type:'lt',name:'Mr. Tosin Elorunda',role:'CEO — Opening Keynote',org:'Moniepoint MFB'},
-     {slot:'Moderator Lower Third',type:'lt',name:'Ms. Rolake Akinkugbe',role:'Moderator',org:''},
-     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Mr. Olugbenga Ayoola — CEO, Flutterwave\n· Mr. Tunbosun Alake — Commissioner, Ministry of Innovation Science & Technology, Lagos State\n· Lord Christopher Geidt — Baron Geidt\n· CEO, RusselSmith (name TBC)\n· Mr. Mitchell Elegbe — Founder and Group CEO, Interswitch'}
+     {slot:'Opening Remarks Lower Third',type:'lt',name:'Mr. Tosin Eniolorunda',role:'Opening Remarks · Chief Executive Officer',org:'Moniepoint MFB'},
+     {slot:'Moderator Lower Third',type:'lt',name:'Mr. Zaki Cooper',role:'Moderator',org:''},
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Mr. Olugbenga Agboola — CEO, Flutterwave\n· Mr. Tunbosun Alake — Commissioner, Ministry of Innovation, Science & Technology, Lagos State\n· Lord Geidt — Director, Burstock\n· Mr. Kayode Adeleke — CEO, Arridex\n· Mrs. Olatomiwa Williams — Chief Growth & AI Officer (MEA), Microsoft'}
    ],
-   mcScript:'We now move to Plenary Two — The Future of Technology and Innovation. This session is moderated by Rolake Akinkugbe. We begin with a Keynote Address from the CEO of Moniepoint MFB — Mr. Tosin Elorunda.',
-   mcDirection:'Note spelling of moderator name for pronunciation — confirm with client. Plenary is now main hall, single track (no longer a breakout).',
+   mcScript:'We now move to Plenary Two — The Future of Technology and Innovation. This session is moderated by Mr. Zaki Cooper. We begin with Opening Remarks from the Chief Executive Officer of Moniepoint — Mr. Tosin Eniolorunda.',
+   mcDirection:'Pronunciation: En-io-lo-run-da. Session is main hall, single track.',
    moderatorNotes:'Session objective: explore AI, digital infrastructure and fintech as drivers of inclusive growth in Lagos. Anchor in what investors need to hear — not what tech founders want to say.',
    moderatorQuestions:["What is the single infrastructure investment that would most accelerate Lagos's tech sector in the next 5 years?","Fintech has scaled — what's the next wave, and who is positioned to lead it from Lagos?","How does Nigeria's regulatory environment compare to Kenya and South Africa for international tech investors today?","What role does AI specifically play in the next phase of growth for Lagos-based businesses?"]},
 
   {id:14,day:1,order:14,startTime:'16:30',duration:60,title:'Plenary 3 — Unlocking Investment',type:'panel',
-   speakers:['Mr. Aig Imoukhuede — Co-Chair, Lagos Finance & Investment Council (LFIC) (Keynote)','Mr. Adeola Ukoha — British International Investment','Mr. Sameh Shenouda — Executive Director & Chief Investment Officer, Africa Finance Corporation','Mr. Olusegun Alebiosu — CEO, First Bank of Nigeria','Mr. Abubakar Suleiman — Managing Director/CEO, Sterling Bank'],
-   moderator:'Temi Marcella — MD, Alcent Capital',
+   speakers:['Mr. Abubakar Suleiman — Chief Executive Officer, Sterling Bank (Opening Remarks)','Ms. Adeola Ukhola — Country Manager, British International Investment','Mr. Banji Fehintola — Executive Board Member and Executive Director, Financial Services, Africa Finance Corporation','Mr. Olusegun Alebiosu — Chief Executive Officer, First Bank of Nigeria','Mr. Mitchell Elegbe — Founder and Group Chief Executive Officer, Interswitch'],
+   moderator:'Temi Marcella — Managing Director, Alcent Capital',
    flags:[
-     {kind:'info',text:'Change: Session is now main hall plenary (not Breakout B). Start time 16:30 (was parallel with Plenary 2 at 15:30).'},
-     {kind:'info',text:'Change: Aig Imoukhuede now gives keynote address. Temi Marcella (MD, Alcent Capital) confirmed as moderator.'},
-     {kind:'warn',text:'Aig Imoukhuede moves directly from Plenary 3 keynote to Day One Closing Plenary at 17:30 — brief him on the sequence.'}
+     {kind:'info',text:'Opening Remarks: Mr. Abubakar Suleiman, CEO Sterling Bank (moved from panellist to Opening Remarks).'},
+     {kind:'info',text:'Mitchell Elegbe moves here from Plenary 2. Aig Imoukhuede no longer keynotes Plenary 3 — he appears only at Closing Plenary.'},
+     {kind:'ok',text:'Moderator confirmed: Temi Marcella, Managing Director, Alcent Capital.'}
    ],
    overview:{venue:'Main Plenary Hall',format:'Keynote address + panel discussion',config:'Panel table: 4 panellists + keynote at podium, then joins panel. Single track, main hall.',objective:'Examine the mechanics of capital deployment: blended finance, DFI co-investment, and the conditions under which commercial capital follows public commitment. Address barriers to financial close on large infrastructure transactions in Lagos.'},
    avCues:[
      {type:'av',label:'Opening Slide',text:'"PLENARY 3: UNLOCKING INVESTMENT"'},
-     {type:'av',label:'Keynote',text:'Aig Imoukhuede keynote: podium lower third. He then chairs from the panel table.'},
-     {type:'av',label:'Audio',text:'4 panel mics + moderator mic + keynote podium mic.'},
-     {type:'stage',label:'Stage',text:'Main plenary hall continues from Plenary 2. Confirm reset between sessions is minimal — panel table reconfigured from 7 seats to 5.'},
-     {type:'warn',label:'Handover',text:'Aig Imoukhuede continues into Day One Closing Plenary at 17:30. Alert him at 17:20 to wrap up. He does not leave the stage — Closing Plenary flows directly.'}
+     {type:'av',label:'Opening Remarks',text:'Abubakar Suleiman Opening Remarks at podium. Lower third: CEO, Sterling Bank. Transition to panel table once he joins.'},
+     {type:'av',label:'Audio',text:'5 panel mics + moderator mic + podium mic for Opening Remarks.'},
+     {type:'stage',label:'Stage',text:'Main plenary hall continues from Plenary 2. Panel table for 5 panellists + moderator.'},
+     {type:'warn',label:'Flow',text:'Plenary 3 flows directly into Closing Plenary at 17:30. Alert Temi Marcella to wrap by 17:25. Hold delegates in the room.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 3',sub:'Unlocking Investment'},
-     {slot:'Keynote Lower Third',type:'lt',name:'Mr. Aig Imoukhuede',role:'Co-Chair — Opening Keynote',org:'Lagos Finance & Investment Council (LFIC)'},
-     {slot:'Moderator Lower Third',type:'lt',name:'Temi Marcella',role:'Moderator · MD',org:'Alcent Capital'},
-     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Mr. Adeola Ukoha — British International Investment\n· Mr. Sameh Shenouda — ED & CIO, Africa Finance Corporation\n· Mr. Olusegun Alebiosu — CEO, First Bank of Nigeria\n· Mr. Abubakar Suleiman — MD/CEO, Sterling Bank'}
+     {slot:'Opening Remarks Lower Third',type:'lt',name:'Mr. Abubakar Suleiman',role:'Opening Remarks · Chief Executive Officer',org:'Sterling Bank'},
+     {slot:'Moderator Lower Third',type:'lt',name:'Temi Marcella',role:'Moderator · Managing Director',org:'Alcent Capital'},
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Ms. Adeola Ukhola — Country Manager, British International Investment\n· Mr. Banji Fehintola — Executive Board Member & ED Financial Services, Africa Finance Corporation\n· Mr. Olusegun Alebiosu — CEO, First Bank of Nigeria\n· Mr. Mitchell Elegbe — Founder and Group CEO, Interswitch'}
    ],
-   mcScript:'We now move to Plenary Three — Unlocking Investment. This session is moderated by Temi Marcella, Managing Director of Alcent Capital. We begin with a Keynote Address from the Co-Chair of the Lagos Finance and Investment Council — Mr. Aig Imoukhuede.',
-   mcDirection:'Plenary 3 flows directly into Day One Closing Plenary. Do not close the session with a full dismissal — alert Aig Imoukhuede at 17:20 and hold delegates in the room.',
+   mcScript:'We now move to Plenary Three — Unlocking Investment. This session is moderated by Temi Marcella, Managing Director of Alcent Capital. We begin with Opening Remarks from the Chief Executive Officer of Sterling Bank — Mr. Abubakar Suleiman.',
+   mcDirection:'Plenary 3 flows directly into the Closing Plenary. Do not dismiss delegates — alert moderator at 17:25 and hold the room.',
    moderatorNotes:'Session objective: unlock the mechanics of capital deployment for Lagos infrastructure projects. Focus on blended finance, DFI co-investment, and barriers to financial close. 60 minutes: ~10 min keynote → 35 min panel → 15 min Q&A.',
    moderatorQuestions:['What is the single biggest barrier to financial close on large Lagos infrastructure projects right now?','How should Lagos structure a blended finance vehicle to attract DFI co-investment?','What conditions need to change before commercial banks in Nigeria can consistently lead infrastructure deals?','Which sector has the clearest pathway to bankable projects in Lagos today?']},
 
   {id:24,day:1,order:15,startTime:'17:30',duration:20,title:'Day One Closing Plenary',type:'speech',
-   speakers:['Mr. Aig Imoukhuede — Co-Chair, Lagos Finance & Investment Council (Co-Chair Reflections)','Governor Babajide Sanwo-Olu — Lagos State (Closing Reflections)'],moderator:'',
+   speakers:['Lagos International Financial Centre — Video Presentation (Special Feature)','Mr. Aig Imoukhuede — Co-Chair, Invest Lagos 3.0','Governor Babajide Sanwo-Olu — Lagos State (Closing Remarks)'],moderator:'',
    flags:[
-     {kind:'info',text:'Timing: moved from 16:45 to 17:30 (after Plenary 3 ends) — production decision to avoid overlap.'},
-     {kind:'info',text:'Aig Imoukhuede moves directly from Plenary 3 (ends 17:30) to this session. No stage reset required — keep him on stage.'},
-     {kind:'warn',text:'Governor Sanwo-Olu must be briefed on 17:30 cue — he may be elsewhere between Plenary 1 (14:30) and this session.'}
+     {kind:'info',text:'New in 2 June 2026 programme: Special Feature — Lagos International Financial Centre video presentation. Queue video ahead of Aig Imoukhuede.'},
+     {kind:'ok',text:'Aig Imoukhuede confirmed as Co-Chair Invest Lagos 3.0 for this session (no longer keynoting Plenary 3 — he comes fresh to stage).'},
+     {kind:'warn',text:'Governor Sanwo-Olu must be briefed on 17:30 cue — alert him while Plenary 3 is running.'}
    ],
    overview:{venue:'Main Plenary Hall',format:'Two short closing addresses — Co-Chair then Governor',config:'Podium. Both speakers delivered from podium or centre stage. No panel table.',objective:'Day One formal close. Co-Chair reflects on the day\'s outcomes. Governor delivers closing remarks and sets expectation for Day Two.'},
    avCues:[
      {type:'av',label:'Opening Slide',text:'"DAY ONE — CLOSING PLENARY". Event branding.'},
-     {type:'av',label:'Aig Imoukhuede',text:'He remains on stage from Plenary 3. New lower third: "Co-Chair Reflections".'},
-     {type:'av',label:'Governor',text:'Governor Sanwo-Olu enters for Closing Reflections. Official portrait or branding slide on entry.'},
+     {type:'av',label:'LIFC Video',text:'⚠️ Special Feature: Lagos International Financial Centre — video presentation. Pre-load and test video before 17:30. Confirm file format with AV team. Full-screen playback on main screen.'},
+     {type:'av',label:'Aig Imoukhuede',text:'Enters after LIFC video. Lower third: Co-Chair, Invest Lagos 3.0.'},
+     {type:'av',label:'Governor',text:'Governor Sanwo-Olu enters for Closing Remarks. Official portrait or branding slide on entry.'},
      {type:'av',label:'Timing',text:'Session runs 17:30–17:50. Strict 20 minutes — Gala Dinner prep begins at 18:00.'},
      {type:'stage',label:'Flow',text:'Aig Imoukhuede: 5–7 min reflections. Governor Sanwo-Olu: 7–10 min closing remarks. MC closes session and announces Gala Dinner time.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'DAY ONE — CLOSING PLENARY',sub:'Lagos State Investment Forum 2026'},
-     {slot:'Co-Chair Lower Third',type:'lt',name:'Mr. Aig Imoukhuede',role:'Co-Chair Reflections',org:'Lagos Finance & Investment Council (LFIC)'},
+     {slot:'LIFC Video',type:'title',title:'LAGOS INTERNATIONAL FINANCIAL CENTRE',sub:'Special Feature · Video Presentation'},
+     {slot:'Co-Chair Lower Third',type:'lt',name:'Mr. Aig Imoukhuede',role:'Co-Chair',org:'Invest Lagos 3.0'},
      {slot:'Governor Lower Third',type:'lt',name:'Mr. Babajide Olusola Sanwo-Olu',role:'Closing Reflections · Executive Governor',org:'Lagos State'},
      {slot:'Day 1 Close Slide',type:'title',title:'THANK YOU — DAY ONE',sub:'Gala Dinner begins at 19:00 · Please return to your hotel rooms to refresh'}
    ],
-   mcScript:'Ladies and gentlemen, we close Day One with reflections from our Co-Chair and the Executive Governor of Lagos State. First, Mr. Aig Imoukhuede. [pause for applause]. And now — the Executive Governor of Lagos State, Mr. Babajide Sanwo-Olu.',
+   mcScript:'Ladies and gentlemen, we move to our Closing Plenary. We begin with a Special Feature — a presentation on the Lagos International Financial Centre. [Video plays]. We are now pleased to invite our Co-Chair, Mr. Aig Imoukhuede. [pause for applause]. And now — Closing Remarks from the Executive Governor of Lagos State, Mr. Babajide Sanwo-Olu.',
    mcDirection:'Keep this tight — 20 minutes total. After Governor\'s remarks, announce Gala Dinner clearly: time, venue, dress code.',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:15,day:1,order:16,startTime:'19:00',duration:150,title:'Gala Dinner',type:'performance',
-   speakers:['Performance: Berklee College of Music'],moderator:'',
-   flags:[{kind:'warn',text:'Berklee rider TBC · Gala running order TBC'}],
-   overview:{venue:'Gala Dinner Venue — TBC (Eko Hotel ballroom or garden)',format:'Seated gala dinner + live performance',config:'Full gala AV setup. Round tables. Performance stage. Separate from plenary configuration.',objective:'Celebrate Day 1, create networking opportunities, showcase cultural excellence through the Berklee College of Music.'},
+  {id:15,day:1,order:16,startTime:'19:00',duration:150,title:'Private Gala Dinner',type:'performance',
+   speakers:['By Invitation Only'],moderator:'',
+   flags:[
+     {kind:'ok',text:'MC confirmed: Ms. Mojibade Sosanya (same MC as Opening Ceremony)'},
+     {kind:'warn',text:'Private Gala Dinner — By Invitation Only. Gala running order and entertainment TBC.'},
+     {kind:'warn',text:'Seating plan, entertainment, and speaker list TBC — request full Gala programme from client.'}
+   ],
+   overview:{venue:'Gala Dinner Venue — TBC (Eko Hotel ballroom or garden)',format:'Private seated gala dinner — By Invitation Only',config:'Full gala AV setup. Round tables. Separate from plenary configuration.',objective:'Private celebration for invited delegates. Celebrate Day 1 outcomes, create premium networking opportunities. MC: Ms. Mojibade Sosanya.'},
    avCues:[
-     {type:'av',label:'Setup',text:'Full gala AV — dedicated sound system for Berklee. NOT the plenary rig. Confirm with venue AV team.'},
-     {type:'av',label:'Sound Check',text:'Berklee College of Music: sound check BEFORE 19:00. Book slot 17:50–18:30 — immediately after Day One Closing Plenary ends.'},
-     {type:'av',label:'Screens',text:'Gala screens: welcome slide + table seating plan + event branding. NOT presentation mode.'},
-     {type:'av',label:'Lighting',text:'Warm dinner lighting initially. Shift to performance lighting for Berklee set. Coordinate with lighting designer.'},
-     {type:'stage',label:'Stage',text:'Full stage reset from plenary configuration. Confirm Berklee stage plot, backline, power requirements.'},
-     {type:'warn',label:'Open Items',text:'1. Berklee rider received?\n2. Sound check slot confirmed with them?\n3. Gala running order — who speaks? In what order?\n4. Seating plan confirmed and printed?\n5. Which space within Eko Hotel?'}
+     {type:'av',label:'Setup',text:'Full gala AV — dedicated sound system. NOT the plenary rig. Confirm with venue AV team.'},
+     {type:'av',label:'Screens',text:'Gala screens: welcome slide + table seating plan + event branding. Warm, celebratory palette — NOT presentation mode.'},
+     {type:'av',label:'Lighting',text:'Warm dinner lighting. Coordinate with lighting designer on gala look.'},
+     {type:'stage',label:'MC',text:'Ms. Mojibade Sosanya is MC for the Gala Dinner. Brief her on full Gala running order at rehearsal.'},
+     {type:'warn',label:'Open Items',text:'1. Full Gala Dinner running order — who speaks? In what order?\n2. Entertainment/performance TBC — confirm requirements\n3. Seating plan confirmed and printed?\n4. Which space within Eko Hotel?'}
    ],
    screenContent:[
-     {slot:'Welcome Slide',type:'title',title:'GALA DINNER',sub:'Lagos State Investment Forum 2026 · 8 June 2026 · Eko Hotel & Suites'},
-     {slot:'Performance Announcement',type:'title',title:'LIVE PERFORMANCE',sub:'Berklee College of Music'},
-     {slot:'Berklee Lower Third',type:'lt',name:'Berklee College of Music',role:'Live Performance',org:'Boston, Massachusetts · USA'},
+     {slot:'Welcome Slide',type:'title',title:'PRIVATE GALA DINNER',sub:'By Invitation Only · Lagos State Investment Forum 2026 · 8 June 2026 · Eko Hotel & Suites'},
+     {slot:'MC Lower Third',type:'lt',name:'Ms. Mojibade Sosanya',role:'Master of Ceremonies',org:'Invest Lagos 3.0'},
      {slot:'Design Note',type:'note',text:'Gala screens should use the full event colour palette — warmer, more celebratory than the daytime conference look.'}
    ],
-   mcScript:'TBC — Gala Dinner programme and running order to be confirmed separately with the client. A dedicated Gala MC script will be prepared once the programme is confirmed.',
-   mcDirection:'Gala may have a separate MC. Confirm with client. If same MC — request full Gala running order 5 days before event.',
+   mcScript:'TBC — Gala Dinner running order to be confirmed with the client. Full MC script to be prepared once programme is received.',
+   mcDirection:'MC: Ms. Mojibade Sosanya. Request full Gala running order minimum 5 days before event. Brief Mojibade on the full Gala programme at Sunday rehearsal.',
    moderatorNotes:'',moderatorQuestions:[]},
 
   // ═══════════════════════════════════════════════════
@@ -407,7 +410,7 @@ export const SESSIONS: BriefingSession[] = [
   // ═══════════════════════════════════════════════════
 
   {id:16,day:2,order:17,startTime:'09:00',duration:30,title:'Day Two Opening',type:'speech',
-   speakers:['Mrs. Folasade Ambrose Medebem — Honourable Commissioner, MCCTI','Zain Asher — CNN'],moderator:'',
+   speakers:['Mrs. Folasade Ambrose Medebem — Honourable Commissioner, Ministry of Commerce, Industry, Trade and Cooperatives','Mr. Sam Egube — Deputy Chief of Staff, Lagos State','Zain Asher — CNN'],moderator:'',
    flags:[
      {kind:'info',text:'Change: Day 2 now starts at 09:00 (was 09:30). This session resolves the previous 30-minute programme gap.'},
      {kind:'info',text:'Format: Opening Reflection Session — both speakers. Confirmed names from updated programme.'}
@@ -421,38 +424,37 @@ export const SESSIONS: BriefingSession[] = [
    ],
    screenContent:[
      {slot:'Day 2 Opening Slide',type:'title',title:'DAY TWO — LAGOS STATE INVESTMENT FORUM',sub:'9 June 2026 · Eko Hotel & Suites · Welcome back'},
-     {slot:'Commissioner Lower Third',type:'lt',name:'Mrs. Folasade Ambrose Medebem',role:'Honourable Commissioner, MCCTI',org:'Lagos State Government'},
+     {slot:'Commissioner Lower Third',type:'lt',name:'Mrs. Folasade Ambrose Medebem',role:'Honourable Commissioner, Ministry of Commerce, Industry, Trade and Cooperatives',org:'Lagos State Government'},
+     {slot:'Sam Egube Lower Third',type:'lt',name:'Mr. Sam Egube',role:'Deputy Chief of Staff',org:'Lagos State'},
      {slot:'Zain Asher Lower Third',type:'lt',name:'Zain Asher',role:'Day Two Opening',org:'CNN'}
    ],
-   mcScript:"Good morning and welcome to Day Two of Invest Lagos 3.0. Yesterday we set the agenda — today we drive it forward. I'm delighted to welcome our Honourable Commissioner, Mrs Folasade Ambrose Medebem, and Zain Asher to open our second day.",
+   mcScript:"Good morning and welcome to Day Two of Invest Lagos 3.0. Yesterday we set the agenda — today we drive it forward. I'm delighted to welcome the Honourable Commissioner Mrs Folasade Ambrose Medebem, Mr Sam Egube, Deputy Chief of Staff of Lagos State, and Zain Asher of CNN, to open our second day.",
    mcDirection:'Energetic delivery — Day 2 needs a strong re-open. Both speakers should be standing by before MC begins.',
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:18,day:2,order:18,startTime:'09:30',duration:60,title:'Plenary 4 — Building the Cities of the Future',type:'panel',
-   speakers:['Deputy Governor Dr. Kadri Obafemi Hamzat — Lagos State (Keynote)','AfDB President (name TBC — confirm in-person or video)','Dr. Segun Ogunsanya — Chairman, Nigeria Sovereign Investment Authority (NSIA)','Prof. Akin Abayomi — Honourable Commissioner for Health, Lagos State','Mrs. Adesuwa Ladoja — CEO, Lagos Free Zone','Mr. Shahzad Athar — Vice President, Adani Group','Mr. Tom Cartledge — CEO, Benoy'],
-   moderator:'Ms. Rolake Akinkugbe',
+   speakers:['Dr. Kadri Obafemi Hamzat — Deputy Governor, Lagos State (Opening Remarks)','Dr. Segun Ogunsanya — Chairman, Nigeria Sovereign Investment Authority (NSIA)','Prof. Akin Abayomi — Honourable Commissioner for Health, Lagos State','Mr. Haresh Aswani — Managing Director for Africa, Tolaram Group','Mr. Tom Cartledge — Chief Executive Officer, Benoy'],
+   moderator:'Mrs. Rolake Akinkugbe-Filani',
    flags:[
-     {kind:'warn',text:'AfDB President: name and attendance format (in-person or video) TBC. PDF lists ambiguously on same line as Deputy Governor — likely two separate keynote speakers. Confirm with client.'},
-     {kind:'warn',text:'Moderator name: spelled "Akikugbe" in PDF — verify correct spelling with client. Rolake is also moderating Plenaries 2, 6 and 7.'},
-     {kind:'info',text:'Start time moved earlier: 09:30 (was 10:30 in previous programme). Directly after Day Two Opening.'}
+     {kind:'ok',text:'Moderator confirmed: Mrs. Rolake Akinkugbe-Filani. Moderates Plenary 1, 4 and 7.'},
+     {kind:'info',text:'AfDB President, Mrs. Adesuwa Ladoja and Mr. Shahzad Athar removed from panel in 2 June 2026 programme.'},
+     {kind:'info',text:'New panellist added: Mr Haresh Aswani, Managing Director for Africa, Tolaram Group.'}
    ],
    overview:{venue:'Main Plenary Hall',format:'Keynote address(es) + panel discussion',config:'Panel table for 7. Keynote at podium, then joins panel. Deputy Governor chairs from panel.',objective:'Explore how infrastructure, energy systems and industrial ecosystems are shaping the next generation of globally competitive African cities. Anchor on Lekki–Epe Airport, metro rail, Fourth Mainland Bridge.'},
    avCues:[
      {type:'av',label:'Opening Slide',text:'"PLENARY 4: BUILDING THE CITIES OF THE FUTURE"'},
-     {type:'av',label:'AfDB',text:'⚠️ Confirm: in-person or via video link? If video — test live connection during Day Two Opening (09:00–09:30). Backup plan if link fails?'},
-     {type:'av',label:'Audio',text:'7 panel mics + moderator mic. Keynote at podium mic.'},
-     {type:'stage',label:'Setup',text:'Panel table for 7. Name placards. Deputy Governor briefed on moderator role before session.'},
-     {type:'warn',label:'AfDB',text:'AfDB President confirmation critical — affects staging, AV, and MC script. Escalate to client.'}
+     {type:'av',label:'Audio',text:'4 panel mics + moderator mic + podium mic for Opening Remarks.'},
+     {type:'stage',label:'Setup',text:'Panel table for 4. Name placards. Deputy Governor delivers Opening Remarks at podium then joins panel.'},
+     {type:'av',label:'Lower Thirds',text:'Pre-load all panellist lower thirds. Haresh Aswani: Managing Director for Africa, Tolaram Group.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 4',sub:'Building the Cities of the Future'},
-     {slot:'Keynote Lower Third',type:'lt',name:'Dr. Kadri Obafemi Hamzat',role:'Deputy Governor — Opening Keynote',org:'Lagos State'},
-     {slot:'AfDB Lower Third — Placeholder',type:'lt',name:'[AfDB President — Name TBC]',role:'President',org:'African Development Bank Group'},
-     {slot:'Moderator Lower Third',type:'lt',name:'Ms. Rolake Akinkugbe',role:'Moderator',org:''},
-     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Dr. Segun Ogunsanya — Chairman, NSIA\n· Prof. Akin Abayomi — Commissioner for Health, Lagos State\n· Mrs. Adesuwa Ladoja — CEO, Lagos Free Zone\n· Mr. Shahzad Athar — VP, Adani Group\n· Mr. Tom Cartledge — CEO, Benoy'}
+     {slot:'Opening Remarks Lower Third',type:'lt',name:'Dr. Kadri Obafemi Hamzat',role:'Opening Remarks · Deputy Governor',org:'Lagos State'},
+     {slot:'Moderator Lower Third',type:'lt',name:'Mrs. Rolake Akinkugbe-Filani',role:'Moderator',org:'EnergyInc Advisors'},
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Dr. Segun Ogunsanya — Chairman, NSIA\n· Prof. Akin Abayomi — Commissioner for Health, Lagos State\n· Mr. Haresh Aswani — Managing Director for Africa, Tolaram Group\n· Mr. Tom Cartledge — CEO, Benoy'}
    ],
-   mcScript:'We now move to Plenary Four — Building the Cities of the Future. This session is moderated by Rolake Akinkugbe. We open with a Keynote Address from the Deputy Governor of Lagos State — Dr. Kadri Obafemi Hamzat.',
-   mcDirection:'AfDB President slot: MC script to be finalised once in-person/video confirmed. Large panel — keep intro crisp.',
+   mcScript:'We now move to Plenary Four — Building the Cities of the Future. This session is moderated by Mrs. Rolake Akinkugbe-Filani. We open with Opening Remarks from the Deputy Governor of Lagos State — Dr. Kadri Obafemi Hamzat.',
+   mcDirection:'Keep intro crisp. Deputy Governor delivers Opening Remarks at podium then joins panel table.',
    moderatorNotes:'Session objective: explore infrastructure, energy and industrial ecosystems shaping globally competitive African cities. Key for investors: financing mechanisms, returns profile, execution capacity.',
    moderatorQuestions:['Which single infrastructure project in Lagos offers the clearest commercial return for private investors in the next decade?','What is the role of international firms in building Lagos\'s infrastructure capacity — beyond the contract?','Energy: what is the honest timeline for reliable power in Lagos, and what does it cost to solve it?','How does Lagos compare to other intentional city-building projects globally in terms of investability?']},
 
@@ -472,11 +474,11 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:20,day:2,order:20,startTime:'11:00',duration:60,title:'Plenary 5 — Global Partnerships for Growth',type:'panel',
-   speakers:['His Excellency Wamkele Mene — Secretary-General, AfCFTA Secretariat (Fireside Chat)','HE Jonny Baxter — Deputy High Commissioner for the United Kingdom to Nigeria'],
+   speakers:['His Excellency Wamkele Mene — Secretary-General, AfCFTA Secretariat (Fireside Chat)','Madam Elsie Attafuah — Resident Representative, UNDP','Massimo de Luca — Head of Cooperation, European Union Delegation to Nigeria and ECOWAS','Donna McGowan — Country Director, British Council Nigeria','Jacky Amprou — Country Director, Agence Française de Développement (AFD), Nigeria'],
    moderator:'Mr. Zaki Cooper',
    flags:[
-     {kind:'warn',text:'Panel is thin — only 1 panellist (HE Jonny Baxter) named in updated programme. Other ambassadors/HCs expected. Confirm full panel with client.'},
-     {kind:'info',text:'Session structure: Samantha Cohen CVO OBE (CEO, CWEIC) chairs. Wamkele Mene delivers fireside chat. Zaki Cooper moderates the panel.'},
+     {kind:'ok',text:'Full panel confirmed in 2 June 2026 programme: Attafuah/UNDP, de Luca/EU, McGowan/British Council, Amprou/AFD.'},
+     {kind:'info',text:'Session structure: Samantha Cohen CVO OBE (CEO CWEIC) chairs fireside. Wamkele Mene delivers fireside chat. Zaki Cooper moderates panel.'},
      {kind:'warn',text:'Wamkele Mene: confirm in-person or video link for this session.'}
    ],
    overview:{venue:'Main Plenary Hall',format:'Fireside Chat (Wamkele Mene) + panel discussion',config:'Chair: Samantha Cohen. Fireside: 2 seats for Samantha + Wamkele Mene. Swap to panel for main discussion.',objective:"Examine how international cooperation and cross-border investment can accelerate Africa's economic transformation. Situate Lagos within the broader AfCFTA architecture and the global diplomatic investment landscape."},
@@ -492,12 +494,12 @@ export const SESSIONS: BriefingSession[] = [
      {slot:'Chair Lower Third',type:'lt',name:'Samantha Cohen CVO OBE',role:'Chair · CEO',org:'Commonwealth Enterprise and Investment Council (CWEIC)'},
      {slot:'Fireside Lower Third',type:'lt',name:'His Excellency Wamkele Mene',role:'Secretary-General',org:'African Continental Free Trade Area (AfCFTA)'},
      {slot:'Moderator Lower Third',type:'lt',name:'Mr. Zaki Cooper',role:'Moderator',org:''},
-     {slot:'Panel Lower Thirds',type:'note',text:'Confirmed: HE Jonny Baxter — Deputy High Commissioner for UK to Nigeria.\nAdditional panellists TBC — update once confirmed by client.'}
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Madam Elsie Attafuah — Resident Representative, UNDP\n· Massimo de Luca — Head of Cooperation, EU Delegation to Nigeria and ECOWAS\n· Donna McGowan — Country Director, British Council Nigeria\n· Jacky Amprou — Country Director, AFD Nigeria'}
    ],
    mcScript:'We now move to Plenary Five — Global Partnerships for Growth. This session is chaired by Samantha Cohen, CEO of CWEIC. We open with a Fireside Chat with the Secretary-General of the African Continental Free Trade Area — Mr. Wamkele Mene.',
    mcDirection:'After announcing the fireside, exit stage completely. Samantha Cohen runs the fireside. Zaki Cooper takes over as moderator for the panel portion.',
    moderatorNotes:"Session objective: examine how international cooperation accelerates Africa's transformation. Fireside opener: ~20 minutes. Panel: ~30 minutes. Q&A: 10 minutes.",
-   moderatorQuestions:["Mr. Mene — where is Lagos in the AfCFTA implementation roadmap, and what would it take to make it a primary AfCFTA hub?","What is the most concrete bilateral investment outcome your mission has committed to with Lagos?","How does the AfCFTA architecture change the calculus for international investors looking at Lagos versus other African markets?","What is the one thing multilateral cooperation can achieve for Lagos that no bilateral deal can?"]},
+   moderatorQuestions:["Mr. Mene — where is Lagos in the AfCFTA implementation roadmap, and what would it take to make it a primary AfCFTA hub?","What is the most concrete bilateral investment outcome your mission has committed to with Lagos?","How does the AfCFTA architecture change the calculus for international investors looking at Lagos versus other African markets?","What role can development institutions play in de-risking private sector entry into Lagos infrastructure?"]},
 
   {id:25,day:2,order:21,startTime:'12:00',duration:60,title:'Networking Break',type:'break',
    speakers:[''],moderator:'',flags:[],
@@ -515,12 +517,12 @@ export const SESSIONS: BriefingSession[] = [
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:21,day:2,order:22,startTime:'13:00',duration:60,title:'Plenary 6 — Talent, Creativity & Culture',type:'panel',
-   speakers:['Her Excellency Hannatu Musa Musawa — Minister of Art, Culture, Tourism & Creative Economy (Keynote)','Mrs. Toke Benson-Awoyinka — Honourable Commissioner for Tourism Arts and Culture','Mrs. Bolanle Austen-Peters — Chief Executive Officer, Terra Kulture','Mrs. Omoyemi Akerele — Founder/CEO, Lagos Fashion Week','Mrs. Choma Ude — Founder, Africa Film Festival AFRIFF','Mrs. Keke Hammond — Co-Founder/COO, Flytime Africa'],
-   moderator:'Ms. Rolake Akinkugbe',
+   speakers:['Her Excellency Hannatu Musa Musawa — Minister of Art, Culture, Tourism & Creative Economy (Opening Remarks)','Mrs. Toke Benson-Awoyinka — Honourable Commissioner for Tourism Arts and Culture','Mrs. Bolanle Austen-Peters — Chief Executive Officer, Terra Kulture','Mrs. Chioma Ude — Founder, Africa International Film Festival (AFRIFF)','Mrs. Keke Hammond — Co-Founder/COO, Flytime Africa'],
+   moderator:'Ms. Zain Asher, CNN',
    flags:[
-     {kind:'ok',text:'Keynote confirmed: HE Hannatu Musa Musawa, Minister of Art, Culture, Tourism & Creative Economy.'},
-     {kind:'info',text:'Change: Eva Omaghomi no longer chairs. Rolake Akinkugbe confirmed as moderator. Note: Rolake moderates Plenary 2 (Day 1), Plenary 4, 6 and 7 (Day 2) — 4 sessions total.'},
-     {kind:'info',text:'Keke Hammond also appears in Day 2 Masterclasses (14:00–14:45).'}
+     {kind:'ok',text:'Moderator updated: Ms. Zain Asher, CNN (changed from Rolake in 2 June 2026 programme).'},
+     {kind:'info',text:'Omoyemi Akerele moved from Plenary 6 panel to Masterclasses. Keke Hammond confirmed in Plenary 6.'},
+     {kind:'ok',text:'Opening Remarks confirmed: HE Hannatu Musa Musawa, Minister of Art, Culture, Tourism & Creative Economy.'}
    ],
    overview:{venue:'Main Plenary Hall',format:'Keynote address + panel discussion',config:'Panel table: 5 panellists + moderator. Keynote at podium.',objective:"Explore how talent, creativity and cultural industries are shaping Africa's economic future. Position Nigeria's creative economy as a structured investment proposition — music, film, fashion, digital content."},
    avCues:[
@@ -528,27 +530,26 @@ export const SESSIONS: BriefingSession[] = [
      {type:'av',label:'Keynote',text:'HE Hannatu Musa Musawa keynote at podium. Official portrait/title slide. Lower third: Minister of Art, Culture, Tourism & Creative Economy.'},
      {type:'av',label:'Audio',text:'5 panel mics + moderator mic + podium mic for keynote.'},
      {type:'stage',label:'Stage',text:'Panel table for 6. Keynote at podium first. Full panel seated before keynote begins.'},
-     {type:'warn',label:'Rolake',text:'Rolake Akinkugbe moderates this session + Plenary 7 (runs right after). Confirm she is briefed on back-to-back moderation.'}
+     {type:'av',label:'Zain Asher',text:'Zain Asher moderates Plenary 6. Brief her alongside Masterclasses (14:00–14:45) which she also moderates.'}
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 6',sub:'Talent, Creativity & Culture'},
      {slot:'Keynote Lower Third',type:'lt',name:'Her Excellency Hannatu Musa Musawa',role:'Keynote Address · Minister of Art, Culture, Tourism & Creative Economy',org:'Federal Republic of Nigeria'},
-     {slot:'Moderator Lower Third',type:'lt',name:'Ms. Rolake Akinkugbe',role:'Moderator',org:''},
-     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Mrs. Toke Benson-Awoyinka — Commissioner for Tourism Arts & Culture, Lagos State\n· Mrs. Bolanle Austen-Peters — CEO, Terra Kulture\n· Mrs. Omoyemi Akerele — Founder/CEO, Lagos Fashion Week\n· Mrs. Choma Ude — Founder, AFRIFF\n· Mrs. Keke Hammond — Co-Founder/COO, Flytime Africa'}
+     {slot:'Moderator Lower Third',type:'lt',name:'Ms. Zain Asher',role:'Moderator',org:'CNN'},
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Mrs. Toke Benson-Awoyinka — Commissioner for Tourism Arts & Culture, Lagos State\n· Mrs. Bolanle Austen-Peters — CEO, Terra Kulture\n· Mrs. Chioma Ude — Founder, Africa International Film Festival (AFRIFF)\n· Mrs. Keke Hammond — Co-Founder/COO, Flytime Africa'}
    ],
-   mcScript:"We now move to Plenary Six — Talent, Creativity and Culture. This session is moderated by Rolake Akinkugbe. We begin with a Keynote Address from the Minister of Art, Culture, Tourism and Creative Economy — Her Excellency Hannatu Musa Musawa.",
-   mcDirection:'Ministerial protocol applies for keynote entry. Panel is fully seated before MC begins.',
+   mcScript:"We now move to Plenary Six — Talent, Creativity and Culture. This session is moderated by Zain Asher of CNN. We begin with Opening Remarks from the Minister of Art, Culture, Tourism and Creative Economy — Her Excellency Hannatu Musa Musawa.",
+   mcDirection:'Ministerial protocol applies for Opening Remarks entry. Panel is fully seated before MC begins.',
    moderatorNotes:"Session objective: present Nigeria's creative economy as a structured investment proposition. Keep discussion grounded in investment potential, IP frameworks, diaspora engagement, and workforce development.",
    moderatorQuestions:["What is the annual GDP contribution of Nigeria's creative economy, and what would it take to double it in 5 years?","How do we move from 'Nigeria is creative' to 'Nigeria is investable' in the creative sector?","What role does IP protection play in attracting serious capital to the music and film industries?","What does Lagos Fashion Week or AFRIFF need to become globally competitive institutions?"]},
 
   {id:26,day:2,order:23,startTime:'14:00',duration:45,title:'Plenary 7 — Energy and Sustainability',type:'panel',
-   speakers:['Mr. Abiodun Ogunleye — Honourable Commissioner for Energy, Lagos State','Representative, CANEX / Afrexim (name TBC)'],
-   moderator:'Ms. Rolake Akinkugbe',
+   speakers:['Mr. Abiodun Ogunleye — Honourable Commissioner for Energy, Lagos State','Barrister Ismaeel Ahmed — Chairman, Presidential Initiative on CNG/EV','Mr. Alex Milne — Director of Partnerships and Policy, Africa Speciality Risks','Mr. Kola Adesina — Group Managing Director, Sahara Group'],
+   moderator:'Mrs. Rolake Akinkugbe-Filani',
    flags:[
-     {kind:'warn',text:'CANEX/Afrexim representative name TBC — confirm with client for lower third and name placard'},
-     {kind:'warn',text:'PARALLEL SESSION — runs at same time as Masterclasses (14:00–14:45). Confirm room assignments and dedicated AV/Stage teams for both.'},
-     {kind:'info',text:'New session — not in previous programme. Added in 20 May 2026 update.'},
-     {kind:'warn',text:'Rolake Akinkugbe moderates this session AND Plenary 6 immediately before (back-to-back). Name spelled differently in PDF for this session — confirm correct spelling.'}
+     {kind:'ok',text:'Full panel confirmed in 2 June 2026 programme: Ismaeel Ahmed/CNG-EV, Alex Milne/Africa Speciality Risks, Kola Adesina/Sahara Group.'},
+     {kind:'warn',text:'PARALLEL SESSION — runs at same time as Masterclasses (14:00–14:45). Separate room and dedicated AV/Stage teams required for both.'},
+     {kind:'info',text:'Rolake Akinkugbe-Filani moderates Plenary 7 (directly after Plenary 4 on Day 2). Brief her on the session.'}
    ],
    overview:{venue:'TBC — confirm room (Main Hall or dedicated breakout)',format:'Panel discussion',config:'Panel table for 2 panellists + moderator. Confirm room assignment — may run in parallel with Masterclasses in separate space.',objective:'Explore opportunities from deregulation of the electricity sector and implications for Lagos State. Discuss renewable energy, clean energy, power generation, distribution and transmission. Path to uninterrupted power supply for households and businesses in Lagos.'},
    avCues:[
@@ -560,39 +561,38 @@ export const SESSIONS: BriefingSession[] = [
    ],
    screenContent:[
      {slot:'Session Slide',type:'title',title:'PLENARY 7',sub:'Energy and Sustainability'},
-     {slot:'Moderator Lower Third',type:'lt',name:'Ms. Rolake Akinkugbe',role:'Moderator',org:''},
-     {slot:'Panel Lower Thirds',type:'note',text:'Confirmed:\n· Mr. Abiodun Ogunleye — Commissioner for Energy, Lagos State\n· Representative, CANEX / Afrexim (name TBC)'}
+     {slot:'Moderator Lower Third',type:'lt',name:'Mrs. Rolake Akinkugbe-Filani',role:'Moderator',org:'EnergyInc Advisors'},
+     {slot:'Panel Lower Thirds',type:'note',text:'Rotate per speaker:\n· Mr. Abiodun Ogunleye — Commissioner for Energy, Lagos State\n· Barrister Ismaeel Ahmed — Chairman, Presidential Initiative on CNG/EV\n· Mr. Alex Milne — Director of Partnerships and Policy, Africa Speciality Risks\n· Mr. Kola Adesina — Group Managing Director, Sahara Group'}
    ],
-   mcScript:'[Delivered at entrance to Plenary 7 room] We now begin Plenary Seven — Energy and Sustainability. This session is moderated by Rolake Akinkugbe.',
+   mcScript:'[Delivered at entrance to Plenary 7 room] We now begin Plenary Seven — Energy and Sustainability. This session is moderated by Mrs. Rolake Akinkugbe-Filani.',
    mcDirection:'Confirm whether this is a split session requiring a separate MC for Plenary 7 vs. Masterclasses. Coordinate with Stage Manager on room flow.',
    moderatorNotes:'Session objective: explore deregulation opportunities in the electricity sector and the path to reliable power in Lagos. Keep grounded in policy implications and private sector investment opportunities.',
    moderatorQuestions:['What does electricity sector deregulation mean practically for a manufacturing investor entering Lagos today?','What is the realistic timeline for the Lagos power distribution network to be reliable enough for industrial-scale users?','How should Lagos structure incentives to attract clean energy investment at scale?','What role can the CANEX model play in financing energy infrastructure across West Africa?']},
 
-  {id:27,day:2,order:24,startTime:'14:00',duration:45,title:'Masterclasses — Talent, Creativity & Culture',type:'panel',
-   speakers:['Mrs. Keke Hammond — Co-Founder/COO, Flytime Africa'],
+  {id:27,day:2,order:24,startTime:'14:00',duration:45,title:'Masterclasses — Music, Film and Fashion',type:'panel',
+   speakers:['Tiwa Savage — Musician / Founder, Tiwa Savage Music Foundation','Mr. David Oyelowo OBE — Hollywood Actor / Director','Mrs. Omoyemi Akerele — Founder / Chief Executive Officer, Lagos Fashion Week'],
    moderator:'Zain Asher — CNN',
    flags:[
-     {kind:'warn',text:'PARALLEL SESSION — runs at same time as Plenary 7 (14:00–14:45). Separate room and AV team required.'},
-     {kind:'warn',text:'Only 1 panellist listed in programme — likely incomplete. Confirm full Masterclasses speaker list with client.'},
-     {kind:'warn',text:'Format not described in programme — confirm: workshop? presentation? intimate panel? Affects room setup, AV, and MC brief.'},
-     {kind:'info',text:'New session — not in previous programme. Added in 20 May 2026 update.'}
+     {kind:'warn',text:'PARALLEL SESSION — runs at same time as Plenary 7 (14:00–14:45). Separate room and dedicated AV/Stage team required.'},
+     {kind:'ok',text:'Full speaker list confirmed in 2 June 2026 programme: Tiwa Savage, David Oyelowo OBE, Omoyemi Akerele.'},
+     {kind:'warn',text:'Format — intimate masterclass. Confirm room setup (theatre, roundtable, or studio) with client.'}
    ],
-   overview:{venue:'TBC — separate room from Plenary 7',format:'Masterclass format TBC (confirm: workshop, panel, or presentation?)',config:'Intimate setup. Zain Asher moderates. Keke Hammond confirmed. Other speakers TBC.',objective:'Deeper-dive session on the talent, creativity and culture theme from Plenary 6. Likely an informal, high-engagement format for a smaller invited audience.'},
+   overview:{venue:'TBC — separate room from Plenary 7',format:'Masterclasses — Music, Film and Fashion',config:'Intimate setup. Zain Asher moderates. Three masterclass speakers confirmed.',objective:'Deeper-dive session on the creative economy: music (Tiwa Savage), film (David Oyelowo OBE), fashion (Omoyemi Akerele/Lagos Fashion Week). High-engagement format for a smaller invited audience.'},
    avCues:[
-     {type:'av',label:'Room',text:'⚠️ Separate room from Plenary 7. Dedicated AV and Stage team assigned.'},
-     {type:'av',label:'Format',text:'⚠️ Confirm format with client — setup (theatre, roundtable, workshop) depends entirely on answer.'},
-     {type:'av',label:'Screens',text:'"MASTERCLASSES — Talent, Creativity & Culture"'},
-     {type:'stage',label:'Zain Asher',text:'Zain Asher also moderates Governors\' Showcase (Day 1) and Day Two Opening — brief on all three sessions together.'},
-     {type:'warn',label:'Critical',text:'Format, full speaker list, and room assignment all TBC. Cannot complete AV brief or MC script until these are confirmed.'}
+     {type:'av',label:'Room',text:'Separate room from Plenary 7. Dedicated AV and Stage team assigned.'},
+     {type:'av',label:'Screens',text:'"MASTERCLASSES — Music, Film and Fashion"'},
+     {type:'stage',label:'Zain Asher',text:'Zain Asher moderates Masterclasses AND Plenary 6 (immediately before). Brief her on both sessions together. High-profile talent — confirm green room, security, and access requirements for Tiwa Savage and David Oyelowo.'},
+     {type:'warn',label:'Talent',text:'Tiwa Savage and David Oyelowo OBE are international celebrities — confirm riders, green room, photography/social media policy.'}
    ],
    screenContent:[
-     {slot:'Session Slide',type:'title',title:'MASTERCLASSES',sub:'Talent, Creativity & Culture'},
+     {slot:'Session Slide',type:'title',title:'MASTERCLASSES',sub:'Music, Film and Fashion'},
      {slot:'Moderator Lower Third',type:'lt',name:'Zain Asher',role:'Moderator',org:'CNN'},
-     {slot:'Speaker Lower Third',type:'lt',name:'Mrs. Keke Hammond',role:'Co-Founder / COO',org:'Flytime Africa'},
-     {slot:'Note',type:'note',text:'Additional speakers TBC — update lower thirds once confirmed.'}
+     {slot:'Speaker 1 Lower Third',type:'lt',name:'Tiwa Savage',role:'Musician / Founder',org:'Tiwa Savage Music Foundation'},
+     {slot:'Speaker 2 Lower Third',type:'lt',name:'Mr. David Oyelowo OBE',role:'Actor / Director',org:'Hollywood'},
+     {slot:'Speaker 3 Lower Third',type:'lt',name:'Mrs. Omoyemi Akerele',role:'Founder / CEO',org:'Lagos Fashion Week'}
    ],
-   mcScript:'TBC — format not yet confirmed. Script to be developed once session structure is agreed.',
-   mcDirection:'Confirm format with client. Masterclasses may need a different tone to plenary sessions — more intimate, interactive. Brief Zain Asher specifically on this format.',
+   mcScript:'[Delivered at Masterclasses room entrance] Welcome to the Masterclasses — Music, Film and Fashion. This intimate session is moderated by Zain Asher of CNN. Our speakers today are Tiwa Savage, Mr David Oyelowo OBE, and Mrs Omoyemi Akerele.',
+   mcDirection:'Intimate, conversational tone — different from the main hall plenaries. Brief Zain Asher on the format. Confirm security and access arrangements for Tiwa Savage and David Oyelowo.',
    moderatorNotes:'',moderatorQuestions:[]},
 
   {id:28,day:2,order:25,startTime:'14:45',duration:15,title:'Showcase — Lagos Fashion Show',type:'performance',
@@ -649,24 +649,26 @@ export const SESSIONS: BriefingSession[] = [
   // ═══════════════════════════════════════════════════
 
   {id:29,day:3,order:27,startTime:'08:00',duration:480,title:'Full Day — Site Visits',type:'other',
-   speakers:['Dangote Petroleum Refinery, Lekki, Lagos','Lekki Free Zone, Lekki, Lagos'],moderator:'',
+   speakers:['Arridex — Advanced Manufacturing and Asset Integrity, Victoria Island, Lagos (Half Day)','Dangote Petroleum Refinery, Ibeju Lekki, Lagos (Full Day)','Lekki Free Zones, Lagos Port, Ibeju Lekki, Lagos (Full Day)'],moderator:'',
    flags:[
-     {kind:'warn',text:'No specific times given in programme — listed as Full Day. Transport, security clearance and schedule TBC.'},
+     {kind:'info',text:'Day 3 now has 3 locations: Arridex (Half Day, Victoria Island) + Dangote Refinery + Lekki Free Zones (both Full Day, Ibeju Lekki). Two separate groups may be required.'},
      {kind:'warn',text:'Security clearance required for Dangote Petroleum Refinery — initiate process with refinery management early.'},
-     {kind:'warn',text:'Transport: buses from Eko Hotel — confirm bus count, departure time(s), and return time with logistics team.'},
-     {kind:'info',text:'Both visits at Lekki — can be scheduled sequentially in one day.'}
+     {kind:'warn',text:'Transport: buses from Eko Hotel — confirm bus count, departure times (split for VI and Lekki), and return times.'},
+     {kind:'warn',text:'Arridex half-day visit: confirm point of contact, tour route, max group size, and security requirements at Victoria Island site.'}
    ],
-   overview:{venue:'Off-site: Dangote Petroleum Refinery + Lekki Free Zone, Lekki, Lagos',format:'Full Day Site Visits — two locations',config:'Buses from Eko Hotel. Both sites in Lekki — confirm routing and travel time between sites.',objective:"Give delegates direct access to Lagos's flagship industrial and economic zones. Tangible demonstration of the city's investment proposition."},
+   overview:{venue:'Off-site: Three locations across Lagos',format:'Full Day Site Visits — Arridex (Half Day, Victoria Island) + Dangote Refinery + Lekki Free Zones (Ibeju Lekki)',config:'Buses from Eko Hotel. Two separate routing groups: Victoria Island (Arridex) and Ibeju Lekki (Dangote + LFTZ). Confirm routing and travel time.',objective:"Give delegates direct access to Lagos's flagship industrial and economic zones. Three locations spanning advanced manufacturing, petroleum refining, and free trade zones."},
    avCues:[
-     {type:'av',label:'N/A',text:'No formal AV required. Consider branded name lanyards and a delegate briefing pack for the buses.'},
-     {type:'stage',label:'Logistics',text:'Confirm: departure time from Eko Hotel, convoy/security arrangement, lunch provision between visits, return time.'},
-     {type:'warn',label:'Security',text:'Dangote Petroleum Refinery: initiate security clearance process for all attending delegates. Passport/ID data collection required in advance.'},
-     {type:'warn',label:'Lekki Free Zone',text:'Confirm LFTZ point of contact, tour route, and maximum group size they can accommodate.'}
+     {type:'av',label:'N/A',text:'No formal AV required. Prepare branded name lanyards and a delegate briefing note for the buses.'},
+     {type:'stage',label:'Logistics',text:'Three sites require careful logistics split. Arridex (VI) — half day. Dangote Refinery + LFTZ (Ibeju Lekki) — full day. Confirm if delegates split into two groups or visit all three in sequence.'},
+     {type:'warn',label:'Security',text:'Dangote Petroleum Refinery: initiate security clearance for all delegates. Passport/ID data collection required in advance.'},
+     {type:'warn',label:'Arridex',text:'Confirm Arridex Victoria Island point of contact, max group size, photography policy, and security requirements.'},
+     {type:'warn',label:'LFTZ',text:'Confirm Lekki Free Zone point of contact, tour route, and maximum group size.'}
    ],
    screenContent:[
      {slot:'Day 3 Slide',type:'title',title:'DAY THREE — SITE VISITS',sub:'Invest Lagos 3.0 · 10 June 2026'},
-     {slot:'Site 1',type:'title',title:'Dangote Petroleum Refinery',sub:'Lekki, Lagos'},
-     {slot:'Site 2',type:'title',title:'Lekki Free Zone',sub:'Lekki, Lagos'}
+     {slot:'Site 1',type:'title',title:'Arridex — Advanced Manufacturing and Asset Integrity',sub:'Half Day Visit · Victoria Island, Lagos'},
+     {slot:'Site 2',type:'title',title:'Dangote Petroleum Refinery',sub:'Full Day Visit · Ibeju Lekki, Lagos'},
+     {slot:'Site 3',type:'title',title:'Lekki Free Zones, Lagos Port',sub:'Full Day Visit · Ibeju Lekki, Lagos'}
    ],
    mcScript:'TBC — briefing to be delivered on the bus. Prepare a short delegate briefing note: schedule, rules of each site, safety requirements, photography policy.',
    mcDirection:'Day 3 likely has a separate logistics lead. Confirm whether the MC role extends to Day 3 or if a dedicated tour guide/host takes over.',
