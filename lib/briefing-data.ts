@@ -206,7 +206,7 @@ export const SESSIONS: BriefingSession[] = [
    mcDirection:'Full stop after "please rise." Wait for the room to stand and for full applause. Do not continue speaking until President reaches the podium.',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:9,day:1,order:9,startTime:'12:30',duration:60,title:"Governors' Pavilion Walk-through",type:'other',
+  {id:9,day:1,order:10,startTime:'12:30',duration:60,title:"Governors' Pavilion Walk-through",type:'other',
    speakers:['President of Nigeria · Governor Sanwo-Olu · Selected VIP Guests'],moderator:'',
    flags:[{kind:'warn',text:'Tour route, guide and VIP list TBC'},{kind:'info',text:'Previously titled "Official Opening of Pavilions & Exhibition" — renamed in updated programme'}],
    overview:{venue:'Exhibition Pavilion & Lobby',format:'Guided VIP tour — President and Governor lead, delegates observe',config:'No stage. Roaming mic for guide. Photography team in position. Refreshments served.',objective:'The President and Governor of Lagos State, accompanied by selected VIP Guests, tour the pavilion. Delegates are invited to observe — this is a VIP-led moment, not open floor time.'},
@@ -226,7 +226,7 @@ export const SESSIONS: BriefingSession[] = [
    mcDirection:'Deliver before VIP party departs for pavilion. Speak clearly — some guests may already be moving.',
    moderatorNotes:'',moderatorQuestions:[]},
 
-  {id:10,day:1,order:10,startTime:'11:30',duration:60,title:"Panel 1 — Governors' Investment Showcase",type:'panel',
+  {id:10,day:1,order:9,startTime:'11:30',duration:60,title:"Panel 1 — Governors' Investment Showcase",type:'panel',
    speakers:['Participating State Governors — TBC (confirmed list pending from client)'],
    moderator:'',
    flags:[
@@ -593,7 +593,13 @@ export const SESSIONS: BriefingSession[] = [
    ],
    mcScript:'[Delivered at Masterclasses room entrance] Welcome to the Masterclasses — Music, Film and Fashion. This intimate session is moderated by Zain Asher of CNN. Our speakers today are Tiwa Savage, Mr David Oyelowo OBE, and Mrs Omoyemi Akerele.',
    mcDirection:'Intimate, conversational tone — different from the main hall plenaries. Brief Zain Asher on the format. Confirm security and access arrangements for Tiwa Savage and David Oyelowo.',
-   moderatorNotes:'',moderatorQuestions:[]},
+   moderatorNotes:"Masterclass format — intimate, conversational. Not a panel. Zain Asher leads each speaker in a focused 12–15 min conversation before opening for audience questions. Tone: warm, personal, aspirational. Objective: show the creative economy as a serious investment proposition through the voices of its practitioners. 45 minutes total: ~15 min per speaker → short audience Q&A at the end.",
+   moderatorQuestions:[
+     'Tiwa Savage — you have built a music career and a business at the same time. What has Lagos given you that nowhere else could?',
+     'David — Selma, The Butler, producing on a global stage. What does it actually take to make Lagos a serious film production hub, not just a talent export hub?',
+     'Omoyemi — Lagos Fashion Week is now over a decade old. Where does it sit in the global fashion calendar, and what would make international investors take it seriously as an industry, not just an event?',
+     'All three of you — what is the one thing government could do tomorrow that would change the trajectory of your industry?'
+   ]},
 
   {id:28,day:2,order:25,startTime:'14:45',duration:15,title:'Showcase — Lagos Fashion Show',type:'performance',
    speakers:['Lagos Fashion Show'],moderator:'',

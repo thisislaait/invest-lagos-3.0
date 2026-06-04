@@ -222,7 +222,10 @@ export default function AdminPage() {
         startTime: s.startTime, duration: s.duration,
         speaker: s.speakers.join(', '), moderator: s.moderator || '',
         mcScript: s.mcScript || '', avCues, stageNotes,
-        moderatorNotes: s.moderatorNotes || '',
+        moderatorNotes: [
+          s.moderatorNotes,
+          ...(s.moderatorQuestions?.length ? s.moderatorQuestions.map((q: string) => `Q: ${q}`) : [])
+        ].filter(Boolean).join('\n\n'),
         status: 'upcoming' as SessionStatus,
       }
     }
