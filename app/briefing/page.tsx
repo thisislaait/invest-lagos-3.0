@@ -299,17 +299,7 @@ export default function BriefingPage() {
       {/* Header */}
       <header className="bg-[#0B1F45] px-4 sm:px-5 py-2.5 flex items-center justify-between gap-3 shrink-0">
         <div className="flex items-center gap-3 min-w-0">
-          <svg width="28" height="28" viewBox="0 0 30 30" fill="none" className="shrink-0">
-            <path d="M15 1 L15 15 L29 1 Z" fill="#F4B41A"/>
-            <path d="M29 1 L15 15 L29 15 Z" fill="#F97316"/>
-            <path d="M29 15 L15 15 L29 29 Z" fill="#D7263D"/>
-            <path d="M29 29 L15 15 L15 29 Z" fill="#C026D3"/>
-            <path d="M15 29 L15 15 L1 29 Z" fill="#F472B6"/>
-            <path d="M1 29 L15 15 L1 15 Z" fill="#3B82F6"/>
-            <path d="M1 15 L15 15 L1 1 Z" fill="#0A8E7F"/>
-            <path d="M1 1 L15 15 L15 1 Z" fill="#22C55E"/>
-            <circle cx="15" cy="15" r="5.5" fill="#0B1F45"/>
-          </svg>
+          <img src="/images/LI-white-logo.png" alt="Lagos State Investment Forum" className="h-8 w-auto shrink-0" />
           <div className="min-w-0">
             <div className="font-bold text-[0.9rem] text-white tracking-tight leading-tight truncate">Lagos State Investment Forum 2026</div>
             <div className="font-mono text-[0.5rem] text-white/30 tracking-widest uppercase mt-0.5">Eko Hotel &amp; Suites · Victoria Island · 8–10 June 2026</div>
